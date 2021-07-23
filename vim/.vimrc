@@ -48,21 +48,22 @@ call plug#begin('~/.vim/plugged')
 " Plug 'sheerun/vim-polyglot'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Plug 'posva/vim-vue'
-Plug 'dense-analysis/ale'
 Plug 'ap/vim-css-color'
+Plug 'dense-analysis/ale'
+Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/is.vim'
-Plug 'morhetz/gruvbox'
-Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug 'morhetz/gruvbox'
 Plug 'scrooloose/nerdtree'
+Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'easymotion/vim-easymotion'
 call plug#end()
 
 command! Config execute ":tabnew ~/.vimrc"
