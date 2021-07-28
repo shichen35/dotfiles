@@ -48,6 +48,7 @@ call plug#begin('~/.vim/plugged')
 " Plug 'sheerun/vim-polyglot'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Plug 'posva/vim-vue'
+Plug 'will133/vim-dirdiff'
 Plug 'Yggdroot/indentLine'
 Plug 'ap/vim-css-color'
 Plug 'dense-analysis/ale'
@@ -67,7 +68,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 call plug#end()
 
+" Use space as <leader>
+nmap <space> <bslash>
 command! Config execute ":tabnew ~/.vimrc"
+command! Reload execute ":source ~/.vimrc"
 nnoremap <C-l> :set invhlsearch<CR>
 nnoremap <C-h> :set invlist<CR>
 "Automatically insert a matching brace in Vim
@@ -123,7 +127,7 @@ colorscheme gruvbox
 hi CursorLine term=bold cterm=bold ctermbg=233
 "hi Search ctermfg=NONE ctermbg=237 cterm=bold
 
-highlight ColorColumn ctermbg=234 guibg=black
+highlight ColorColumn ctermbg=234 guibg=#303030
 nnoremap <leader>cc :call ToggleColorColumn()<CR>
 function! ToggleColorColumn()
     if &colorcolumn == ""
