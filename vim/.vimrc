@@ -4,8 +4,8 @@ set nocompatible
 set termguicolors
 
 if empty(glob("~/.vim/autoload/plug.vim"))
-	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
@@ -48,6 +48,7 @@ call plug#begin('~/.vim/plugged')
 " Plug 'sheerun/vim-polyglot'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Plug 'posva/vim-vue'
+Plug 'Yggdroot/indentLine'
 Plug 'ap/vim-css-color'
 Plug 'dense-analysis/ale'
 Plug 'easymotion/vim-easymotion'
@@ -59,7 +60,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'morhetz/gruvbox'
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -91,7 +92,7 @@ xnoremap K :m '<-2<CR>gv=gv
 
 " NERDTree shortcuts
 nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <leader>nt :NERDTreeToggle<CR>
 nnoremap <leader>nf :NERDTreeFind<CR>
 
 " Ale shortcuts
@@ -138,53 +139,53 @@ endfunction
 "cnoremap <Right> <Nop>
 "cnoremap <Up> <Nop>
 
-" Remove newbie crutches in Insert Mode
-inoremap <Down> <Nop>
-inoremap <Left> <Nop>
-inoremap <Right> <Nop>
-inoremap <Up> <Nop>
+" " Remove newbie crutches in Insert Mode
+" inoremap <Down> <Nop>
+" inoremap <Left> <Nop>
+" inoremap <Right> <Nop>
+" inoremap <Up> <Nop>
 
-" Remove newbie crutches in Normal Mode
-nnoremap <silent><Down> :echoe "Use j"<CR>
-nnoremap <silent><Left> :echoe "Use h"<CR>
-nnoremap <silent><Right> :echoe "Use l"<CR>
-nnoremap <silent><Up> :echoe "Use k"<CR>
+" " Remove newbie crutches in Normal Mode
+" nnoremap <silent><Down> :echoe "Use j"<CR>
+" nnoremap <silent><Left> :echoe "Use h"<CR>
+" nnoremap <silent><Right> :echoe "Use l"<CR>
+" nnoremap <silent><Up> :echoe "Use k"<CR>
 
-" Remove newbie crutches in Visual Mode
-xnoremap <Down> <Nop>
-xnoremap <Left> <Nop>
-xnoremap <Right> <Nop>
-xnoremap <Up> <Nop>
+" " Remove newbie crutches in Visual Mode
+" xnoremap <Down> <Nop>
+" xnoremap <Left> <Nop>
+" xnoremap <Right> <Nop>
+" xnoremap <Up> <Nop>
 
 let g:lightline = {
-      \ 'colorscheme': 'powerline',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'readonly', 'filename', 'modified' ] ],
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
-      \ },
-      \ 'component_function': {
-      \   'percent': 'ScrollIndicator',
-      \ }
-      \ }
+            \ 'colorscheme': 'powerline',
+            \ 'active': {
+                \   'left': [ [ 'mode', 'paste' ],
+                \             [ 'readonly', 'filename', 'modified' ] ],
+                \   'right': [ [ 'lineinfo' ],
+                \              [ 'percent' ],
+                \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
+                \ },
+                \ 'component_function': {
+                    \   'percent': 'ScrollIndicator',
+                    \ }
+                    \ }
 
 function! ScrollIndicator()
     "let l:line_no_indicator_chars = ['⎺', '⎻', '─', '⎼', '⎽']
     let l:line_no_indicator_chars = [
-        \ '>         ',
-        \ '=>        ',
-        \ '==>       ',
-        \ '===>      ',
-        \ '====>     ',
-        \ '=====>    ',
-        \ '======>   ',
-        \ '=======>  ',
-        \ '========> ',
-        \ '=========>',
-        \ '==========',
-    \ ]
+                \ '>         ',
+                \ '=>        ',
+                \ '==>       ',
+                \ '===>      ',
+                \ '====>     ',
+                \ '=====>    ',
+                \ '======>   ',
+                \ '=======>  ',
+                \ '========> ',
+                \ '=========>',
+                \ '==========',
+                \ ]
     let l:current_line = line('.')
     let l:total_lines = line('$')
     let l:line_no_fraction = floor(l:current_line) / floor(l:total_lines)

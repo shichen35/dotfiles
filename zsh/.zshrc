@@ -37,7 +37,7 @@ plugins=(git zsh-syntax-highlighting zsh-completions zsh-autosuggestions)  # doc
 
 source $ZSH/oh-my-zsh.sh
 # FZF keybindings
-source "/usr/share/doc/fzf/examples/key-bindings.zsh"
+source "$HOME/.vim/plugged/fzf/shell/key-bindings.zsh"
 
 # User configuration
 printf "$(figlet -f slant 'Rock & Code')\n$(fortune -s)\n" | lolcat;
@@ -73,8 +73,11 @@ if [[ $- =~ .*i.* ]]; then bindkey -s "^[r" " vim \"+normal G\" ~/.zsh_history^M
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
 ZSH_AUTOSUGGEST_USE_ASYNC=YES
-#autoload -Uz compinit && compinit -i
-
+autoload -Uz compinit # && compinit
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -104,6 +107,46 @@ bindkey '^[l' down-case-word
 
 # This function is executed before the command line is written to history. If it does return 1, the current command line is neither appended to the history file nor to the local history stack.
 zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
+
+function displaytime {
+    local T=$1
+    if (( T > 1000 )) then
+        (( T = T/1000.0 ))
+        local Y=$((T/365/60/60/24))
+        local D=$((T/60/60/24%365))
+        local H=$((T/60/60%24))
+        local M=$((T/60%60))
+        local S=$((T%60))
+        [[ $Y -ge 1 ]] && printf '%dy ' $Y
+        [[ $D -ge 1 ]] && printf '%dd ' $D
+        [[ $H -ge 1 ]] && printf '%dh ' $H
+        [[ $M -ge 1 ]] && printf '%dm ' $M
+        printf "%.3fs${NC}\n" $S
+    else
+        printf "%dms${NC}\n" $T
+    fi
+}
+
+function preexec() {
+  if [[ $time == "on" ]] then
+    timer=$(($(print -P %D{%s%6.})/1000))
+  fi
+}
+
+function precmd() {
+  if [[ $timer && $time == "on" ]]; then
+    now=$(($(print -P %D{%s%6.})/1000))
+    elapsed=$(($now-$timer))
+
+    # export RPROMPT="%F{cyan}${elapsed}ms %{$reset_color%}"
+    GRAY='\033[0;90m'
+    CYAN='\033[1;37m'
+    NC='\033[0m' # No Color
+    printf "${GRAY}elapsed "
+    displaytime $elapsed
+    unset timer
+  fi
+}
 
 vdiff () {
     if [ "${#}" -ne 2 ] ; then
