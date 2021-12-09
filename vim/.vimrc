@@ -17,9 +17,11 @@ set shiftround
 set tabstop=4 softtabstop=4
 set expandtab
 set autoindent
-set hidden
-set laststatus=2 " Always show statusline.
-set display+=lastline  " Show as much as possible of the last line.
+set hidden                     " Buffer should still exist if window is closed
+set laststatus=2               " Always show statusline.
+set display+=lastline          " Show as much as possible of the last line.
+set splitright                 " Vertical windows should be split to right
+set splitbelow                 " Horizontal windows should split to bottom
 set noerrorbells
 set nowrap
 set noswapfile
@@ -35,12 +37,13 @@ set wildmode=list:full
 set path+=**
 set nu rnu
 set noshowmode
-set showcmd
+set showcmd                    " Show me what I'm typing
 set ttyfast
 set scrolloff=2
 set sidescrolloff=4
 set sidescroll=1
 set encoding=utf-8
+set fileformats=unix,mac
 
 "vim-plug
 call plug#begin('~/.vim/plugged')
@@ -50,6 +53,9 @@ call plug#begin('~/.vim/plugged')
 " Plug 'posva/vim-vue'
 " Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'junegunn/vim-easy-align'
 Plug 'will133/vim-dirdiff'
 Plug 'Yggdroot/indentLine'
 Plug 'ap/vim-css-color'
@@ -68,6 +74,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 call plug#end()
 
+" Autocomplete on tab
+inoremap <Tab> <c-x><c-o>
 " Use space as <leader>
 nmap <space> <bslash>
 command! Config execute ":tabnew ~/.vimrc"
@@ -116,6 +124,32 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 "    nnoremap <leader>c :!clear && echo "\# Compiling program... \#" && gcc -o %:r.out %<CR>
 "    nnoremap <leader>x :!clear && echo "\# Running program... \#" && ./%:r.out<CR>
 "endif
+
+nnoremap <leader>r :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+    exec "w"
+    if &filetype == 'c'
+        set splitbelow
+        :term gcc % -o %:r.out && time ./%:r.out
+    elseif &filetype == 'cpp'
+        set splitbelow
+        exec "!g++ -std=c++11 % -Wall -o %<"
+        :term time ./%<
+    elseif &filetype == 'python'
+        set splitbelow
+        :term python3 %
+    elseif &filetype == 'html'
+        silent! exec "!open % &"
+    elseif &filetype == 'markdown'
+        exec "InstantMarkdownPreview"
+    elseif &filetype == 'javascript'
+        set splitbelow
+        :term export DEBUG="INFO,ERROR,WARNING"; node --trace-warnings .
+    elseif &filetype == 'go'
+        set splitbelow
+        :term go run %
+    endif
+endfunc
 
 autocmd InsertEnter,InsertLeave * call ToggleInsertMode()
 function! ToggleInsertMode()
@@ -201,7 +235,6 @@ function! ScrollIndicator()
     return string(float2nr(l:line_no_fraction * 100)).'% ['.l:line_no_indicator_chars[l:index].']'
 endfunction
 
-
 function! TrimWhitespace()
     let l:save = winsaveview()
     keeppatterns %s/\s\+$//e
@@ -216,6 +249,22 @@ augroup CHEN_SHI
 augroup END
 
 autocmd FileType c,cpp setlocal equalprg=clang-format
+
+"""""""""""""""""""""
+"      Plugins      "
+"""""""""""""""""""""
+
+" vim-go
+let g:go_fmt_command = "goimports"
+let g:go_autodetect_gopath = 1
+let g:go_list_type = "quickfix"
+
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_generate_tags = 1
 
 let g:ale_linters = {'c': ['gcc']}
 let g:ale_c_cc_options = '-std=gnu17 -Wall'
