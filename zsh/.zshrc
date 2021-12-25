@@ -33,7 +33,7 @@ TIMEFMT=$'=============\nCPU\t%P\nuser\t%*U\nsystem\t%*S\ntotal\t%*E'
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-completions zsh-autosuggestions)  # docker docker-compose
+plugins=(git zsh-syntax-highlighting zsh-completions zsh-autosuggestions) # docker docker-compose
 
 source $ZSH/oh-my-zsh.sh
 # FZF keybindings
@@ -64,7 +64,6 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording en
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 
-
 # ensure synchronization between Bash memory and history file
 # export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
 # if this is interactive shell, then bind hstr to Ctrl-r (for Vi mode check doc)
@@ -88,7 +87,7 @@ alias cmds='history | awk '\''{print $2}'\'' | sort | uniq -c | sort -nr | head 
 alias bat='bat --style=plain --paging=never --color=always'
 #alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 
-reset-prompt-and-accept-line() {
+function reset-prompt-and-accept-line() {
     if [ -n "${BUFFER##*( )}" ]; then
         OLD_PROMPT="$PROMPT"
         PROMPT='%{%F{245}%}[%D{%H:%M:%S}]>%f '
@@ -106,7 +105,7 @@ bindkey '^[l' down-case-word
 #bindkey '^[^?' vi-backward-kill-word
 
 # This function is executed before the command line is written to history. If it does return 1, the current command line is neither appended to the history file nor to the local history stack.
-zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
+function zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
 
 function displaytime {
     local T=$1
@@ -148,7 +147,7 @@ function precmd() {
   fi
 }
 
-vdiff () {
+function vdiff () {
     if [ "${#}" -ne 2 ] ; then
         echo "vdiff requires two arguments"
         echo "  comparing dirs:  vdiff dir_a dir_b"
@@ -166,7 +165,7 @@ vdiff () {
     fi
 }
 
-colors() {
+function colors() {
   for i in {0..255};
   do
     printf "\x1b[38;5;${i}m${i} ";
@@ -174,7 +173,7 @@ colors() {
   printf "\b";
 }
 
-timezsh() {
+function timezsh() {
   shell=${1-$SHELL}
   for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
 }
