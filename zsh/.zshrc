@@ -88,16 +88,35 @@ alias bat='bat --style=plain --paging=never --color=always'
 #alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 
 function reset-prompt-and-accept-line() {
+    reset-prompt
+    zle accept-line
+}
+
+function reset-prompt() {
     if [ -n "${BUFFER##*( )}" ]; then
         OLD_PROMPT="$PROMPT"
         PROMPT='%{%F{245}%}[%D{%H:%M:%S}]>%f '
         zle reset-prompt
         PROMPT="$OLD_PROMPT"
     fi
-    zle accept-line
 }
+
+function reset-prompt-and-accept-and-hold() {
+    reset-prompt
+    zle accept-and-hold
+}
+
+reset-prompt-and-accept-and-down-history() {
+    reset-prompt
+    zle accept-line-and-down-history
+}
+
 zle -N reset-prompt-and-accept-line
+zle -N reset-prompt-and-accept-and-hold
+zle -N reset-prompt-and-accept-and-down-history
 bindkey '^M' reset-prompt-and-accept-line
+bindkey '^[a' reset-prompt-and-accept-and-hold
+bindkey '^o' reset-prompt-and-accept-and-down-history
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=reset-prompt-and-accept-line
 
 bindkey '^[l' down-case-word
@@ -179,3 +198,10 @@ function timezsh() {
 }
 
 # zprof|head
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 20
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
