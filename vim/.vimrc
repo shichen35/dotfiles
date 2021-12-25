@@ -84,6 +84,8 @@ nnoremap <C-l> :set invhlsearch<CR>
 nnoremap <C-h> :set invlist<CR>
 "Automatically insert a matching brace in Vim
 inoremap {<CR> {<CR>}<CR><Up><C-o>O
+inoremap (<CR> (<CR>)<C-o>O
+
 nnoremap <leader>u :UndotreeToggle<CR>
 nnoremap , @@
 inoremap <C-e> <C-o><S-a>
