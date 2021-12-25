@@ -44,6 +44,7 @@ set sidescrolloff=4
 set sidescroll=1
 set encoding=utf-8
 set fileformats=unix,mac
+set nrformats+=alpha           " Make CTRL-A and CTRL-X work for alphabet characters
 
 "vim-plug
 call plug#begin('~/.vim/plugged')
@@ -51,8 +52,8 @@ call plug#begin('~/.vim/plugged')
 " Plug 'sheerun/vim-polyglot'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Plug 'posva/vim-vue'
-" Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets'
+" Plug 'SirVer/ultisnips'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'junegunn/vim-easy-align'
@@ -75,59 +76,61 @@ Plug 'tpope/vim-surround'
 call plug#end()
 
 " Autocomplete on tab
-inoremap <Tab> <c-x><c-o>
+imap <Tab> <c-x><c-o>
 " Use space as <leader>
 nmap <space> <bslash>
 command! Config execute ":tabnew ~/.vimrc"
 command! Reload execute ":source ~/.vimrc"
-nnoremap <C-l> :set invhlsearch<CR>
-nnoremap <C-h> :set invlist<CR>
+nmap <C-l> :set invhlsearch<CR>
+nmap <C-h> :set invlist<CR>
 "Automatically insert a matching brace in Vim
-inoremap {<CR> {<CR>}<CR><Up><C-o>O
-inoremap (<CR> (<CR>)<C-o>O
+imap {<CR> {<CR>}<CR><Up><C-o>O
 
-nnoremap <leader>u :UndotreeToggle<CR>
-nnoremap , @@
-inoremap <C-e> <C-o><S-a>
-inoremap <c-a> <c-o><s-i>
+nmap <leader>u :UndotreeToggle<CR>
+nmap , @@
+imap <C-e> <C-o><S-a>
+imap <c-a> <c-o><s-i>
 " yank into clipboard
-nnoremap <leader>y "+y
-xnoremap <leader>y "+y
-nnoremap <leader>Y gg"+yG
+nmap <leader>y "+y
+xmap <leader>y "+y
+nmap <leader>Y gg"+yG
 " delete without yanking
-nnoremap <leader>d "_d
-xnoremap <leader>d "_d
+nmap <leader>d "_d
+xmap <leader>d "_d
 " replace currently selected text with default register
 " without yanking it
-xnoremap <leader>p "_dp
+xmap <leader>p "_dp
 " moving lines up and down in visual mode
-xnoremap J :m '>+1<CR>gv=gv
-xnoremap K :m '<-2<CR>gv=gv
+xmap J :m '>+1<CR>gv=gv
+xmap K :m '<-2<CR>gv=gv
 
 " NERDTree shortcuts
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <leader>nt :NERDTreeToggle<CR>
-nnoremap <leader>nf :NERDTreeFind<CR>
+nmap <leader>n :NERDTreeFocus<CR>
+nmap <leader>nt :NERDTreeToggle<CR>
+nmap <leader>nf :NERDTreeFind<CR>
 
 " Ale shortcuts
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
+" Pressing ,ss will toggle and untoggle spell checking
+nmap <leader>ss :setlocal spell!<cr>
+
 "if has('nvim')
 "    " Neovim specific commands
 "    "autocmd TermOpen * startinsert
-"    nnoremap <leader>cpp :tabnew %<bar>te echo "\# Compiling program... \#" && g++ -std=c++17 -o %:r.out %<CR>
-"    nnoremap <leader>c :tabnew %<bar>te echo "\# Compiling program... \#" && gcc -o %:r.out %<CR>
-"    nnoremap <leader>x :tabnew %<bar>te echo "\# Running program... \#" && ./%:r.out<CR>
+"    nmap <leader>cpp :tabnew %<bar>te echo "\# Compiling program... \#" && g++ -std=c++17 -o %:r.out %<CR>
+"    nmap <leader>c :tabnew %<bar>te echo "\# Compiling program... \#" && gcc -o %:r.out %<CR>
+"    nmap <leader>x :tabnew %<bar>te echo "\# Running program... \#" && ./%:r.out<CR>
 "else
 "    " Standard vim specific commands
 "    " o
-"    nnoremap <leader>cpp :!clear && echo "\# Compiling program... \#" && g++ -o %:r.out % -std=c++17<CR>
-"    nnoremap <leader>c :!clear && echo "\# Compiling program... \#" && gcc -o %:r.out %<CR>
-"    nnoremap <leader>x :!clear && echo "\# Running program... \#" && ./%:r.out<CR>
+"    nmap <leader>cpp :!clear && echo "\# Compiling program... \#" && g++ -o %:r.out % -std=c++17<CR>
+"    nmap <leader>c :!clear && echo "\# Compiling program... \#" && gcc -o %:r.out %<CR>
+"    nmap <leader>x :!clear && echo "\# Running program... \#" && ./%:r.out<CR>
 "endif
 
-nnoremap <leader>r :call CompileRunGcc()<CR>
+nmap <leader>r :call CompileRunGcc()<CR>
 func! CompileRunGcc()
     exec "w"
     if &filetype == 'c'
@@ -153,6 +156,8 @@ func! CompileRunGcc()
     endif
 endfunc
 
+autocmd CompleteDone * pclose
+
 autocmd InsertEnter,InsertLeave * call ToggleInsertMode()
 function! ToggleInsertMode()
     set cul!
@@ -164,7 +169,7 @@ hi CursorLine term=bold cterm=bold ctermbg=233
 "hi Search ctermfg=NONE ctermbg=237 cterm=bold
 
 highlight ColorColumn ctermbg=234 guibg=#303030
-nnoremap <leader>cc :call ToggleColorColumn()<CR>
+nmap <leader>cc :call ToggleColorColumn()<CR>
 function! ToggleColorColumn()
     if &colorcolumn == ""
         let &colorcolumn="".join(range(81,winwidth(0)),",")
@@ -174,28 +179,28 @@ function! ToggleColorColumn()
 endfunction
 
 " Remove newbie crutches in Command Mode
-"cnoremap <Down> <Nop>
-"cnoremap <Left> <Nop>
-"cnoremap <Right> <Nop>
-"cnoremap <Up> <Nop>
+"cmap <Down> <Nop>
+"cmap <Left> <Nop>
+"cmap <Right> <Nop>
+"cmap <Up> <Nop>
 
 " " Remove newbie crutches in Insert Mode
-" inoremap <Down> <Nop>
-" inoremap <Left> <Nop>
-" inoremap <Right> <Nop>
-" inoremap <Up> <Nop>
+" imap <Down> <Nop>
+" imap <Left> <Nop>
+" imap <Right> <Nop>
+" imap <Up> <Nop>
 
-" " Remove newbie crutches in Normal Mode
-" nnoremap <silent><Down> :echoe "Use j"<CR>
-" nnoremap <silent><Left> :echoe "Use h"<CR>
-" nnoremap <silent><Right> :echoe "Use l"<CR>
-" nnoremap <silent><Up> :echoe "Use k"<CR>
+" Remove newbie crutches in Normal Mode
+nmap <silent><Down> :echoe "Use j"<CR>
+nmap <silent><Left> :echoe "Use h"<CR>
+nmap <silent><Right> :echoe "Use l"<CR>
+nmap <silent><Up> :echoe "Use k"<CR>
 
 " " Remove newbie crutches in Visual Mode
-" xnoremap <Down> <Nop>
-" xnoremap <Left> <Nop>
-" xnoremap <Right> <Nop>
-" xnoremap <Up> <Nop>
+" xmap <Down> <Nop>
+" xmap <Left> <Nop>
+" xmap <Right> <Nop>
+" xmap <Up> <Nop>
 
 let g:lightline = {
             \ 'colorscheme': 'powerline',

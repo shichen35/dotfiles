@@ -118,6 +118,8 @@ bindkey '^M' reset-prompt-and-accept-line
 bindkey '^[a' reset-prompt-and-accept-and-hold
 bindkey '^o' reset-prompt-and-accept-and-down-history
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=reset-prompt-and-accept-line
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=reset-prompt-and-accept-and-hold
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=reset-prompt-and-accept-and-down-history
 
 bindkey '^[l' down-case-word
 #bindkey '^W' vi-backward-kill-word
