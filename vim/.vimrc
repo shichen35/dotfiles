@@ -209,27 +209,27 @@ let g:lightline = {
                 \             [ 'readonly', 'filename', 'modified' ] ],
                 \   'right': [ [ 'lineinfo' ],
                 \              [ 'percent' ],
-                \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
+                \              [ 'fileformat', 'fileencoding', 'filetype'] ]
                 \ },
                 \ 'component_function': {
                     \   'percent': 'ScrollIndicator',
+                    \ },
+                \ 'component': {
+                    \  'filename': '%n:%t'
                     \ }
                     \ }
 
 function! ScrollIndicator()
     "let l:line_no_indicator_chars = ['⎺', '⎻', '─', '⎼', '⎽']
     let l:line_no_indicator_chars = [
-                \ '>         ',
-                \ '=>        ',
-                \ '==>       ',
-                \ '===>      ',
-                \ '====>     ',
-                \ '=====>    ',
-                \ '======>   ',
-                \ '=======>  ',
-                \ '========> ',
-                \ '=========>',
-                \ '==========',
+                \ '>      ',
+                \ '=>     ',
+                \ '==>    ',
+                \ '===>   ',
+                \ '====>  ',
+                \ '=====> ',
+                \ '======>',
+                \ '=======',
                 \ ]
     let l:current_line = line('.')
     let l:total_lines = line('$')
