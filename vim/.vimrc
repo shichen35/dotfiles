@@ -45,6 +45,7 @@ set sidescroll=1
 set encoding=utf-8
 set fileformats=unix,mac
 set nrformats+=alpha           " Make CTRL-A and CTRL-X work for alphabet characters
+set omnifunc=ale#completion#OmniFunc
 
 "vim-plug
 call plug#begin('~/.vim/plugged')
@@ -73,6 +74,7 @@ Plug 'preservim/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'rust-lang/rust.vim'
 call plug#end()
 
 " Autocomplete on tab
@@ -273,6 +275,8 @@ let g:go_highlight_function_calls = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_generate_tags = 1
 
-let g:ale_linters = {'c': ['gcc']}
+let g:ale_linters = {'c': ['gcc'],'rust': ['analyzer']}
 let g:ale_c_cc_options = '-std=gnu17 -Wall'
+
+let g:ale_fixers = { 'rust': ['rustfmt', 'trim_whitespace', 'remove_trailing_lines'] }
 
