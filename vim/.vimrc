@@ -114,26 +114,19 @@ nmap <leader>nf :NERDTreeFind<CR>
 " Ale shortcuts
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+nmap <silent> gd <Plug>(ale_go_to_definition)
+nmap <silent> gi <Plug>(ale_go_to_implementation)
+nmap <silent> gt <Plug>(ale_go_to_type_definition)
+nmap <silent> gh <Plug>(ale_hover)
+nmap <silent> gr <Plug>(ale_find_references)
 
 " Pressing ,ss will toggle and untoggle spell checking
 nmap <leader>ss :setlocal spell!<cr>
 
-"if has('nvim')
-"    " Neovim specific commands
-"    "autocmd TermOpen * startinsert
-"    nmap <leader>cpp :tabnew %<bar>te echo "\# Compiling program... \#" && g++ -std=c++17 -o %:r.out %<CR>
-"    nmap <leader>c :tabnew %<bar>te echo "\# Compiling program... \#" && gcc -o %:r.out %<CR>
-"    nmap <leader>x :tabnew %<bar>te echo "\# Running program... \#" && ./%:r.out<CR>
-"else
-"    " Standard vim specific commands
-"    " o
-"    nmap <leader>cpp :!clear && echo "\# Compiling program... \#" && g++ -o %:r.out % -std=c++17<CR>
-"    nmap <leader>c :!clear && echo "\# Compiling program... \#" && gcc -o %:r.out %<CR>
-"    nmap <leader>x :!clear && echo "\# Running program... \#" && ./%:r.out<CR>
-"endif
 
-nmap <leader>r :call CompileRunGcc()<CR>
-func! CompileRunGcc()
+
+nmap <leader>r :call CompileRun()<CR>
+func! CompileRun()
     exec "w"
     if &filetype == 'c'
         set splitbelow
@@ -155,6 +148,8 @@ func! CompileRunGcc()
     elseif &filetype == 'go'
         set splitbelow
         :term go run %
+    elseif &filetype == 'rust'
+        :Cargo run
     endif
 endfunc
 
