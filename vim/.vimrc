@@ -274,4 +274,6 @@ let g:ale_linters = {'c': ['gcc'],'rust': ['analyzer']}
 let g:ale_c_cc_options = '-std=gnu17 -Wall'
 
 let g:ale_fixers = { 'rust': ['rustfmt', 'trim_whitespace', 'remove_trailing_lines'] }
+let g:rustfmt_autosave = 1
+
 
