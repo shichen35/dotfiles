@@ -33,7 +33,8 @@ set incsearch
 set hls
 set smartcase
 set ignorecase
-set wildmode=list:full
+set wildmenu
+set wildmode=longest:full,full
 set path+=**
 set nu rnu
 set noshowmode
@@ -89,7 +90,6 @@ nmap <C-h> :set invlist<CR>
 imap {<CR> {<CR>}<CR><Up><C-o>O
 
 nmap <leader>u :UndotreeToggle<CR>
-nmap , @@
 imap <C-e> <C-o><S-a>
 imap <c-a> <c-o><s-i>
 " yank into clipboard
@@ -210,24 +210,38 @@ let g:lightline = {
                 \ },
                 \ 'component_function': {
                     \   'percent': 'ScrollIndicator',
+                    \   'lineinfo': 'LightlineLineinfo',
                     \ },
                 \ 'component': {
                     \  'filename': '%n:%t'
                     \ }
                     \ }
 
+function! LightlineLineinfo()
+    "if winwidth(0) < 80
+    "    return ''
+    "endif
+
+    let l:current_line = printf('%3d', line('.'))
+    let l:max_line = printf('%d', line('$'))
+    let l:current_col = printf('%-2d', col('.'))
+    let l:lineinfo = ' ' . l:current_line . '/' . l:max_line . ':' . l:current_col
+    return l:lineinfo
+endfunction
+
 function! ScrollIndicator()
-    "let l:line_no_indicator_chars = ['⎺', '⎻', '─', '⎼', '⎽']
-    let l:line_no_indicator_chars = [
-                \ '>      ',
-                \ '=>     ',
-                \ '==>    ',
-                \ '===>   ',
-                \ '====>  ',
-                \ '=====> ',
-                \ '======>',
-                \ '=======',
-                \ ]
+    let l:line_no_indicator_chars = ['⎺', '⎻', '─', '⎼', '⎽']
+    "let l:line_no_indicator_chars = ['⡀','⣀','⣄','⣤','⣦','⣶','⣷','⣿']
+    "let l:line_no_indicator_chars = [
+    "            \ '>      ',
+    "            \ '=>     ',
+    "            \ '==>    ',
+    "            \ '===>   ',
+    "            \ '====>  ',
+    "            \ '=====> ',
+    "            \ '======>',
+    "            \ '=======',
+    "            \ ]
     let l:current_line = line('.')
     let l:total_lines = line('$')
     let l:line_no_fraction = floor(l:current_line) / floor(l:total_lines)
@@ -236,7 +250,9 @@ function! ScrollIndicator()
     else
         let l:index = float2nr(l:line_no_fraction * len(l:line_no_indicator_chars))
     endif
-    return string(float2nr(l:line_no_fraction * 100)).'% ['.l:line_no_indicator_chars[l:index].']'
+    let l:percentage = printf("%3d%%",float2nr(l:line_no_fraction * 100))
+    "return l:percentage . ' ['.l:line_no_indicator_chars[l:index].']'
+    return l:line_no_indicator_chars[l:index]
 endfunction
 
 function! TrimWhitespace()
