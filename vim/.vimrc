@@ -52,7 +52,7 @@ set omnifunc=ale#completion#OmniFunc
 call plug#begin('~/.vim/plugged')
 " Plug 'joshdick/onedark.vim'
 " Plug 'sheerun/vim-polyglot'
-" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 " Plug 'posva/vim-vue'
 " Plug 'honza/vim-snippets'
 " Plug 'SirVer/ultisnips'
@@ -141,7 +141,7 @@ func! CompileRun()
     elseif &filetype == 'html'
         silent! exec "!open % &"
     elseif &filetype == 'markdown'
-        exec "InstantMarkdownPreview"
+        exec "MarkdownPreview"
     elseif &filetype == 'javascript'
         set splitbelow
         :term export DEBUG="INFO,ERROR,WARNING"; node --trace-warnings .
