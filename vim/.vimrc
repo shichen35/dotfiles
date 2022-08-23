@@ -52,19 +52,19 @@ set omnifunc=ale#completion#OmniFunc
 call plug#begin('~/.vim/plugged')
 " Plug 'joshdick/onedark.vim'
 " Plug 'sheerun/vim-polyglot'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 " Plug 'posva/vim-vue'
 " Plug 'honza/vim-snippets'
 " Plug 'SirVer/ultisnips'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'will133/vim-dirdiff'
+" Plug 'will133/vim-dirdiff'
 Plug 'Yggdroot/indentLine'
 Plug 'ap/vim-css-color'
 Plug 'dense-analysis/ale'
 Plug 'easymotion/vim-easymotion'
-Plug 'haya14busa/is.vim'
+" Plug 'haya14busa/is.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -73,7 +73,7 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'morhetz/gruvbox'
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'rust-lang/rust.vim'
 call plug#end()
@@ -106,7 +106,7 @@ xmap <leader>p "_dp
 xmap J :m '>+1<CR>gv=gv
 xmap K :m '<-2<CR>gv=gv
 
-" NERDTree shortcuts
+" MERDTree shortcuts
 nmap <leader>n :NERDTreeFocus<CR>
 nmap <leader>nt :NERDTreeToggle<CR>
 nmap <leader>nf :NERDTreeFind<CR>
@@ -293,3 +293,10 @@ let g:ale_fixers = { 'rust': ['rustfmt', 'trim_whitespace', 'remove_trailing_lin
 let g:rustfmt_autosave = 1
 
 
+" vim term debugger settings
+autocmd VimEnter *.rs call SetRustDebugger()
+function! SetRustDebugger()
+    :packadd termdebug
+    let g:termdebugger="rust-gdb"
+    let g:termdebug_wide = 163
+endfunction
