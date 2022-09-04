@@ -114,11 +114,11 @@ nmap <leader>nf :NERDTreeFind<CR>
 " Ale shortcuts
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
-nmap <silent> gd <Plug>(ale_go_to_definition)
-nmap <silent> gi <Plug>(ale_go_to_implementation)
-nmap <silent> gt <Plug>(ale_go_to_type_definition)
-nmap <silent> gh <Plug>(ale_hover)
-nmap <silent> gr <Plug>(ale_find_references)
+" nmap <silent> gd <Plug>(ale_go_to_definition)
+" nmap <silent> gi <Plug>(ale_go_to_implementation)
+" nmap <silent> gt <Plug>(ale_go_to_type_definition)
+" nmap <silent> gh <Plug>(ale_hover)
+" nmap <silent> gr <Plug>(ale_find_references)
 
 " Pressing ,ss will toggle and untoggle spell checking
 nmap <leader>ss :setlocal spell!<cr>
