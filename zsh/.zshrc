@@ -1,19 +1,4 @@
 # zmodload zsh/zprof
-# If you come from bash you might have to change your $PATH.
-#
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-export TERM=xterm-256color
-export VISUAL="vim"
-export EDITOR="$VISUAL"
-# export PATH=$PATH:/snap/bin:$HOME/.local/bin
-# export PATH=$PATH:/usr/local/go/bin:/snap/bin:$HOME/.local/bin;
 
 #export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 #[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
@@ -26,29 +11,33 @@ export EDITOR="$VISUAL"
 ZSH_THEME="gentoo"
 # ZSH_THEME="agnoster"
 
-TIMEFMT=$'=============\nCPU\t%P\nuser\t%*U\nsystem\t%*S\ntotal\t%*E'
+# TIMEFMT=$'=============\nCPU\t%P\nuser\t%*U\nsystem\t%*S\ntotal\t%*E'
+DISABLE_MAGIC_FUNCTIONS="true"
+DISABLE_AUTO_TITLE="true"
+# COMPLETION_WAITING_DOTS="true"
+
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
+ZSH_AUTOSUGGEST_USE_ASYNC="true"
 
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-completions zsh-autosuggestions) # docker docker-compose
+plugins=(zsh-completions zsh-syntax-highlighting zsh-autosuggestions) # docker docker-compose git
 
 source $ZSH/oh-my-zsh.sh
 # FZF keybindings
 source "$HOME/.vim/plugged/fzf/shell/key-bindings.zsh"
 
 # User configuration
-printf "$(figlet -f slant 'Rock & Code')\n$(fortune -s)\n" | lolcat;
-
-# Colorizing pager for man, by setting the MANPAGER environment variable
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+(figlet -f slant 'Rock & Code' && fortune -s)|lolcat;
 
 HISTFILE=~/.zsh_history
 SAVEHIST=50000
 HISTSIZE=50000
-#HISTORY_IGNORE="(cd|cd ..*|ps|ls|la|l|ll|pwd|clear|reset|man *|history*|vim|vi|nvim)"
+HISTORY_IGNORE="(cd|cd ..*|ps|ls|la|l|ll|pwd|clear|reset|man *|history*|vim|vi|nvim)"
 
 setopt BANG_HIST                 # Treat the '!' character specially during expansion.
 setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
@@ -64,19 +53,13 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording en
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 
-# ensure synchronization between Bash memory and history file
-# export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
 # if this is interactive shell, then bind hstr to Ctrl-r (for Vi mode check doc)
 if [[ $- =~ .*i.* ]]; then bindkey -s "^[r" " vim \"+normal G\" ~/.zsh_history^M"; fi
-
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
-ZSH_AUTOSUGGEST_USE_ASYNC=YES
-autoload -Uz compinit # && compinit
-for dump in ~/.zcompdump(N.mh+24); do
-  compinit
-done
-compinit -C
+# autoload -Uz compinit
+# for dump in ~/.zcompdump(N.mh+24); do
+#   compinit
+# done
+# compinit -C
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -191,19 +174,45 @@ function colors() {
   do
     printf "\x1b[38;5;${i}m${i} ";
   done
-  printf "\b";
+  printf "\n";
 }
 
 function timezsh() {
   shell=${1-$SHELL}
-  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
+  for i in $(seq 1 5); do time $shell -i -c exit; done
 }
 
-# zprof|head
-defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -int 20
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+# fglog - git log browser with FZF
+function fglog() {
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {}
+FZF-EOF"
+}
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+# ftmux - help you choose tmux sessions
+function ftmux() {
+    if [[ ! -n $TMUX ]]; then
+        # get the IDs
+        ID="`tmux list-sessions`"
+        if [[ -z "$ID" ]]; then
+            tmux new-session
+        fi
+        create_new_session="Create New Session"
+        ID="$ID\n${create_new_session}"
+        ID="`echo $ID | fzf | cut -d: -f1`"
+        if [[ "$ID" = "${create_new_session}" ]]; then
+            tmux new-session
+        elif [[ -n "$ID" ]]; then
+            printf '\033]777;tabbedx;set_tab_name;%s\007' "$ID"
+            tmux attach-session -t "$ID"
+        else
+            :  # Start terminal normally
+        fi
+    fi
+}
+# zprof|head
