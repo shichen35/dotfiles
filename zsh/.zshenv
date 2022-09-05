@@ -19,8 +19,10 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export TIMEFMT=$'=============\nCPU\t%P\nuser\t%*U\nsystem\t%*S\ntotal\t%*E'
 
 # fzf
-# export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
-# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+if type rg &> /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+fi
 
 FZF_COLORS="bg+:-1,\
 fg:gray,\
