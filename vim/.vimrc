@@ -57,54 +57,63 @@ call plug#begin('~/.vim/plugged')
 " Plug 'honza/vim-snippets'
 " Plug 'SirVer/ultisnips'
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'AndrewRadev/splitjoin.vim'
-Plug 'junegunn/vim-easy-align'
 " Plug 'will133/vim-dirdiff'
+" Plug 'tpope/vim-fugitive'
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'ap/vim-css-color'
 Plug 'dense-analysis/ale'
 Plug 'easymotion/vim-easymotion'
-" Plug 'haya14busa/is.vim'
+Plug 'haya14busa/is.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-easy-align'
 Plug 'mbbill/undotree'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'morhetz/gruvbox'
 Plug 'preservim/nerdtree'
-Plug 'tpope/vim-commentary'
-" Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
 Plug 'rust-lang/rust.vim'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 call plug#end()
 
 " Autocomplete on tab
 imap <Tab> <c-x><c-o>
+
 " Use space as <leader>
 nmap <space> <bslash>
+
 command! Config execute ":tabnew ~/.vimrc"
 command! Reload execute ":source ~/.vimrc"
-nmap <C-l> :set invhlsearch<CR>
+
 nmap <C-h> :set invlist<CR>
+
 "Automatically insert a matching brace in Vim
-imap {<CR> {<CR>}<CR><Up><C-o>O
+imap <silent> {<CR> {<CR>}<CR><Up><C-o>O
 
 nmap <leader>f :Files<CR>
 nmap <leader>g :Rg<CR>
+nmap <leader>b :Buffers<CR>
 
 nmap <leader>u :UndotreeToggle<CR>
+
 imap <C-e> <C-o><S-a>
 imap <c-a> <c-o><s-i>
+
 " yank into clipboard
 nmap <leader>y "+y
 xmap <leader>y "+y
 nmap <leader>Y gg"+yG
+
 " delete without yanking
 nmap <leader>d "_d
 xmap <leader>d "_d
+
 " replace currently selected text with default register
 " without yanking it
-xmap <leader>p "_dp
+xmap <leader>p "_dP
+
 " moving lines up and down in visual mode
 xmap J :m '>+1<CR>gv=gv
 xmap K :m '<-2<CR>gv=gv
