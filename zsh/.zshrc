@@ -1,17 +1,19 @@
 # zmodload zsh/zprof
+case ${OSTYPE} in
+  darwin*)
+    source $DOTFILES/zsh-files/mac.zsh
+    ;;
+  linux*)
+    ;;
+esac
 
-#export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
-ZSH_THEME="gentoo"
-# ZSH_THEME="agnoster"
+[[ ! -v ZSH_THEME ]] && ZSH_THEME="gentoo"
 
-# TIMEFMT=$'=============\nCPU\t%P\nuser\t%*U\nsystem\t%*S\ntotal\t%*E'
 DISABLE_MAGIC_FUNCTIONS="true"
 DISABLE_AUTO_TITLE="true"
 # COMPLETION_WAITING_DOTS="true"
@@ -55,11 +57,6 @@ setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 
 # if this is interactive shell, then bind hstr to Ctrl-r (for Vi mode check doc)
 if [[ $- =~ .*i.* ]]; then bindkey -s "^[r" " vim \"+normal G\" ~/.zsh_history^M"; fi
-# autoload -Uz compinit
-# for dump in ~/.zcompdump(N.mh+24); do
-#   compinit
-# done
-# compinit -C
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
