@@ -89,6 +89,9 @@ nmap <C-h> :set invlist<CR>
 "Automatically insert a matching brace in Vim
 imap {<CR> {<CR>}<CR><Up><C-o>O
 
+nmap <leader>f :Files<CR>
+nmap <leader>g :Rg<CR>
+
 nmap <leader>u :UndotreeToggle<CR>
 imap <C-e> <C-o><S-a>
 imap <c-a> <c-o><s-i>
@@ -275,16 +278,16 @@ autocmd FileType c,cpp setlocal equalprg=clang-format
 """""""""""""""""""""
 
 " vim-go
-let g:go_fmt_command = "goimports"
-let g:go_autodetect_gopath = 1
-let g:go_list_type = "quickfix"
-
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_generate_tags = 1
+" let g:go_fmt_command = "goimports"
+" let g:go_autodetect_gopath = 1
+" let g:go_list_type = "quickfix"
+"
+" let g:go_highlight_types = 1
+" let g:go_highlight_fields = 1
+" let g:go_highlight_functions = 1
+" let g:go_highlight_function_calls = 1
+" let g:go_highlight_extra_types = 1
+" let g:go_highlight_generate_tags = 1
 
 let g:ale_linters = {'c': ['gcc'],'rust': ['analyzer']}
 let g:ale_c_cc_options = '-std=gnu17 -Wall'
