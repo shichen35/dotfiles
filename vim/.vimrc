@@ -34,7 +34,8 @@ set hls
 set smartcase
 set ignorecase
 set wildmenu
-set wildmode=longest:full,full
+" set wildmode=longest:full,full
+" set wildmode=list:longest,full
 set path+=**
 set nu rnu
 set noshowmode
@@ -72,6 +73,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'mbbill/undotree'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'morhetz/gruvbox'
+Plug 'arcticicestudio/nord-vim'
 Plug 'preservim/nerdtree'
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-commentary'
@@ -87,14 +89,16 @@ nmap <space> <bslash>
 command! Config execute ":tabnew ~/.vimrc"
 command! Reload execute ":source ~/.vimrc"
 
-nmap <C-h> :set invlist<CR>
+nmap <leader>l :set invlist<CR>
+nmap <leader>h :set hls!<CR>
+nnoremap / :set hls<CR>/
 
 "Automatically insert a matching brace in Vim
 imap <silent> {<CR> {<CR>}<CR><Up><C-o>O
 
-nmap <leader>f :Files<CR>
-nmap <leader>g :Rg<CR>
-nmap <leader>b :Buffers<CR>
+nmap <leader>ff :Files<CR>
+nmap <leader>fg :Rg<CR>
+nmap <leader>fb :Buffers<CR>
 
 nmap <leader>u :UndotreeToggle<CR>
 
@@ -126,17 +130,15 @@ nmap <leader>nf :NERDTreeFind<CR>
 " Ale shortcuts
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
-" nmap <silent> gd <Plug>(ale_go_to_definition)
-" nmap <silent> gi <Plug>(ale_go_to_implementation)
-" nmap <silent> gt <Plug>(ale_go_to_type_definition)
-" nmap <silent> gh <Plug>(ale_hover)
-" nmap <silent> gr <Plug>(ale_find_references)
+nmap <silent> <leader>gd <Plug>(ale_go_to_definition)
+nmap <silent> <leader>gl <Plug>(ale_detail)
+nmap <silent> <leader>gi <Plug>(ale_go_to_implementation)
+nmap <silent> <leader>gt <Plug>(ale_go_to_type_definition)
+nmap <silent> <leader>gh <Plug>(ale_hover)
+nmap <silent> <leader>gr <Plug>(ale_find_references)
 
 " Pressing ,ss will toggle and untoggle spell checking
 nmap <leader>ss :setlocal spell!<cr>
-
-
-
 nmap <leader>r :call CompileRun()<CR>
 func! CompileRun()
     exec "w"
@@ -172,7 +174,7 @@ function! ToggleInsertMode()
     set cul!
     set nornu!
 endfunction
-set bg=dark
+set background=dark
 colorscheme gruvbox
 hi CursorLine term=bold cterm=bold ctermbg=233
 "hi Search ctermfg=NONE ctermbg=237 cterm=bold
@@ -298,6 +300,8 @@ autocmd FileType c,cpp setlocal equalprg=clang-format
 " let g:go_highlight_extra_types = 1
 " let g:go_highlight_generate_tags = 1
 
+" Enable completion where available.
+let g:ale_completion_enabled = 1
 let g:ale_linters = {'c': ['gcc'],'rust': ['analyzer']}
 let g:ale_c_cc_options = '-std=gnu17 -Wall'
 
@@ -310,5 +314,5 @@ autocmd VimEnter *.rs call SetRustDebugger()
 function! SetRustDebugger()
     :packadd termdebug
     let g:termdebugger="rust-gdb"
-    let g:termdebug_wide = 163
+    " let g:termdebug_wide = 163
 endfunction
