@@ -190,4 +190,14 @@ function fglog() {
 FZF-EOF"
 }
 
+function omzu() {
+    printf "\x1b[38;5;117m%s\033[0m\n" "Updating custom omz plugins"
+    for plugin in ~/.oh-my-zsh/custom/plugins/*/; do
+        if [ -d "$plugin/.git" ]; then
+            printf "${YELLOW}%s${RESET}\n" "${plugin%/}"
+            git -C "$plugin" pull
+        fi
+    done
+    omz update
+}
 # zprof|head
