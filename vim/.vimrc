@@ -11,6 +11,7 @@ endif
 
 filetype plugin indent on
 syntax on
+" set mouse=a
 set backspace=indent,eol,start " Make backspace work as you would expect.
 set shiftwidth=4
 set shiftround
@@ -137,8 +138,18 @@ nmap <silent> <leader>gt <Plug>(ale_go_to_type_definition)
 nmap <silent> <leader>gh <Plug>(ale_hover)
 nmap <silent> <leader>gr <Plug>(ale_find_references)
 
+" TermDebug shortcuts
+nmap <leader>db :Break<CR>
+nmap <leader>dr :Run
+nmap <leader>dl :Clear<CR>
+nmap <leader>df :Finish<CR>
+nmap <leader>du :Util<CR>
+nmap <leader>dn :Over<CR>
+nmap <leader>ds :Step<CR>
+nmap <leader>dc :Continue<CR>
+
 " Pressing ,ss will toggle and untoggle spell checking
-nmap <leader>ss :setlocal spell!<cr>
+nmap <leader>ss :setlocal spell!<CR>
 nmap <leader>r :call CompileRun()<CR>
 func! CompileRun()
     exec "w"
