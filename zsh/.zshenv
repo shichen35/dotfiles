@@ -9,6 +9,14 @@ export EDITOR="$VISUAL"
 export ZSH="$HOME/.oh-my-zsh"
 export DOTFILES="$HOME/.dotfiles"
 # export GOPATH=$HOME/go
+case ${OSTYPE} in
+  darwin*)
+    source $DOTFILES/zsh-files/mac.zsh
+    ;;
+  linux*)
+    export PATH=$PATH:/usr/games/;
+    ;;
+esac
 # export PATH=$PATH:/snap/bin:$HOME/.local/bin
 # export PATH=$PATH:$GOPATH/bin:$HOME/.local/bin;
 # export PATH=$PATH:/usr/local/go/bin:/snap/bin:$HOME/.local/bin;
