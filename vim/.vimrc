@@ -85,7 +85,7 @@ call plug#end()
 imap <Tab> <c-x><c-o>
 
 " Use space as <leader>
-nmap <space> <bslash>
+let mapleader = "\<Space>"
 
 command! Config execute ":tabnew ~/.vimrc"
 command! Reload execute ":source ~/.vimrc"
