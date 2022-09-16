@@ -70,6 +70,7 @@ Plug 'haya14busa/is.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'wellle/context.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'mbbill/undotree'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -149,7 +150,7 @@ nmap <leader>ds :Step<CR>
 nmap <leader>dc :Continue<CR>
 
 " Pressing ,ss will toggle and untoggle spell checking
-nmap <leader>ss :setlocal spell!<CR>
+nmap <leader>sp :setlocal spell!<CR>
 nmap <leader>r :call CompileRun()<CR>
 func! CompileRun()
     exec "w"
@@ -180,11 +181,9 @@ endfunc
 
 autocmd CompleteDone * pclose
 
-autocmd InsertEnter,InsertLeave * call ToggleInsertMode()
-function! ToggleInsertMode()
-    set cul!
-    set nornu!
-endfunction
+autocmd InsertEnter * set cul nornu
+autocmd InsertLeave * set nocul rnu
+
 set background=dark
 colorscheme gruvbox
 hi CursorLine term=bold cterm=bold ctermbg=233
@@ -298,6 +297,20 @@ autocmd FileType c,cpp setlocal equalprg=clang-format
 """""""""""""""""""""
 "      Plugins      "
 """""""""""""""""""""
+" easy motion
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+" nmap s <Plug>(easymotion-sn)
+nmap <Leader>/ <Plug>(easymotion-sn)
+
+" Turn on case-insensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+" map <Leader>j <Plug>(easymotion-j)
+" map <Leader>k <Plug>(easymotion-k)
 
 " vim-go
 " let g:go_fmt_command = "goimports"
