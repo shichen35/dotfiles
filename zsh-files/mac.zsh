@@ -1,4 +1,4 @@
-ZSH_THEME="agnoster"
+ZSH_THEME="gentoo"
 # source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 
 # macOS specific configuration
