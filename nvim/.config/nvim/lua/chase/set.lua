@@ -1,3 +1,6 @@
+-- Use space as <leader>
+vim.g.mapleader = "<Space>"
+
 vim.cmd([[
 " set mouse=a
 set backspace=indent,eol,start " Make backspace work as you would expect.
@@ -36,7 +39,10 @@ set sidescroll=1
 set encoding=utf-8
 set fileformats=unix,mac
 set nrformats+=alpha           " Make CTRL-A and CTRL-X work for alphabet characters
-" set omnifunc=ale#completion#OmniFunc
+
+" Set updatetime for CursorHold
+" 300ms of no cursor movement to trigger CursorHold
+set updatetime=300
 
 autocmd InsertEnter * set cul nornu
 autocmd InsertLeave * set nocul rnu
