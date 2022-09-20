@@ -45,6 +45,5 @@ set background=dark
 colorscheme gruvbox
 hi CursorLine term=bold cterm=bold ctermbg=233
 "hi Search ctermfg=NONE ctermbg=237 cterm=bold
-
-
 ]])
+
