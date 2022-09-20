@@ -1,7 +1,6 @@
-vim.cmd([[
-" Use space as <leader>
-let mapleader = "\<Space>"
+vim.g.mapleader = " "
 
+vim.cmd([[
 nmap <leader>l :set invlist<CR>
 nmap <leader>h :set hls!<CR>
 nnoremap / :set hls<CR>/
@@ -48,16 +47,45 @@ function! ToggleColorColumn()
 endfunction
 
 " Autocomplete on tab
-imap <Tab> <c-x><c-o>
+" imap <Tab> <c-x><c-o>
 
 " telescope
 " Using Lua functions
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <silent> <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <silent> <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <silent> <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <silent> <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 " nnoremap <silent> <leader>fa :lua vim.lsp.buf.code_action()<CR>
-nnoremap <silent> <leader>fa :CodeActionMenu<CR>
+nnoremap <silent> <leader>ca :CodeActionMenu<CR>
+
+" cmp
+" Code navigation shortcuts
+" as found in :help lsp
+" nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+"nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+"nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+"nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+"nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+"nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+"nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+"nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+"nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
+
+" Quick-fix
+"nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
+
+" Setup Completion
+" See https://github.com/hrsh7th/nvim-cmp#basic-configuration
+
+" have a fixed column for the diagnostics to appear in
+" this removes the jitter when warnings/errors flow in
+set signcolumn=yes
+
+" Goto previous/next diagnostic warning/error
+"nnoremap <silent> g[ <cmd>lua vim.diagnostic.goto_prev()<CR>
+"nnoremap <silent> g] <cmd>lua vim.diagnostic.goto_next()<CR>
+
+
 
 " easy motion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
