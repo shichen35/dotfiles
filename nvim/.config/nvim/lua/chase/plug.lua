@@ -11,6 +11,7 @@ vim.api.nvim_create_autocmd(
 )
 -- vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 
+local rt = require("rust-tools")
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -22,22 +23,25 @@ local on_attach = function(client, bufnr)
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
   vim.keymap.set('n', '<leader>gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', '<leader>gK', vim.lsp.buf.hover, bufopts)
+  vim.keymap.set('n', '<leader>gt', vim.lsp.buf.type_definition, bufopts)
   vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<leader>gk', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
   vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
   vim.keymap.set('n', '<leader>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, bufopts)
-  vim.keymap.set('n', '<leader>gt', vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<leader>ga', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, bufopts)
+  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', '<leader>gf', vim.lsp.buf.formatting, bufopts)
   vim.keymap.set('n', '<C-j>', vim.diagnostic.goto_prev, bufopts)
   vim.keymap.set('n', '<C-k>', vim.diagnostic.goto_next, bufopts)
   vim.keymap.set('n', '<C-l>', vim.diagnostic.setloclist, bufopts)
+  -- Hover actions
+  vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+  vim.keymap.set("n", "<leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
 end
 
 local lsp_flags = {
@@ -61,6 +65,10 @@ require('lspconfig')['rust_analyzer'].setup{
     }
 }
 
+local extension_path = vim.env.HOME .. '.local/share/nvim/mason/packages/codelldb/extension/'
+local codelldb_path = extension_path .. 'adapter/codelldb'
+local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'
+
 local opts = {
     tools = {
         runnables = {
@@ -68,9 +76,15 @@ local opts = {
         },
         inlay_hints = {
             auto = true,
-            show_parameter_hints = false,
-            parameter_hints_prefix = "",
-            other_hints_prefix = "",
+            show_parameter_hints = true,
+            parameter_hints_prefix = "<-",
+            other_hints_prefix = "=>",
+        },
+        -- options same as lsp hover / vim.lsp.util.open_floating_preview()
+        hover_actions = {
+            -- whether the hover action window gets automatically focused
+            -- default: false
+            auto_focus = true,
         },
     },
 
@@ -91,9 +105,25 @@ local opts = {
             }
         }
     },
+      -- debugging stuff
+    dap = {
+        adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path)
+    },
 }
 
-require('rust-tools').setup(opts)
+local dap = require('dap')
+dap.adapters.codelldb = {
+  type = 'server',
+  port = "${port}",
+  executable = {
+    command = codelldb_path,
+    args = {"--port", "${port}"},
+  }
+}
+
+rt.setup(opts)
+rt.hover_range.hover_range()
+
 --Set completeopt to have a better completion experience
 -- :help completeopt
 -- menuone: popup even when there's only one match
@@ -152,13 +182,37 @@ cmp.setup({
         --     path = 'P',
         -- }
         -- vim_item.menu = menu_icon[entry.source.name]
-        vim_item.abbr = string.sub(vim_item.abbr, 1, 20)
+        vim_item.abbr = string.sub(vim_item.abbr, 1, 24)
         return vim_item
     end
   },
 })
 
+require("telescope").setup {
+  extensions = {
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown {
+        -- even more opts
+      }
+
+      -- pseudo code / specification for writing custom displays, like the one
+      -- for "codeactions"
+      -- specific_opts = {
+      --   [kind] = {
+      --     make_indexed = function(items) -> indexed_items, width,
+      --     make_displayer = function(widths) -> displayer
+      --     make_display = function(displayer) -> function(e)
+      --     make_ordinal = function(e) -> string
+      --   },
+      --   -- for example to disable the custom builtin "codeactions" display
+      --      do the following
+      --   codeactions = false,
+      -- }
+    }
+  }
+}
 require("telescope").load_extension("ui-select")
+
 -- require("trouble").setup()
 require("fidget").setup()
 -- vim.cmd [[autocmd CursorHold,CursorHoldI * lua require('nvim-lightbulb').update_lightbulb()]]

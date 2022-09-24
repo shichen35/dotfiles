@@ -64,7 +64,7 @@ nnoremap <silent> <leader>fg <cmd>lua require('telescope.builtin').live_grep()<c
 nnoremap <silent> <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <silent> <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 " nnoremap <silent> <leader>fa :lua vim.lsp.buf.code_action()<CR>
-nnoremap <silent> <leader>ca :CodeActionMenu<CR>
+" nnoremap <silent> <leader>ca :CodeActionMenu<CR>
 
 " vsnip
 " Expand or jump
