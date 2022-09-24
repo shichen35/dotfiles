@@ -10,9 +10,6 @@ vim.api.nvim_create_autocmd(
   {callback = function()vim.diagnostic.open_float(nil, { focusable = false }) end}
 )
 -- vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '<leader>g[', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', '<leader>g]', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<leader>gl', vim.diagnostic.setloclist, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -38,6 +35,9 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<leader>ga', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<leader>gf', vim.lsp.buf.formatting, bufopts)
+  vim.keymap.set('n', '<C-j>', vim.diagnostic.goto_prev, bufopts)
+  vim.keymap.set('n', '<C-k>', vim.diagnostic.goto_next, bufopts)
+  vim.keymap.set('n', '<C-l>', vim.diagnostic.setloclist, bufopts)
 end
 
 local lsp_flags = {
@@ -94,10 +94,14 @@ local opts = {
 }
 
 require('rust-tools').setup(opts)
-vim.cmd([[
-set completeopt=menuone,noinsert,noselect
-set shortmess+=c
-]])
+--Set completeopt to have a better completion experience
+-- :help completeopt
+-- menuone: popup even when there's only one match
+-- noinsert: Do not insert text until a selection is made
+-- noselect: Do not select, force to select one from the menu
+-- shortness: avoid showing extra messages when using completion
+vim.opt.completeopt = {'menuone', 'noselect', 'noinsert'}
+vim.opt.shortmess = vim.opt.shortmess + { c = true}
 
 -- Completion Plugin Setup
 local cmp = require'cmp'
@@ -112,8 +116,8 @@ cmp.setup({
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-n>'] = cmp.mapping.select_next_item(),
     -- Add tab support
-    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-    ['<Tab>'] = cmp.mapping.select_next_item(),
+    -- ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+    -- ['<Tab>'] = cmp.mapping.select_next_item(),
     ['<C-S-f>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
@@ -138,13 +142,21 @@ cmp.setup({
       -- documentation = cmp.config.window.bordered(),
   },
   formatting = {
+    -- fields = {'menu', 'abbr', 'kind'},
+    fields = {'abbr', 'kind'},
     format = function(entry, vim_item)
+        -- local menu_icon ={
+        --     nvim_lsp = 'C',
+        --     vsnip = 'S',
+        --     buffer = 'B',
+        --     path = 'P',
+        -- }
+        -- vim_item.menu = menu_icon[entry.source.name]
         vim_item.abbr = string.sub(vim_item.abbr, 1, 20)
         return vim_item
     end
   },
 })
-
 
 require("telescope").load_extension("ui-select")
 -- require("trouble").setup()
@@ -153,8 +165,10 @@ require("fidget").setup()
 
 require('nvim-treesitter.configs').setup {
   ensure_installed = { "bash", "c", "cmake", "css", "dockerfile", "go", "gomod", "gowork", "hcl", "help", "html", "http", "javascript", "json", "lua", "make", "markdown", "python", "regex", "ruby", "rust", "toml", "vim", "yaml", "zig" },
+  ensure_installed = { "lua", "rust", "toml" },
   highlight = {
     enable = true,
+    additional_vim_regex_highlighting=false,
   },
   rainbow = {
     enable = true,

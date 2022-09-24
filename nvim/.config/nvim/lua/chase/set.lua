@@ -1,6 +1,13 @@
 -- Use space as <leader>
 vim.g.mapleader = "<Space>"
 
+-- let g:indentLine_setConceal = 0
+vim.g.indentLine_fileTypeExclude = { 'json', 'markdown' }
+
+-- Set updatetime for CursorHold
+-- 300ms of no cursor movement to trigger CursorHold
+vim.api.nvim_set_option('updatetime', 300)
+
 vim.cmd([[
 " set mouse=a
 set backspace=indent,eol,start " Make backspace work as you would expect.
@@ -40,16 +47,18 @@ set encoding=utf-8
 set fileformats=unix,mac
 set nrformats+=alpha           " Make CTRL-A and CTRL-X work for alphabet characters
 
-" Set updatetime for CursorHold
-" 300ms of no cursor movement to trigger CursorHold
-set updatetime=300
+
+" have a fixed column for the diagnostics to appear in
+" this removes the jitter when warnings/errors flow in
+set signcolumn=yes
 
 autocmd InsertEnter * set cul nornu
 autocmd InsertLeave * set nocul rnu
 
 set background=dark
 colorscheme gruvbox
-hi CursorLine term=bold cterm=bold ctermbg=233
+"colorscheme nord
+hi CursorLine cterm=bold ctermbg=233
 "hi Search ctermfg=NONE ctermbg=237 cterm=bold
 ]])
 
