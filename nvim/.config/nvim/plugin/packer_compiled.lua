@@ -149,10 +149,15 @@ _G.packer_plugins = {
     path = "/Users/chen.shi/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
-  ["nvim-code-action-menu"] = {
+  ["nvim-dap"] = {
     loaded = true,
-    path = "/Users/chen.shi/.local/share/nvim/site/pack/packer/start/nvim-code-action-menu",
-    url = "https://github.com/weilbith/nvim-code-action-menu"
+    path = "/Users/chen.shi/.local/share/nvim/site/pack/packer/start/nvim-dap",
+    url = "https://github.com/mfussenegger/nvim-dap"
+  },
+  ["nvim-dap-ui"] = {
+    loaded = true,
+    path = "/Users/chen.shi/.local/share/nvim/site/pack/packer/start/nvim-dap-ui",
+    url = "https://github.com/rcarriga/nvim-dap-ui"
   },
   ["nvim-lspconfig"] = {
     loaded = true,

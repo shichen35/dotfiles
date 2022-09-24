@@ -63,6 +63,7 @@ nnoremap <silent> <leader>fa <cmd>lua require('telescope.builtin').find_files({ 
 nnoremap <silent> <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <silent> <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <silent> <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <silent> <leader>fl <cmd>lua require('telescope.builtin').treesitter()<cr>
 " nnoremap <silent> <leader>fa :lua vim.lsp.buf.code_action()<CR>
 " nnoremap <silent> <leader>ca :CodeActionMenu<CR>
 
