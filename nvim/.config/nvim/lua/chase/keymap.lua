@@ -5,6 +5,13 @@ nmap <leader>l :set invlist<CR>
 nmap <leader>h :set hls!<CR>
 nnoremap / :set hls<CR>/
 
+" define line highlight color
+highlight LineHighlight cterm=bold ctermbg=darkgray guibg=darkgray
+" highlight the current line
+nnoremap <silent> <Leader>ll :call matchadd('LineHighlight', '\%'.line('.').'l')<CR>
+" clear all the highlighted lines
+nnoremap <silent> <Leader>lc :call clearmatches()<CR>
+
 "Automatically insert a matching brace in Vim
 imap <silent> {<CR> {<CR>}<CR><Up><C-o>O
 
@@ -52,11 +59,21 @@ endfunction
 " telescope
 " Using Lua functions
 nnoremap <silent> <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <silent> <leader>fa <cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>
 nnoremap <silent> <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <silent> <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <silent> <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 " nnoremap <silent> <leader>fa :lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> <leader>ca :CodeActionMenu<CR>
+
+" vsnip
+" Expand or jump
+imap <expr> <Tab>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
+smap <expr> <Tab>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
+" Jump forward or backward
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+
 
 " cmp
 " Code navigation shortcuts
@@ -77,15 +94,9 @@ nnoremap <silent> <leader>ca :CodeActionMenu<CR>
 " Setup Completion
 " See https://github.com/hrsh7th/nvim-cmp#basic-configuration
 
-" have a fixed column for the diagnostics to appear in
-" this removes the jitter when warnings/errors flow in
-set signcolumn=yes
-
 " Goto previous/next diagnostic warning/error
 "nnoremap <silent> g[ <cmd>lua vim.diagnostic.goto_prev()<CR>
 "nnoremap <silent> g] <cmd>lua vim.diagnostic.goto_next()<CR>
-
-
 
 " easy motion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings

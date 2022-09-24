@@ -8,7 +8,6 @@ use 'wbthomason/packer.nvim'
 use 'williamboman/mason.nvim'
 use 'williamboman/mason-lspconfig.nvim'
 
-use 'nvim-lua/plenary.nvim'
 use {
   'nvim-telescope/telescope.nvim',
   requires = { {'nvim-lua/plenary.nvim'} }
@@ -25,6 +24,7 @@ use 'hrsh7th/cmp-path'
 use 'hrsh7th/cmp-buffer'
 use 'simrat39/rust-tools.nvim'
 use 'hrsh7th/vim-vsnip'
+use 'rafamadriz/friendly-snippets'
 
 use 'nvim-lua/popup.nvim'
 
@@ -37,8 +37,6 @@ use 'j-hui/fidget.nvim'
 use 'm-demare/hlargs.nvim'
 use 'nvim-treesitter/nvim-treesitter'
 use 'nvim-treesitter/nvim-treesitter-context'
-
-
 
 use 'AndrewRadev/splitjoin.vim'
 use 'Yggdroot/indentLine'
