@@ -26,9 +26,11 @@ use 'simrat39/rust-tools.nvim'
 use 'hrsh7th/vim-vsnip'
 use 'rafamadriz/friendly-snippets'
 
+use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+
 use 'nvim-lua/popup.nvim'
 
-use 'weilbith/nvim-code-action-menu'
+-- use 'weilbith/nvim-code-action-menu'
 use 'j-hui/fidget.nvim'
 -- use {
 --   'kosayoda/nvim-lightbulb',
