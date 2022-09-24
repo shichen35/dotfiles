@@ -12,6 +12,7 @@ use {
   'nvim-telescope/telescope.nvim',
   requires = { {'nvim-lua/plenary.nvim'} }
 }
+use 'nvim-lua/popup.nvim'
 use {'nvim-telescope/telescope-ui-select.nvim' }
 
 use 'neovim/nvim-lspconfig'
@@ -27,8 +28,6 @@ use 'hrsh7th/vim-vsnip'
 use 'rafamadriz/friendly-snippets'
 
 use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-
-use 'nvim-lua/popup.nvim'
 
 -- use 'weilbith/nvim-code-action-menu'
 use 'j-hui/fidget.nvim'
