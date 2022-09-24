@@ -64,12 +64,19 @@ require('lspconfig')['rust_analyzer'].setup{
     }
 }
 
+local os = vim.loop.os_uname().sysname
 
 local install_root_dir = vim.fn.stdpath "data" .. "/mason"
 local extension_path = install_root_dir .. "/packages/codelldb/extension/"
 local codelldb_path = extension_path .. "adapter/codelldb"
-local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
-
+local liblldb_path;
+if os == "Linux" then
+    liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+elseif os == "Darwin" then
+    liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
+else
+    error("invalid operation")
+end
 local dap, dapui = require("dap"), require("dapui")
 dap.adapters.codelldb = {
   type = 'server',
