@@ -64,6 +64,7 @@ nnoremap <silent> <leader>fg <cmd>lua require('telescope.builtin').live_grep()<c
 nnoremap <silent> <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <silent> <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <silent> <leader>fl <cmd>lua require('telescope.builtin').treesitter()<cr>
+nnoremap <silent> <leader>ft :split<cr> :terminal<cr>a
 " nnoremap <silent> <leader>fa :lua vim.lsp.buf.code_action()<CR>
 " nnoremap <silent> <leader>ca :CodeActionMenu<CR>
 
@@ -80,12 +81,13 @@ nnoremap <silent> <F5> <Cmd>lua require'dap'.continue()<CR>
 nnoremap <silent> <F10> <Cmd>lua require'dap'.step_over()<CR>
 nnoremap <silent> <F11> <Cmd>lua require'dap'.step_into()<CR>
 nnoremap <silent> <F12> <Cmd>lua require'dap'.step_out()<CR>
-nnoremap <silent> <Leader>b <Cmd>lua require'dap'.toggle_breakpoint()<CR>
-nnoremap <silent> <Leader>B <Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
-nnoremap <silent> <Leader>lp <Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
-nnoremap <silent> <Leader>dr <Cmd>lua require'dap'.repl.open()<CR>
-nnoremap <silent> <Leader>dl <Cmd>lua require'dap'.run_last()<CR>
-nnoremap <silent> <Leader>do <Cmd>lua require'dapui'.toggle()<CR>
+nnoremap <silent> <leader>b <Cmd>lua require'dap'.toggle_breakpoint()<CR>
+nnoremap <silent> <leader>B <Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
+nnoremap <silent> <leader>lp <Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
+nnoremap <silent> <leader>dr <Cmd>lua require'dap'.repl.open()<CR>
+nnoremap <silent> <leader>dl <Cmd>lua require'dap'.run_last()<CR>
+nnoremap <silent> <leader>do <Cmd>lua require'dapui'.toggle()<CR>
+nnoremap <silent> <leader>k <Cmd>lua require'dapui'.eval()<CR>
 
 
 " cmp
