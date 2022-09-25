@@ -16,7 +16,6 @@ use 'nvim-lua/popup.nvim'
 use {'nvim-telescope/telescope-ui-select.nvim' }
 
 use 'neovim/nvim-lspconfig'
---
 use 'hrsh7th/nvim-cmp'
 use 'hrsh7th/cmp-nvim-lsp'
 use 'hrsh7th/cmp-nvim-lsp-signature-help'
@@ -29,12 +28,9 @@ use 'rafamadriz/friendly-snippets'
 
 use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
 
--- use 'weilbith/nvim-code-action-menu'
+-- standalone UI for nvim-lsp progress
 use 'j-hui/fidget.nvim'
--- use {
---   'kosayoda/nvim-lightbulb',
---   requires = 'antoinemadec/FixCursorHold.nvim',
--- }
+
 use 'm-demare/hlargs.nvim'
 use 'nvim-treesitter/nvim-treesitter'
 use 'nvim-treesitter/nvim-treesitter-context'
