@@ -6,6 +6,7 @@ case ${OSTYPE} in
   linux*)
     ;;
 esac
+source "$HOME/.cargo/env"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -201,3 +202,7 @@ function omzu() {
     omz update
 }
 # zprof|head
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
