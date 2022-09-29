@@ -56,8 +56,8 @@ autocmd InsertEnter * set cul nornu
 autocmd InsertLeave * set nocul rnu
 
 set background=dark
-colorscheme gruvbox
-"colorscheme nord
+"colorscheme gruvbox
+colorscheme nord
 hi CursorLine cterm=bold ctermbg=233
 "hi Search ctermfg=NONE ctermbg=237 cterm=bold
 ]])
