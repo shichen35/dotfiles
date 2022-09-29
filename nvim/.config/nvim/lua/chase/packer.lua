@@ -50,5 +50,6 @@ use 'arcticicestudio/nord-vim'
 -- use 'rust-lang/rust.vim'
 use 'tpope/vim-commentary'
 use 'tpope/vim-surround'
+use 'ryanoasis/vim-devicons'
 end)
 
