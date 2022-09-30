@@ -2,19 +2,16 @@
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
--- Packer can manage itself
-use 'wbthomason/packer.nvim'
+use 'wbthomason/packer.nvim' -- Packer can manage itself
 
 use 'williamboman/mason.nvim'
 use 'williamboman/mason-lspconfig.nvim'
 
-use {
-  'nvim-telescope/telescope.nvim',
-  requires = { {'nvim-lua/plenary.nvim'} }
-}
-use 'nvim-lua/popup.nvim'
-use {'nvim-telescope/telescope-ui-select.nvim' }
+use 'nvim-telescope/telescope.nvim'
+use 'nvim-lua/plenary.nvim'
+use 'nvim-telescope/telescope-ui-select.nvim'
 
+-- lsp and cmp
 use 'neovim/nvim-lspconfig'
 use 'hrsh7th/nvim-cmp'
 use 'hrsh7th/cmp-nvim-lsp'
@@ -25,11 +22,13 @@ use 'hrsh7th/cmp-buffer'
 use 'simrat39/rust-tools.nvim'
 use 'hrsh7th/vim-vsnip'
 use 'rafamadriz/friendly-snippets'
+-- dap
+use 'rcarriga/nvim-dap-ui'
+use 'mfussenegger/nvim-dap'
 
-use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+use 'j-hui/fidget.nvim' -- standalone UI for nvim-lsp progress
 
--- standalone UI for nvim-lsp progress
-use 'j-hui/fidget.nvim'
+use 'tpope/vim-fugitive'
 
 use 'm-demare/hlargs.nvim'
 use 'nvim-treesitter/nvim-treesitter'
@@ -39,14 +38,13 @@ use 'AndrewRadev/splitjoin.vim'
 use 'Yggdroot/indentLine'
 use 'ap/vim-css-color'
 use 'easymotion/vim-easymotion'
--- use 'haya14busa/is.vim'
+use 'haya14busa/is.vim' -- incremental search improved
 use 'itchyny/lightline.vim'
 use 'junegunn/vim-easy-align'
 use 'mbbill/undotree'
--- use 'mg979/vim-visual-multi', {'branch': 'master'}
 use 'morhetz/gruvbox'
 use 'arcticicestudio/nord-vim'
--- use 'preservim/nerdtree'
+use 'preservim/nerdtree'
 -- use 'rust-lang/rust.vim'
 use 'tpope/vim-commentary'
 use 'tpope/vim-surround'
