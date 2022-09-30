@@ -48,7 +48,7 @@ set sidescroll=1
 set encoding=utf-8
 set fileformats=unix,mac
 set nrformats+=alpha           " Make CTRL-A and CTRL-X work for alphabet characters
-
+set background=dark
 
 " have a fixed column for the diagnostics to appear in
 " this removes the jitter when warnings/errors flow in
@@ -57,9 +57,10 @@ set signcolumn=yes
 autocmd InsertEnter * set cul nornu
 autocmd InsertLeave * set nocul rnu
 
-set background=dark
 "colorscheme gruvbox
 colorscheme nord
+let g:colour_scheme_list = ['nord', 'gruvbox']
+
 hi CursorLine cterm=bold ctermbg=233
 "hi Search ctermfg=NONE ctermbg=237 cterm=bold
 ]])

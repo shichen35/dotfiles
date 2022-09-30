@@ -43,15 +43,22 @@ nmap <silent><Left> :echoe "Use h"<CR>
 nmap <silent><Right> :echoe "Use l"<CR>
 nmap <silent><Up> :echoe "Use k"<CR>
 
-nmap <leader>cc :call ToggleColorColumn()<CR>
-highlight ColorColumn ctermbg=234 guibg=#303030
-function! ToggleColorColumn()
-    if &colorcolumn == ""
-        let &colorcolumn="".join(range(81,winwidth(0)),",")
-    else
-        let &colorcolumn=""
-    endif
-endfunction
+"nmap <leader>cl :call ToggleColorColumn()<CR>
+"highlight ColorColumn ctermbg=234 guibg=#303030
+"function! ToggleColorColumn()
+"    if &colorcolumn == ""
+"        let &colorcolumn="".join(range(81,winwidth(0)),",")
+"    else
+"        let &colorcolumn=""
+"    endif
+"endfunction
+
+" cycle through colorschemes
+func! NextColors()
+    let idx = index(g:colour_scheme_list, g:colors_name)
+    return (idx + 1 >= len(g:colour_scheme_list) ? g:colour_scheme_list[0] : g:colour_scheme_list[idx + 1])
+endfunc
+nnoremap <silent> <leader>cc :exe "colorscheme " .. NextColors()<CR>
 
 " Autocomplete on tab
 " imap <Tab> <c-x><c-o>
@@ -120,26 +127,29 @@ nmap <Leader>/ <Plug>(easymotion-sn)
 " Turn on case-insensitive feature
 let g:EasyMotion_smartcase = 1
 
+" Switching themes automatically in lightline.vim
+function! s:onColorSchemeChange(scheme)
+    " Try a scheme provided already
+    execute 'runtime autoload/lightline/colorscheme/'.a:scheme.'.vim'
+    if exists('g:lightline#colorscheme#{a:scheme}#palette')
+        let g:lightline.colorscheme = a:scheme
+    else  " Try falling back to a known colour scheme
+        let l:colors_name = get(g:colour_scheme_list, a:scheme, '')
+        if empty(l:colors_name)
+            return
+        else
+            let g:lightline.colorscheme = l:colors_name
+        endif
+    endif
+    call lightline#init()
+    call lightline#colorscheme()
+    call lightline#update()
+endfunction
 
-"augroup LightlineColorscheme
-"    autocmd!
-"    autocmd ColorScheme * call s:lightline_update()
-"augroup END
-"function! s:lightline_update()
-"    if !exists('g:loaded_lightline')
-"    return
-"    endif
-"    try
-"    if g:colors_name =~# 'wombat\|solarized\|landscape\|jellybeans\|seoul256\|Tomorrow'
-"        let g:lightline.colorscheme =
-"            \ substitute(substitute(g:colors_name, '-', '_', 'g'), '256.*', '', '')
-"        call lightline#init()
-"        call lightline#colorscheme()
-"        call lightline#update()
-"    endif
-"    catch
-"    endtry
-"endfunction
+augroup LightlineColorscheme
+    autocmd!
+    autocmd ColorScheme * call s:onColorSchemeChange(expand("<amatch>"))
+augroup END
 
 let g:lightline = {
             \ 'colorscheme': 'nord',
