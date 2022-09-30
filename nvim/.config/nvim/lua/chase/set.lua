@@ -1,3 +1,5 @@
+vim.opt.termguicolors = true
+
 -- Use space as <leader>
 vim.g.mapleader = "<Space>"
 
@@ -9,7 +11,7 @@ vim.g.indentLine_fileTypeExclude = { 'json', 'markdown' }
 vim.api.nvim_set_option('updatetime', 300)
 
 vim.cmd([[
-set mouse=a
+"set mouse=a
 set backspace=indent,eol,start " Make backspace work as you would expect.
 set shiftwidth=4
 set shiftround
