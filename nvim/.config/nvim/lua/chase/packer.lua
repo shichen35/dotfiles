@@ -35,7 +35,7 @@ use 'nvim-treesitter/nvim-treesitter'
 use 'nvim-treesitter/nvim-treesitter-context'
 
 use 'AndrewRadev/splitjoin.vim'
-use 'Yggdroot/indentLine'
+use 'lukas-reineke/indent-blankline.nvim'
 use 'ap/vim-css-color'
 use 'easymotion/vim-easymotion'
 use 'haya14busa/is.vim' -- incremental search improved

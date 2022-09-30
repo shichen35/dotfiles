@@ -127,7 +127,6 @@ xmap K :m '<-2<CR>gv=gv
 
 " MERDTree shortcuts
 nmap <leader>nn :NERDTreeFocus<CR>
-nmap <leader>nt :NERDTreeToggle<CR>
 nmap <leader>nf :NERDTreeFind<CR>
 
 " Ale shortcuts
