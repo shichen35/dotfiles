@@ -39,7 +39,6 @@ xmap K :m '<-2<CR>gv=gv
 
 " MERDTree shortcuts
 nmap <leader>nn :NERDTreeFocus<CR>
-nmap <leader>nt :NERDTreeToggle<CR>
 nmap <leader>nf :NERDTreeFind<CR>
 
 " Remove newbie crutches in Normal Mode
@@ -80,6 +79,7 @@ nnoremap <silent> <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <silent> <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <silent> <leader>fl <cmd>lua require('telescope.builtin').treesitter()<cr>
 nnoremap <silent> <leader>ft :split<cr> :terminal<cr>a
+nnoremap <silent> <leader>fc <cmd>lua require('telescope.builtin').commands()<cr>
 
 " vsnip
 " Expand or jump
