@@ -341,3 +341,69 @@ require('nvim-treesitter.configs').setup {
 require('hlargs').setup()
 require("mason").setup()
 
+vim.cmd([[
+" Switching themes automatically in lightline.vim
+function! s:onColorSchemeChange(scheme)
+    " Try a scheme provided already
+    execute 'runtime autoload/lightline/colorscheme/'.a:scheme.'.vim'
+    if exists('g:lightline#colorscheme#{a:scheme}#palette')
+        let g:lightline.colorscheme = a:scheme
+    else  " Try falling back to a known colour scheme
+        let l:colors_name = get(g:colour_scheme_list, a:scheme, '')
+        if empty(l:colors_name)
+            return
+        else
+            let g:lightline.colorscheme = l:colors_name
+        endif
+    endif
+    call lightline#init()
+    call lightline#colorscheme()
+    call lightline#update()
+endfunction
+
+augroup LightlineColorscheme
+    autocmd!
+    autocmd ColorScheme * call s:onColorSchemeChange(expand("<amatch>"))
+augroup END
+
+let g:lightline = {
+            \ 'colorscheme': 'nord',
+            \ 'active': {
+                \   'left': [ [ 'mode', 'paste' ],
+                \             [ 'readonly', 'filename', 'modified' ] ],
+                \   'right': [ [ 'lineinfo' ],
+                \              [ 'percent' ],
+                \              [ 'fileformat', 'fileencoding', 'filetype'] ]
+                \ },
+                \ 'component_function': {
+                    \   'percent': 'ScrollIndicator',
+                    \   'lineinfo': 'LightlineLineinfo',
+                    \ },
+                \ 'component': {
+                    \  'filename': '%n:%t'
+                    \ }
+                    \ }
+
+function! LightlineLineinfo()
+    let l:current_line = printf('%3d', line('.'))
+    let l:max_line = printf('%d', line('$'))
+    let l:current_col = printf('%-2d', col('.'))
+    let l:lineinfo = ' ' . l:current_line . '/' . l:max_line . ':' . l:current_col
+    return l:lineinfo
+endfunction
+
+function! ScrollIndicator()
+    let l:line_no_indicator_chars = ['⎺', '⎻', '─', '⎼', '⎽']
+    let l:current_line = line('.')
+    let l:total_lines = line('$')
+    let l:line_no_fraction = floor(l:current_line) / floor(l:total_lines)
+    if l:current_line == l:total_lines
+        let l:index = len(l:line_no_indicator_chars) - 1
+    else
+        let l:index = float2nr(l:line_no_fraction * len(l:line_no_indicator_chars))
+    endif
+    let l:percentage = printf("%3d%%",float2nr(l:line_no_fraction * 100))
+    "return l:percentage . ' ['.l:line_no_indicator_chars[l:index].']'
+    return l:line_no_indicator_chars[l:index]
+endfunction
+]])

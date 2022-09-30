@@ -37,6 +37,11 @@ xmap <leader>p "_dP
 xmap J :m '>+1<CR>gv=gv
 xmap K :m '<-2<CR>gv=gv
 
+" MERDTree shortcuts
+nmap <leader>nn :NERDTreeFocus<CR>
+nmap <leader>nt :NERDTreeToggle<CR>
+nmap <leader>nf :NERDTreeFind<CR>
+
 " Remove newbie crutches in Normal Mode
 nmap <silent><Down> :echoe "Use j"<CR>
 nmap <silent><Left> :echoe "Use h"<CR>
@@ -52,6 +57,9 @@ nmap <silent><Up> :echoe "Use k"<CR>
 "        let &colorcolumn=""
 "    endif
 "endfunction
+
+" EasyAlign
+xmap ga <Plug>(EasyAlign)
 
 " cycle through colorschemes
 func! NextColors()
@@ -72,8 +80,6 @@ nnoremap <silent> <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <silent> <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <silent> <leader>fl <cmd>lua require('telescope.builtin').treesitter()<cr>
 nnoremap <silent> <leader>ft :split<cr> :terminal<cr>a
-" nnoremap <silent> <leader>fa :lua vim.lsp.buf.code_action()<CR>
-" nnoremap <silent> <leader>ca :CodeActionMenu<CR>
 
 " vsnip
 " Expand or jump
@@ -111,14 +117,10 @@ nnoremap <silent> <leader>k <Cmd>lua require'dapui'.eval()<CR>
 "nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
 
 " Quick-fix
-"nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
+"nnoremap <silent> ca    <cmd>lua vim.lsp.buf.code_action()<CR>
 
 " Setup Completion
 " See https://github.com/hrsh7th/nvim-cmp#basic-configuration
-
-" Goto previous/next diagnostic warning/error
-"nnoremap <silent> g[ <cmd>lua vim.diagnostic.goto_prev()<CR>
-"nnoremap <silent> g] <cmd>lua vim.diagnostic.goto_next()<CR>
 
 " easy motion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
@@ -126,71 +128,6 @@ let g:EasyMotion_do_mapping = 0 " Disable default mappings
 nmap <Leader>/ <Plug>(easymotion-sn)
 " Turn on case-insensitive feature
 let g:EasyMotion_smartcase = 1
-
-" Switching themes automatically in lightline.vim
-function! s:onColorSchemeChange(scheme)
-    " Try a scheme provided already
-    execute 'runtime autoload/lightline/colorscheme/'.a:scheme.'.vim'
-    if exists('g:lightline#colorscheme#{a:scheme}#palette')
-        let g:lightline.colorscheme = a:scheme
-    else  " Try falling back to a known colour scheme
-        let l:colors_name = get(g:colour_scheme_list, a:scheme, '')
-        if empty(l:colors_name)
-            return
-        else
-            let g:lightline.colorscheme = l:colors_name
-        endif
-    endif
-    call lightline#init()
-    call lightline#colorscheme()
-    call lightline#update()
-endfunction
-
-augroup LightlineColorscheme
-    autocmd!
-    autocmd ColorScheme * call s:onColorSchemeChange(expand("<amatch>"))
-augroup END
-
-let g:lightline = {
-            \ 'colorscheme': 'nord',
-            \ 'active': {
-                \   'left': [ [ 'mode', 'paste' ],
-                \             [ 'readonly', 'filename', 'modified' ] ],
-                \   'right': [ [ 'lineinfo' ],
-                \              [ 'percent' ],
-                \              [ 'fileformat', 'fileencoding', 'filetype'] ]
-                \ },
-                \ 'component_function': {
-                    \   'percent': 'ScrollIndicator',
-                    \   'lineinfo': 'LightlineLineinfo',
-                    \ },
-                \ 'component': {
-                    \  'filename': '%n:%t'
-                    \ }
-                    \ }
-
-function! LightlineLineinfo()
-    let l:current_line = printf('%3d', line('.'))
-    let l:max_line = printf('%d', line('$'))
-    let l:current_col = printf('%-2d', col('.'))
-    let l:lineinfo = ' ' . l:current_line . '/' . l:max_line . ':' . l:current_col
-    return l:lineinfo
-endfunction
-
-function! ScrollIndicator()
-    let l:line_no_indicator_chars = ['⎺', '⎻', '─', '⎼', '⎽']
-    let l:current_line = line('.')
-    let l:total_lines = line('$')
-    let l:line_no_fraction = floor(l:current_line) / floor(l:total_lines)
-    if l:current_line == l:total_lines
-        let l:index = len(l:line_no_indicator_chars) - 1
-    else
-        let l:index = float2nr(l:line_no_fraction * len(l:line_no_indicator_chars))
-    endif
-    let l:percentage = printf("%3d%%",float2nr(l:line_no_fraction * 100))
-    "return l:percentage . ' ['.l:line_no_indicator_chars[l:index].']'
-    return l:line_no_indicator_chars[l:index]
-endfunction
 
 function! TrimWhitespace()
     let l:save = winsaveview()
@@ -204,7 +141,6 @@ augroup CHEN_SHI
     " autocmd VimEnter * :VimApm
     " autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
 augroup END
-
 
 nnoremap <leader>r :call CompileRunGcc()<CR>
 func! CompileRunGcc()
