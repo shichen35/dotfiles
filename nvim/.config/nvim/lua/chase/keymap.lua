@@ -78,7 +78,7 @@ nnoremap <silent> <leader>fg <cmd>lua require('telescope.builtin').live_grep()<c
 nnoremap <silent> <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <silent> <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <silent> <leader>fl <cmd>lua require('telescope.builtin').treesitter()<cr>
-nnoremap <silent> <leader>ft :split<cr> :terminal<cr>a
+nnoremap <silent> <leader>ft :sp <bar> ter<cr>a
 nnoremap <silent> <leader>fc <cmd>lua require('telescope.builtin').commands()<cr>
 
 " vsnip
