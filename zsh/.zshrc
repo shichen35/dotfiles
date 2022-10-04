@@ -34,7 +34,7 @@ source $ZSH/oh-my-zsh.sh
 source "$HOME/.vim/plugged/fzf/shell/key-bindings.zsh"
 
 # User configuration
-(figlet -f slant 'Rock & Code' && fortune -s)|lolcat;
+# (figlet -f slant 'Rock & Code' && fortune -s)|lolcat;
 
 HISTFILE=~/.zsh_history
 SAVEHIST=10000

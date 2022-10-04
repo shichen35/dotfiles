@@ -11,6 +11,7 @@ vim.g.indentLine_fileTypeExclude = { 'json', 'markdown' }
 vim.api.nvim_set_option('updatetime', 300)
 
 vim.cmd([[
+set mouse=
 "set mouse=a
 set backspace=indent,eol,start " Make backspace work as you would expect.
 set shiftwidth=4
