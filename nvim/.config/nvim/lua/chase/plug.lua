@@ -40,6 +40,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<C-l>', vim.diagnostic.setloclist, bufopts)
   -- Hover actions
   vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+  vim.keymap.set("n", "<leader>ha", rt.hover_actions.hover_actions, { buffer = bufnr })
   vim.keymap.set("n", "<leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
 end
 
