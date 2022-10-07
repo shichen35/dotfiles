@@ -142,8 +142,8 @@ augroup CHEN_SHI
     " autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
 augroup END
 
-nnoremap <leader>r :call CompileRunGcc()<CR>
-func! CompileRunGcc()
+nnoremap <leader>r :call CompileRun()<CR>
+func! CompileRun()
 	exec "w"
 	if &filetype == 'c'
 		set splitbelow

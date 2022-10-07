@@ -28,7 +28,7 @@ use 'mfussenegger/nvim-dap'
 
 use 'j-hui/fidget.nvim' -- standalone UI for nvim-lsp progress
 
-use 'tpope/vim-fugitive'
+-- use 'tpope/vim-fugitive'
 
 use 'm-demare/hlargs.nvim'
 use 'nvim-treesitter/nvim-treesitter'
