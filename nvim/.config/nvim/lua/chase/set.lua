@@ -29,8 +29,17 @@ set nowrap
 set noswapfile
 set nobackup
 set nowritebackup
-set undodir=~/.config/nvim/undodir
-set undofile
+if has("persistent_undo")
+   let target_path = expand('~/.config/nvim/undodir')
+    " create the directory and any parent directories
+    " if the location does not exist.
+    if !isdirectory(target_path)
+        call mkdir(target_path, "p", 0700)
+    endif
+
+    let &undodir=target_path
+    set undofile
+endif
 set incsearch
 set hls
 set smartcase
