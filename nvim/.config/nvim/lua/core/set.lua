@@ -1,17 +1,35 @@
+local cache_dir = vim.env.HOME .. '/.cache/nvim/'
+
 vim.opt.termguicolors = true
+vim.opt.hidden = true
+vim.opt.magic = true
+vim.opt.showcmd = true
+vim.opt.showmode = false
+vim.opt.cmdheight = 1
+vim.opt.scrolloff = 2
+vim.opt.sidescrolloff = 4
+vim.opt.laststatus = 3
 
 -- Use space as <leader>
-vim.g.mapleader = "<Space>"
+vim.g.mapleader = ' '
 
--- let g:indentLine_setConceal = 0
-vim.g.indentLine_fileTypeExclude = { 'json', 'markdown' }
+if vim.fn.has("persistent_undo") then
+   local undodir = cache_dir .. '/undodir'
+    -- create the undo directory
+    -- if the location does not exist.
+    if vim.fn.isdirectory(undodir) == 0 then
+        vim.fn.mkdir(undodir,"p")
+    end
+    vim.opt.undodir = undodir
+    vim.opt.undofile = true
+end
 
 -- Set updatetime for CursorHold
 -- 300ms of no cursor movement to trigger CursorHold
 vim.api.nvim_set_option('updatetime', 300)
 
 vim.cmd([[
-"set mouse=
+set mouse=
 "set mouse=a
 set backspace=indent,eol,start " Make backspace work as you would expect.
 set shiftwidth=4
@@ -19,8 +37,6 @@ set shiftround
 set tabstop=4 softtabstop=4
 set expandtab
 set autoindent
-set hidden                     " Buffer should still exist if window is closed
-set laststatus=2               " Always show statusline.
 set display+=lastline          " Show as much as possible of the last line.
 set splitright                 " Vertical windows should be split to right
 set splitbelow                 " Horizontal windows should split to bottom
@@ -29,17 +45,6 @@ set nowrap
 set noswapfile
 set nobackup
 set nowritebackup
-if has("persistent_undo")
-   let target_path = expand('~/.config/nvim/undodir')
-    " create the directory and any parent directories
-    " if the location does not exist.
-    if !isdirectory(target_path)
-        call mkdir(target_path, "p", 0700)
-    endif
-
-    let &undodir=target_path
-    set undofile
-endif
 set incsearch
 set hls
 set smartcase
@@ -49,12 +54,7 @@ set wildmenu
 " set wildmode=list:longest,full
 set path+=**
 set nu rnu
-set noshowmode
-set showcmd                    " Show me what I'm typing
 set ttyfast
-set scrolloff=2
-set sidescrolloff=4
-set sidescroll=1
 set encoding=utf-8
 set fileformats=unix,mac
 set nrformats+=alpha           " Make CTRL-A and CTRL-X work for alphabet characters
