@@ -50,3 +50,10 @@ export FZF_DEFAULT_OPTS="--color='$FZF_COLORS' \
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -n 10'"
 
 # export FZF_TMUX_OPTS="-p"
+
+# skim
+if type rg &> /dev/null && type fd &> /dev/null; then
+  export SKIM_DEFAULT_COMMAND="fd --type f || git ls-tree -r --name-only HEAD || rg --files || find ."
+  export SKIM_CTRL_R_OPTS="--color=fg:243,fg+:255,hl:220,hl+:202"
+  export SKIM_CTRL_T_OPTS="--color=fg:243,fg+:255,hl:220,hl+:202"
+fi

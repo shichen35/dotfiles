@@ -31,8 +31,10 @@ plugins=(zsh-completions zsh-syntax-highlighting zsh-autosuggestions) # docker d
 
 source $ZSH/oh-my-zsh.sh
 # FZF keybindings
-source "$HOME/.vim/plugged/fzf/shell/key-bindings.zsh"
+# source "$HOME/.vim/plugged/fzf/shell/key-bindings.zsh"
 
+# Skim keybindings
+source $DOTFILES/zsh-files/key-bindings.zsh
 # User configuration
 # (figlet -f slant 'Rock & Code' && fortune -s)|lolcat;
 
