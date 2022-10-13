@@ -15,9 +15,9 @@ if [ ! -d $HOME/.oh-my-zsh/custom/plugins/zsh-completions ]; then
 fi
 
 # backup and copy .zshrc
-if [ -e ~/.zshrc.pre-oh-my-zsh ] && [-e ~/.zshrc]; then
-  mv ~/.zshrc ~/.zshrc.backup
-  ~/.zshrc.pre-oh-my-zsh ~/.zshrc
+if [ -f $HOME/.zshrc.pre-oh-my-zsh ] && [ -f $HOME/.zshrc ]; then
+  mv $HOME/.zshrc $HOME/.zshrc.backup
+  mv $HOME/.zshrc.pre-oh-my-zsh $HOME/.zshrc
   echo "zshrc file copied! Original .zshrc was replaced to .zshrc.backup"
 fi
 
