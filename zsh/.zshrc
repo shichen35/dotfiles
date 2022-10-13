@@ -6,13 +6,13 @@ case ${OSTYPE} in
   linux*)
     ;;
 esac
-source "$HOME/.cargo/env"
+[ -s $HOME/.cargo/env ] && source "$HOME/.cargo/env"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-[[ ! -v ZSH_THEME ]] && ZSH_THEME="gentoo"
+[ ! -v ZSH_THEME ] && ZSH_THEME="gentoo"
 
 DISABLE_MAGIC_FUNCTIONS="true"
 DISABLE_AUTO_TITLE="true"
@@ -29,12 +29,12 @@ ZSH_AUTOSUGGEST_USE_ASYNC="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(zsh-completions zsh-syntax-highlighting zsh-autosuggestions) # docker docker-compose git
 
-source $ZSH/oh-my-zsh.sh
+[ -s $ZSH/oh-my-zsh.sh ] && source $ZSH/oh-my-zsh.sh
 # FZF keybindings
 # source "$HOME/.vim/plugged/fzf/shell/key-bindings.zsh"
 
 # Skim keybindings
-source $DOTFILES/zsh-files/key-bindings.zsh
+(($+commands[sk] && $+commands[rg])) && source $DOTFILES/zsh-files/key-bindings.zsh
 # User configuration
 # (figlet -f slant 'Rock & Code' && fortune -s)|lolcat;
 
@@ -64,6 +64,7 @@ if [[ $- =~ .*i.* ]]; then bindkey -s "^[r" " vim \"+normal G\" ~/.zsh_history^M
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
+alias vim=nvim
 alias reset='tput reset'
 alias cmds='history | awk '\''{print $2}'\'' | sort | uniq -c | sort -nr | head -n 6'
 alias bat='bat --style=plain --paging=never --color=always'

@@ -49,61 +49,79 @@ local lsp_flags = {
   debounce_text_changes = 150,
 }
 require('lspconfig')['pyright'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
+  on_attach = on_attach,
+  flags = lsp_flags,
 }
 require('lspconfig')['tsserver'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
+  on_attach = on_attach,
+  flags = lsp_flags,
 }
 require('lspconfig')['rust_analyzer'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-    -- Server-specific settings...
-    settings = {
-      ["rust-analyzer"] = {}
-    }
-}
-
-local os = vim.loop.os_uname().sysname
-
-local install_root_dir = vim.fn.stdpath "data" .. "/mason"
-local extension_path = install_root_dir .. "/packages/codelldb/extension/"
-local codelldb_path = extension_path .. "adapter/codelldb"
-local liblldb_path;
-if os == "Linux" then
-    liblldb_path = extension_path .. "lldb/lib/liblldb.so"
-elseif os == "Darwin" then
-    liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
-else
-    error("invalid operation")
-end
-local dap, dapui = require("dap"), require("dapui")
-dap.adapters.codelldb = {
-  type = 'server',
-  port = "${port}",
-  executable = {
-    command = codelldb_path,
-    args = {"--port", "${port}"},
-    -- On windows you may have to uncomment this:
-    -- detached = false,
+  on_attach = on_attach,
+  flags = lsp_flags,
+  -- Server-specific settings...
+  settings = {
+    ["rust-analyzer"] = {}
   }
 }
-dap.configurations.cpp = {
-  {
-    name = "Launch file",
-    type = "codelldb",
-    request = "launch",
-    program = function()
-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-    end,
-    cwd = '${workspaceFolder}',
-    stopOnEntry = true,
-  },
-}
 
-dap.configurations.c = dap.configurations.cpp
-dap.configurations.rust = dap.configurations.cpp
+local release = vim.loop.os_uname().release
+local sysname = vim.loop.os_uname().sysname
+
+local liblldb_path
+local extension_path
+
+if string.find(release, "android") then
+  liblldb_path = "/data/data/com.termux/files/usr/lib/liblldb.so"
+  codelldb_path = "/data/data/com.termux/files/usr/bin/lldb-vscode"
+else
+  local install_root_dir = vim.fn.stdpath "data" .. "/mason"
+  local extension_path = install_root_dir .. "/packages/codelldb/extension/"
+  codelldb_path = extension_path .. "adapter/codelldb"
+  if sysname == "Linux" then
+    liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+  elseif sysname == "Darwin" then
+    liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
+  else
+    error("invalid operation")
+  end
+end
+vim.api.nvim_set_hl(0, 'DapBreakpoint', { ctermbg=0, fg='#993939', bg='#31353f' })
+vim.api.nvim_set_hl(0, 'DapLogPoint', { ctermbg=0, fg='#61afef', bg='#31353f' })
+vim.api.nvim_set_hl(0, 'DapStopped', { ctermbg=0, fg='#98c379', bg='#31353f' })
+
+vim.fn.sign_define('DapBreakpoint', { text='', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
+vim.fn.sign_define('DapBreakpointCondition', { text='ﳁ', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
+vim.fn.sign_define('DapBreakpointRejected', { text='', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl= 'DapBreakpoint' })
+vim.fn.sign_define('DapLogPoint', { text='', texthl='DapLogPoint', linehl='DapLogPoint', numhl= 'DapLogPoint' })
+vim.fn.sign_define('DapStopped', { text='', texthl='DapStopped', linehl='DapStopped', numhl= 'DapStopped' })
+
+local dap, dapui = require("dap"), require("dapui")
+-- dap.adapters.codelldb = {
+--   type = 'server',
+--   port = "${port}",
+--   executable = {
+--     command = codelldb_path,
+--     args = {"--port", "${port}"},
+--     -- On windows you may have to uncomment this:
+--     -- detached = false,
+--   }
+-- }
+-- dap.configurations.cpp = {
+--   {
+--     name = "Launch file",
+--     type = "codelldb",
+--     request = "launch",
+--     program = function()
+--       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+--     end,
+--     cwd = '${workspaceFolder}',
+--     stopOnEntry = true,
+--   },
+-- }
+
+-- dap.configurations.c = dap.configurations.cpp
+-- dap.configurations.rust = dap.configurations.cpp
 
 dapui.setup({
   icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
