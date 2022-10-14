@@ -309,6 +309,33 @@ vim.opt.completeopt = {'menuone', 'noselect', 'noinsert'}
 vim.opt.shortmess = vim.opt.shortmess + { c = true}
 
 -- Completion Plugin Setup
+local kind_icons = {
+  Text = "",
+  Method = "",
+  Function = "",
+  Constructor = "",
+  Field = "",
+  Variable = "",
+  Class = "ﴯ",
+  Interface = "",
+  Module = "",
+  Property = "ﰠ",
+  Unit = "",
+  Value = "",
+  Enum = "",
+  Keyword = "",
+  Snippet = "",
+  Color = "",
+  File = "",
+  Reference = "",
+  Folder = "",
+  EnumMember = "",
+  Constant = "",
+  Struct = "",
+  Event = "",
+  Operator = "",
+  TypeParameter = ""
+}
 local cmp = require'cmp'
 cmp.setup({
   -- Enable LSP snippets
@@ -348,19 +375,15 @@ cmp.setup({
   formatting = {
     -- fields = {'menu', 'abbr', 'kind'},
     fields = {'abbr', 'kind'},
+
     format = function(entry, vim_item)
-        -- local menu_icon ={
-        --     nvim_lsp = 'C',
-        --     vsnip = 'S',
-        --     buffer = 'B',
-        --     path = 'P',
-        -- }
-        -- vim_item.menu = menu_icon[entry.source.name]
+        vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
         vim_item.abbr = string.sub(vim_item.abbr, 1, 24)
         return vim_item
     end
   },
 })
+
 
 require("telescope").setup {
   extensions = {
@@ -415,6 +438,23 @@ require('hlargs').setup()
 require("mason").setup()
 
 vim.cmd([[
+" gray
+highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
+" blue
+highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
+highlight! link CmpItemAbbrMatchFuzzy CmpItemAbbrMatch
+" light blue
+highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE
+highlight! link CmpItemKindInterface CmpItemKindVariable
+highlight! link CmpItemKindText CmpItemKindVariable
+" pink
+highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0
+highlight! link CmpItemKindMethod CmpItemKindFunction
+" front
+highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
+highlight! link CmpItemKindProperty CmpItemKindKeyword
+highlight! link CmpItemKindUnit CmpItemKindKeyword
+
 " Switching themes automatically in lightline.vim
 function! s:onColorSchemeChange(scheme)
     " Try a scheme provided already
