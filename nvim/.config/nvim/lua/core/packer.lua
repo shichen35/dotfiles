@@ -50,5 +50,6 @@ use 'preservim/nerdtree'
 use 'tpope/vim-commentary'
 use 'tpope/vim-surround'
 use 'ryanoasis/vim-devicons'
+use 'folke/which-key.nvim'
 end)
 

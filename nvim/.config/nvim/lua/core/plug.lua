@@ -3,6 +3,12 @@
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
 
+require("which-key").setup {
+  -- your configuration comes here
+  -- or leave it empty to use the default settings
+  -- refer to the configuration section below
+}
+
 -- Show diagnostic popup on cursor hover
 -- autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 vim.api.nvim_create_autocmd(
@@ -124,7 +130,7 @@ local dap, dapui = require("dap"), require("dapui")
 -- dap.configurations.rust = dap.configurations.cpp
 
 dapui.setup({
-  icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
+  icons = { expanded = "", collapsed = "", current_frame = "" },
   mappings = {
     -- Use a table to apply multiple mappings
     expand = { "<CR>", "<2-LeftMouse>" },
@@ -171,14 +177,14 @@ dapui.setup({
     -- Display controls in this element
     element = "repl",
     icons = {
-      pause = "",
-      play = "",
+      pause = "",
+      play = "",
       step_into = "",
-      step_over = "",
-      step_out = "",
-      step_back = "",
-      run_last = "↻",
-      terminate = "x",
+      step_over = "",
+      step_out = "",
+      step_back = "",
+      run_last = "",
+      terminate = "",
     },
   },
   floating = {
