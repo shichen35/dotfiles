@@ -92,15 +92,6 @@ else
     error("invalid operation")
   end
 end
-vim.api.nvim_set_hl(0, 'DapBreakpoint', { ctermbg=0, fg='#993939', bg='#31353f' })
-vim.api.nvim_set_hl(0, 'DapLogPoint', { ctermbg=0, fg='#61afef', bg='#31353f' })
-vim.api.nvim_set_hl(0, 'DapStopped', { ctermbg=0, fg='#98c379', bg='#31353f' })
-
-vim.fn.sign_define('DapBreakpoint', { text='', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
-vim.fn.sign_define('DapBreakpointCondition', { text='ﳁ', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
-vim.fn.sign_define('DapBreakpointRejected', { text='', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl= 'DapBreakpoint' })
-vim.fn.sign_define('DapLogPoint', { text='', texthl='DapLogPoint', linehl='DapLogPoint', numhl= 'DapLogPoint' })
-vim.fn.sign_define('DapStopped', { text='', texthl='DapStopped', linehl='DapStopped', numhl= 'DapStopped' })
 
 local dap, dapui = require("dap"), require("dapui")
 -- dap.adapters.codelldb = {
@@ -390,39 +381,6 @@ cmp.setup({
   },
 })
 
-
-require("telescope").setup {
-  extensions = {
-    fzf = {
-      fuzzy = true,                    -- false will only do exact matching
-      override_generic_sorter = true,  -- override the generic sorter
-      override_file_sorter = true,     -- override the file sorter
-      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-    },
-    ["ui-select"] = {
-      require("telescope.themes").get_dropdown {
-        -- even more opts
-      }
-
-      -- pseudo code / specification for writing custom displays, like the one
-      -- for "codeactions"
-      -- specific_opts = {
-      --   [kind] = {
-      --     make_indexed = function(items) -> indexed_items, width,
-      --     make_displayer = function(widths) -> displayer
-      --     make_display = function(displayer) -> function(e)
-      --     make_ordinal = function(e) -> string
-      --   },
-      --   -- for example to disable the custom builtin "codeactions" display
-      --      do the following
-      --   codeactions = false,
-      -- }
-    }
-  }
-}
-require("telescope").load_extension("ui-select")
-require("telescope").load_extension('fzf')
-
 -- require("trouble").setup()
 require("fidget").setup()
 -- vim.cmd [[autocmd CursorHold,CursorHoldI * lua require('nvim-lightbulb').update_lightbulb()]]
@@ -442,6 +400,31 @@ require('nvim-treesitter.configs').setup {
 }
 require('hlargs').setup()
 require("mason").setup()
+
+function set_hl()
+  vim.api.nvim_set_hl(0, 'Red', {fg='#d95555'})
+  vim.api.nvim_set_hl(0, 'Yellow', {fg='#efd472'})
+  vim.api.nvim_set_hl(0, 'Orange', {fg='#fc6600'})
+  vim.api.nvim_set_hl(0, 'Green', {fg='#98c379'})
+  vim.api.nvim_set_hl(0, 'Blue', {fg='#61afef'})
+
+  local signs = {
+    { name = "DiagnosticSignError", text = "", hl = "Red" },
+    { name = "DiagnosticSignWarn", text = "", hl = "Orange" },
+    { name = "DiagnosticSignHint", text = "", hl = "Blue" },
+    { name = "DiagnosticSignInfo", text = "", hl = "Yellow" },
+    { name = "DapBreakpoint", text = "", hl = "Red" },
+    { name = "DapBreakpointCondition", text = "ﳁ", hl = "Red" },
+    { name = "DapBreakpointRejected", text = "", hl = "Red" },
+    { name = "DapLogPoint", text = "", hl = "Blue" },
+    { name = "DapStopped", text = "", hl = "Green" },
+  }
+
+  for _, sign in ipairs(signs) do
+    vim.fn.sign_define(sign.name, { text = sign.text, linehl = sign.hl, texthl = sign.hl, numhl = sign.hl })
+  end
+end
+set_hl()
 
 vim.cmd([[
 " gray
@@ -463,6 +446,7 @@ highlight! link CmpItemKindUnit CmpItemKindKeyword
 
 " Switching themes automatically in lightline.vim
 function! s:onColorSchemeChange(scheme)
+    lua set_hl()
     " Try a scheme provided already
     execute 'runtime autoload/lightline/colorscheme/'.a:scheme.'.vim'
     if exists('g:lightline#colorscheme#{a:scheme}#palette')

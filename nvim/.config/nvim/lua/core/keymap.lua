@@ -1,4 +1,47 @@
+-- Shorten function name
+local keymap = vim.keymap.set
+-- Silent keymap option
+local opts = { silent = true }
+
+--Remap space as leader key
+keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
+
+-- Modes
+--   normal_mode = "n",
+--   insert_mode = "i",
+--   visual_mode = "v",
+--   visual_block_mode = "x",
+--   term_mode = "t",
+--   command_mode = "c",
+
+
+-- DAP
+keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
+keymap("n", "<leader>dB", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", opts)
+keymap("n", "<leader>dlp", "<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>", opts)
+keymap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", opts)
+keymap("n", "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", opts)
+keymap("n", "<leader>do", "<cmd>lua require'dap'.step_over()<cr>", opts)
+keymap("n", "<leader>dO", "<cmd>lua require'dap'.step_out()<cr>", opts)
+keymap("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", opts)
+keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
+keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
+keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
+keymap("n", "<leader>dk", "<cmd>lua require'dapui'.eval()<cr>", opts)
+
+-- " dap-ui
+-- nnoremap <silent> <F5> <Cmd>lua require'dap'.continue()<CR>
+-- nnoremap <silent> <F10> <Cmd>lua require'dap'.step_over()<CR>
+-- nnoremap <silent> <F11> <Cmd>lua require'dap'.step_into()<CR>
+-- nnoremap <silent> <F12> <Cmd>lua require'dap'.step_out()<CR>
+-- nnoremap <silent> <leader>b <Cmd>lua require'dap'.toggle_breakpoint()<CR>
+-- nnoremap <silent> <leader>B <Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
+-- nnoremap <silent> <leader>lp <Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
+-- nnoremap <silent> <leader>dr <Cmd>lua require'dap'.repl.open()<CR>
+-- nnoremap <silent> <leader>dl <Cmd>lua require'dap'.run_last()<CR>
+-- nnoremap <silent> <leader>do <Cmd>lua require'dapui'.toggle()<CR>
+-- nnoremap <silent> <leader>k <Cmd>lua require'dapui'.eval()<CR>
 
 vim.cmd([[
 nmap <leader>l :set invlist<CR>
@@ -90,18 +133,6 @@ smap <expr> <Tab>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<Tab
 imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 
-" dap-ui
-nnoremap <silent> <F5> <Cmd>lua require'dap'.continue()<CR>
-nnoremap <silent> <F10> <Cmd>lua require'dap'.step_over()<CR>
-nnoremap <silent> <F11> <Cmd>lua require'dap'.step_into()<CR>
-nnoremap <silent> <F12> <Cmd>lua require'dap'.step_out()<CR>
-nnoremap <silent> <leader>b <Cmd>lua require'dap'.toggle_breakpoint()<CR>
-nnoremap <silent> <leader>B <Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
-nnoremap <silent> <leader>lp <Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
-nnoremap <silent> <leader>dr <Cmd>lua require'dap'.repl.open()<CR>
-nnoremap <silent> <leader>dl <Cmd>lua require'dap'.run_last()<CR>
-nnoremap <silent> <leader>do <Cmd>lua require'dapui'.toggle()<CR>
-nnoremap <silent> <leader>k <Cmd>lua require'dapui'.eval()<CR>
 
 
 " cmp
