@@ -1,3 +1,6 @@
+# set -x
+# setopt PRINT_EXIT_VALUE
+
 # zmodload zsh/zprof
 case ${OSTYPE} in
   darwin*)
@@ -27,7 +30,7 @@ ZSH_AUTOSUGGEST_USE_ASYNC="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-completions zsh-syntax-highlighting zsh-autosuggestions) # docker docker-compose git
+plugins=(zsh-completions zsh-syntax-highlighting zsh-autosuggestions) # zsh-autosuggestions docker docker-compose git
 
 [ -s $ZSH/oh-my-zsh.sh ] && source $ZSH/oh-my-zsh.sh
 # FZF keybindings
@@ -35,6 +38,7 @@ plugins=(zsh-completions zsh-syntax-highlighting zsh-autosuggestions) # docker d
 
 # Skim keybindings
 (($+commands[sk] && $+commands[rg])) && source $DOTFILES/zsh-files/key-bindings.zsh
+
 # User configuration
 # (figlet -f slant 'Rock & Code' && fortune -s)|lolcat;
 
@@ -89,7 +93,7 @@ function reset-prompt-and-accept-and-hold() {
     zle accept-and-hold
 }
 
-reset-prompt-and-accept-and-down-history() {
+function reset-prompt-and-accept-and-down-history() {
     reset-prompt
     zle accept-line-and-down-history
 }
@@ -137,19 +141,27 @@ function preexec() {
 }
 
 function precmd() {
+  # local exit_code=$?
+  GRAY='\033[0;90m'
+  CYAN='\033[1;37m'
+  NC='\033[0m' # No Color
+
   if [[ $timer && $time == "on" ]]; then
     now=$(($(print -P %D{%s%6.})/1000))
     elapsed=$(($now-$timer))
 
     # export RPROMPT="%F{cyan}${elapsed}ms %{$reset_color%}"
-    GRAY='\033[0;90m'
-    CYAN='\033[1;37m'
-    NC='\033[0m' # No Color
     printf "${GRAY}elapsed "
     displaytime $elapsed
     unset timer
   fi
+
+  # if (( exit_code != 0)) then
+  #   printf "${GRAY}error code: $return_code${NC}\n"
+  # fi
 }
+
+# TRAPERR() print -u2 exit code $?
 
 function vdiff () {
     if [ "${#}" -ne 2 ] ; then
@@ -207,5 +219,5 @@ function omzu() {
 # zprof|head
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+# export SDKMAN_DIR="$HOME/.sdkman"
+# [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
