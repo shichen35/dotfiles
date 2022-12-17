@@ -206,6 +206,10 @@ func! CompileRun()
 		set splitbelow
 		:sp
 		:term cargo run .
+	elseif &filetype == 'typescript'
+		set splitbelow
+		:sp
+		:term node %
 	endif
 endfunc
 ]])
