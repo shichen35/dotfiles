@@ -77,7 +77,10 @@ alias bat='bat --style=plain --paging=never --color=always'
 function reset-prompt-and-accept-line() {
     reset-prompt
     zle accept-line
+    RPROMPT='%(?..%B(%?%)%b)'
 }
+
+# setopt PRINT_EXIT_VALUE
 
 function reset-prompt() {
     if [ -n "${BUFFER##*( )}" ]; then
@@ -97,6 +100,10 @@ function reset-prompt-and-accept-and-down-history() {
     reset-prompt
     zle accept-line-and-down-history
 }
+
+# TRAPERR() {
+#   print -u2 Exit status: $?
+# }
 
 zle -N reset-prompt-and-accept-line
 zle -N reset-prompt-and-accept-and-hold
