@@ -194,10 +194,6 @@ func! CompileRun()
 		silent! exec "!open % &"
 	elseif &filetype == 'markdown'
 		exec "InstantMarkdownPreview"
-	elseif &filetype == 'javascript'
-		set splitbelow
-		:sp
-		:term export DEBUG="INFO,ERROR,WARNING"; node --trace-warnings .
 	elseif &filetype == 'go'
 		set splitbelow
 		:sp
@@ -209,7 +205,11 @@ func! CompileRun()
 	elseif &filetype == 'typescript'
 		set splitbelow
 		:sp
-		:term node %
+		:term tsc % && node %:r.js
+	elseif &filetype == 'javascript'
+		set splitbelow
+		:sp
+		:term node %:r.js
 	endif
 endfunc
 ]])
