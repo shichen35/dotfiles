@@ -341,6 +341,10 @@ cmp.setup({
         vim.fn["vsnip#anonymous"](args.body)
     end,
   },
+  completion = {
+    completeopt = 'menu,menuone,noinsert'
+  },
+  preselect = cmp.PreselectMode.None,
   mapping = {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-n>'] = cmp.mapping.select_next_item(),
