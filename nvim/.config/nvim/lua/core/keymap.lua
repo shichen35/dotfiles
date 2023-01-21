@@ -175,6 +175,9 @@ augroup CHEN_SHI
 augroup END
 
 nnoremap <leader>r :call CompileRun()<CR>
+
+autocmd TermOpen * startinsert
+
 func! CompileRun()
 	exec "w"
 	if &filetype == 'c'
