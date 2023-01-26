@@ -259,6 +259,8 @@ if type rg &> /dev/null && type fd &> /dev/null; then
   export SKIM_CTRL_T_OPTS="--color=fg:243,fg+:255,hl:220,hl+:202"
 fi
 
+eval "$(zoxide init zsh)"
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 # export SDKMAN_DIR="$HOME/.sdkman"
 # [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"

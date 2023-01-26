@@ -53,7 +53,13 @@ use 'nvim-treesitter/nvim-treesitter-context'
 use 'AndrewRadev/splitjoin.vim'
 use 'lukas-reineke/indent-blankline.nvim'
 use 'ap/vim-css-color'
-use 'easymotion/vim-easymotion'
+use {
+  'phaazon/hop.nvim',
+  branch = 'v2',
+  config = function()
+    require'hop'.setup {}
+  end
+}
 use 'haya14busa/is.vim' -- incremental search improved
 use 'itchyny/lightline.vim'
 use 'junegunn/vim-easy-align'

@@ -30,6 +30,9 @@ keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
 keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
 keymap("n", "<leader>dk", "<cmd>lua require'dapui'.eval()<cr>", opts)
 
+-- Jump to anywhere you want with minimal keystrokes, with just one key binding.
+keymap("n", "<leader>/", "<cmd>HopPatternAC<cr>",opts)
+keymap("n", "<leader>?", "<cmd>HopPatternBC<cr>",opts)
 -- " dap-ui
 -- nnoremap <silent> <F5> <Cmd>lua require'dap'.continue()<CR>
 -- nnoremap <silent> <F10> <Cmd>lua require'dap'.step_over()<CR>
@@ -154,10 +157,6 @@ smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-T
 " Setup Completion
 " See https://github.com/hrsh7th/nvim-cmp#basic-configuration
 
-" easy motion
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-" Jump to anywhere you want with minimal keystrokes, with just one key binding.
-nmap <Leader>/ <Plug>(easymotion-sn)
 " Turn on case-insensitive feature
 let g:EasyMotion_smartcase = 1
 
