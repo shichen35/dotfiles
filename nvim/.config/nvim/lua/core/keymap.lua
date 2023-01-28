@@ -128,16 +128,6 @@ nnoremap <silent> <leader>fl <cmd>lua require('telescope.builtin').treesitter()<
 nnoremap <silent> <leader>ft :sp <bar> ter<cr>a
 nnoremap <silent> <leader>fc <cmd>lua require('telescope.builtin').commands()<cr>
 
-" vsnip
-" Expand or jump
-imap <expr> <Tab>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
-smap <expr> <Tab>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
-" Jump forward or backward
-imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-
-
-
 " cmp
 " Code navigation shortcuts
 " as found in :help lsp
@@ -157,8 +147,6 @@ smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-T
 " Setup Completion
 " See https://github.com/hrsh7th/nvim-cmp#basic-configuration
 
-" Turn on case-insensitive feature
-let g:EasyMotion_smartcase = 1
 
 function! TrimWhitespace()
     let l:save = winsaveview()
