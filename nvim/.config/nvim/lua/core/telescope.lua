@@ -7,11 +7,12 @@ local actions = require "telescope.actions"
 telescope.setup {
     defaults = {
 
-    prompt_prefix = "   ",
+    prompt_prefix = "   ",
     selection_caret = "   ",
     entry_prefix = '    ',
     path_display = { "smart" },
     file_ignore_patterns = { ".git/", "node_modules" },
+    layout_strategy = "vertical",
 
     mappings = {
       i = {
@@ -51,5 +52,5 @@ telescope.setup {
   }
 }
 telescope.load_extension("ui-select")
-telescope.load_extension('fzf')
+-- telescope.load_extension('fzf')
 

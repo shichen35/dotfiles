@@ -1,11 +1,13 @@
-if require("core.install")() then
-  return
-end
 require "core.packer"
+require "core.alpha"
 require "core.colorscheme"
 require "core.impatient"
 require "core.set"
 require "core.plug"
 require "core.telescope"
+require "core.treesitter"
 require "core.keymap"
-
+require "core.which-key"
+require "core.lsp"
+require "core.cmp"
+require "core.dap"
