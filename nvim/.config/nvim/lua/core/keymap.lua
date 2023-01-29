@@ -84,8 +84,7 @@ xmap J :m '>+1<CR>gv=gv
 xmap K :m '<-2<CR>gv=gv
 
 " MERDTree shortcuts
-nmap <leader>nn :NERDTreeFocus<CR>
-nmap <leader>nf :NERDTreeFind<CR>
+nmap <leader>e :NERDTreeToggle<CR>
 
 " Remove newbie crutches in Normal Mode
 nmap <silent><Down> :echoe "Use j"<CR>
@@ -125,7 +124,7 @@ nnoremap <silent> <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <silent> <leader>fm <cmd>lua require('telescope.builtin').marks()<cr>
 nnoremap <silent> <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <silent> <leader>fl <cmd>lua require('telescope.builtin').treesitter()<cr>
-nnoremap <silent> <leader>ft :sp <bar> ter<cr>a
+nnoremap <silent> <leader>ft :sp<bar>term<cr>
 nnoremap <silent> <leader>fc <cmd>lua require('telescope.builtin').commands()<cr>
 
 " cmp
