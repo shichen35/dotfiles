@@ -211,11 +211,11 @@ require('hop').setup()
 
 -- dap colorscheme related configs
 function set_hl()
-  vim.api.nvim_set_hl(0, 'Red', {fg='#d95555'})
-  vim.api.nvim_set_hl(0, 'Yellow', {fg='#efd472'})
-  vim.api.nvim_set_hl(0, 'Orange', {fg='#fc6600'})
-  vim.api.nvim_set_hl(0, 'Green', {fg='#98c379'})
-  vim.api.nvim_set_hl(0, 'Blue', {fg='#61afef'})
+  vim.api.nvim_set_hl(0, 'Red', { fg = '#d95555' })
+  vim.api.nvim_set_hl(0, 'Yellow', { fg = '#efd472' })
+  vim.api.nvim_set_hl(0, 'Orange', { fg = '#fc6600' })
+  vim.api.nvim_set_hl(0, 'Green', { fg = '#98c379' })
+  vim.api.nvim_set_hl(0, 'Blue', { fg = '#61afef' })
 
   local signs = {
     { name = "DiagnosticSignError", text = "", hl = "Red" },
@@ -233,6 +233,7 @@ function set_hl()
     vim.fn.sign_define(sign.name, { text = sign.text, linehl = sign.hl, texthl = sign.hl, numhl = sign.hl })
   end
 end
+
 set_hl()
 
 vim.cmd([[
