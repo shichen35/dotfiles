@@ -245,19 +245,17 @@ export FZF_DEFAULT_OPTS="--color='$FZF_COLORS' \
 --marker ⇒"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -n 10'"
 
-# export FZF_TMUX_OPTS="-p"
+
 # FZF keybindings
-# source "$HOME/.vim/plugged/fzf/shell/key-bindings.zsh"
+(($+commands[fzf] && $+commands[rg])) && source $DOTFILES/zsh-files/key-bindings-fzf.zsh
 
 # Skim keybindings
-(($+commands[sk] && $+commands[rg])) && source $DOTFILES/zsh-files/key-bindings.zsh
-
-# skim
-if (($+commands[rg] && $+commands[fd])) then
-  export SKIM_DEFAULT_COMMAND="fd --type f || git ls-tree -r --name-only HEAD || rg --files || find ."
-  export SKIM_CTRL_R_OPTS="--color=fg:243,fg+:255,current_match_bg:239,hl:3,hl+:2,matched_bg:-1"
-  export SKIM_CTRL_T_OPTS="--color=fg:243,fg+:255,current_match_bg:239,hl:3,hl+:2,matched_bg:-1"
-fi
+# (($+commands[sk] && $+commands[rg])) && source $DOTFILES/zsh-files/key-bindings-skim.zsh
+# if (($+commands[rg] && $+commands[fd])) then
+#   export SKIM_DEFAULT_COMMAND="fd --type f || git ls-tree -r --name-only HEAD || rg --files || find ."
+#   export SKIM_CTRL_R_OPTS="--color=fg:243,fg+:255,current_match_bg:239,hl:3,hl+:2,matched_bg:-1"
+#   export SKIM_CTRL_T_OPTS="--color=fg:243,fg+:255,current_match_bg:239,hl:3,hl+:2,matched_bg:-1"
+# fi
 
 (( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
 
