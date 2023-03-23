@@ -182,7 +182,7 @@ func! CompileRun()
 	elseif &filetype == 'html'
 		silent! exec "!open % &"
 	elseif &filetype == 'markdown'
-		exec "InstantMarkdownPreview"
+		exec "MarkdownPreview"
 	elseif &filetype == 'go'
 		set splitbelow
 		:sp

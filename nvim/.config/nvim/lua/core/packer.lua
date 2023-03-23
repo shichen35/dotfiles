@@ -12,7 +12,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
     "https://github.com/wbthomason/packer.nvim",
     install_path,
   }
-  print (PACKER_BOOTSTRAP)
+  print(PACKER_BOOTSTRAP)
   print "Packer installed..."
   print "Press Enter to install plugins"
   vim.cmd [[packadd packer.nvim]]
@@ -42,7 +42,7 @@ return packer.startup(function(use)
   use 'williamboman/mason-lspconfig.nvim'
 
   use 'nvim-telescope/telescope.nvim'
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use 'nvim-lua/plenary.nvim'
   use 'nvim-telescope/telescope-ui-select.nvim'
 
@@ -88,6 +88,11 @@ return packer.startup(function(use)
   use 'ryanoasis/vim-devicons'
   use 'folke/which-key.nvim'
 
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
+  })
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
@@ -95,4 +100,3 @@ return packer.startup(function(use)
     print "( After installing, please reopen NeoVim to load the plugins )"
   end
 end)
-
