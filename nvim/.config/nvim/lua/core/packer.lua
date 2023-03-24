@@ -87,6 +87,7 @@ return packer.startup(function(use)
   use 'tpope/vim-surround'
   use 'ryanoasis/vim-devicons'
   use 'folke/which-key.nvim'
+  use 'lambdalisue/suda.vim'
 
   use({
     "iamcco/markdown-preview.nvim",
