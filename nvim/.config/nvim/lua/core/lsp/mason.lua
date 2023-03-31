@@ -25,8 +25,8 @@ local settings = {
 
 require("mason").setup(settings)
 require("mason-lspconfig").setup({
-	ensure_installed = servers,
-	automatic_installation = true,
+	-- ensure_installed = servers,
+	-- automatic_installation = true,
 })
 
 local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
