@@ -11,3 +11,5 @@ require "core.which-key"
 require "core.lsp"
 require "core.cmp"
 require "core.dap"
+vim.g.neovide_cursor_vfx_mode = "pixiedust"
+
