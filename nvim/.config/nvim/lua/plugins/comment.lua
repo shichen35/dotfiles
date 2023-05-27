@@ -32,6 +32,7 @@ function M.config()
       }
     end
   end
+  require('Comment').setup()
 end
 
 return M
