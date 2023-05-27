@@ -22,7 +22,7 @@ export PATH=$PATH:$HOME/.cargo/bin
 # export PATH=$PATH:/usr/local/go/bin:/snap/bin:$HOME/.local/bin;
 
 # Colorizing pager for man, by setting the MANPAGER environment variable
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+# export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export TIMEFMT=$'=============\nCPU\t%P\nuser\t%*U\nsystem\t%*S\ntotal\t%*E'
 
