@@ -26,10 +26,9 @@ local settings = {
 function M.config()
   require("mason").setup(settings)
   require("mason-lspconfig").setup {
-    ensure_installed = require("utils").servers,
+    -- ensure_installed = require("utils").servers,
     automatic_installation = false,
   }
-  require("lspconfig").rust_analyzer.setup {}
 end
 
 return M
