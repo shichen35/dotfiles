@@ -116,12 +116,12 @@ func! CompileRun()
 	if &filetype == 'c'
 		set splitbelow
 		:sp
-		:term gcc % -o %:r.out && time ./%:r.out
+		:term gcc % -o %:r.out && ./%:r.out
 	elseif &filetype == 'cpp'
 		set splitbelow
 		exec "!g++ -std=c++11 % -Wall -o %<"
 		:sp
-		:term time ./%<
+		:term ./%<
 	elseif &filetype == 'python'
 		set splitbelow
 		:sp
