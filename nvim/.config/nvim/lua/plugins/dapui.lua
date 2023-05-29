@@ -52,7 +52,28 @@ function M.config()
     },
   }
 
-  vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
+  -- vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
+  vim.api.nvim_set_hl(0, 'Red', { fg = '#d95555' })
+  vim.api.nvim_set_hl(0, 'Yellow', { fg = '#efd472' })
+  vim.api.nvim_set_hl(0, 'Orange', { fg = '#fc6600' })
+  vim.api.nvim_set_hl(0, 'Green', { fg = '#98c379' })
+  vim.api.nvim_set_hl(0, 'Blue', { fg = '#61afef' })
+
+  local signs = {
+    { name = "DiagnosticSignError", text = "", hl = "Red" },
+    { name = "DiagnosticSignWarn", text = "", hl = "Orange" },
+    { name = "DiagnosticSignHint", text = "", hl = "Blue" },
+    { name = "DiagnosticSignInfo", text = "", hl = "Yellow" },
+    { name = "DapBreakpoint", text = "", hl = "Red" },
+    { name = "DapBreakpointCondition", text = "ﳁ", hl = "Red" },
+    { name = "DapBreakpointRejected", text = "", hl = "Red" },
+    { name = "DapLogPoint", text = "", hl = "Blue" },
+    { name = "DapStopped", text = "", hl = "Green" },
+  }
+
+  for _, sign in ipairs(signs) do
+    vim.fn.sign_define(sign.name, { text = sign.text, linehl = sign.hl, texthl = sign.hl, numhl = sign.hl })
+  end
 end
 
 return M

@@ -15,6 +15,14 @@ M.servers = {
 
 M.root_patterns = {".git", "lua"}
 
+function M.truncate(text, max_width)
+        if #text > max_width then
+          return string.sub(text, 1, max_width) .. "…"
+        else
+          return text
+        end
+end
+
 ---@param on_attach fun(client, buffer)
 function M.on_attach(on_attach)
     vim.api.nvim_create_autocmd("LspAttach", {
