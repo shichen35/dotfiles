@@ -62,12 +62,12 @@ function M.config()
   local signs = {
     { name = "DiagnosticSignError", text = "", hl = "Red" },
     { name = "DiagnosticSignWarn", text = "", hl = "Orange" },
-    { name = "DiagnosticSignHint", text = "", hl = "Blue" },
-    { name = "DiagnosticSignInfo", text = "", hl = "Yellow" },
-    { name = "DapBreakpoint", text = "", hl = "Red" },
-    { name = "DapBreakpointCondition", text = "ﳁ", hl = "Red" },
-    { name = "DapBreakpointRejected", text = "", hl = "Red" },
-    { name = "DapLogPoint", text = "", hl = "Blue" },
+    { name = "DiagnosticSignHint", text = "", hl = "Blue" },
+    { name = "DiagnosticSignInfo", text = "", hl = "Yellow" },
+    { name = "DapBreakpoint", text = "", hl = "Red" },
+    { name = "DapBreakpointCondition", text = "", hl = "Red" },
+    { name = "DapBreakpointRejected", text = "", hl = "Red" },
+    { name = "DapLogPoint", text = "󰰍", hl = "Blue" },
     { name = "DapStopped", text = "", hl = "Green" },
   }
 
