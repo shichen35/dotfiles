@@ -1,3 +1,5 @@
+local Util = require("utils")
+
 local M = {
   "hrsh7th/nvim-cmp",
   dependencies = {
@@ -133,6 +135,7 @@ function M.config()
           path = "",
           emoji = "",
         })[entry.source.name]
+        vim_item.abbr = Util.truncate(vim_item.abbr, 30)
         return vim_item
       end,
     },
