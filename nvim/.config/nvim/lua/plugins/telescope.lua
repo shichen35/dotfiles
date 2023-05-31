@@ -95,16 +95,17 @@ M.opts = {
     file_ignore_patterns = { ".git/", "node_modules" },
     mappings = {
       i = {
-        ["<Down>"] = actions.move_selection_next,
-        ["<Up>"] = actions.move_selection_previous,
-        ["<C-j>"] = actions.move_selection_next,
-        ["<C-k>"] = actions.move_selection_previous,
+        ["<Down>"] = actions.cycle_history_next,
+        ["<Up>"] = actions.cycle_history_prev,
+        ["<C-j>"] = actions.cycle_history_next,
+        ["<C-k>"] = actions.cycle_history_prev,
       },
     },
   },
 }
 
-function M.config()
+function M.config(_, opts)
+  require('telescope').setup(opts)
   require('telescope').load_extension('fzf')
 end
 
