@@ -6,9 +6,18 @@ local M = {
 function M.config()
   local tree_cb = require("nvim-tree.config").nvim_tree_callback
   require("nvim-tree").setup {
+    sync_root_with_cwd = true,
+    respect_buf_cwd = true,
     update_focused_file = {
       enable = true,
       update_cwd = true,
+    },
+    actions = {
+      change_dir = {
+        enable = true,
+        global = false,
+        restrict_above_cwd = false,
+      }
     },
     renderer = {
       icons = {
