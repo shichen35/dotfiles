@@ -3,9 +3,9 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 vim.opt.backup = false                          -- creates a backup file
--- vim.opt.clipboard = "unnamedplus"               -- allows neovim to access the system clipboard
+vim.opt.clipboard = "unnamedplus"               -- allows neovim to access the system clipboard
 vim.opt.cmdheight = 1                           -- more space in the neovim command line for displaying messages
-vim.opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
+vim.opt.completeopt = { "menu", "menuone", "noselect" } -- mostly just for cmp
 vim.opt.conceallevel = 0                        -- so that `` is visible in markdown files
 vim.opt.fileencoding = "utf-8"                  -- the encoding written to a file
 vim.opt.hlsearch = true                         -- highlight all matches on previous search pattern
