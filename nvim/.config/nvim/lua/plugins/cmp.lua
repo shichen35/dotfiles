@@ -76,6 +76,7 @@ function M.config()
   }
 
   cmp.setup {
+    preselect = true,
     snippet = {
       expand = function(args)
         luasnip.lsp_expand(args.body) -- For `luasnip` users.
