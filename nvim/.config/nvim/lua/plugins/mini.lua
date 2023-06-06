@@ -9,7 +9,7 @@ return {
     },
     init = function()
       vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "help", "alpha", "dashboard", "NvimTree", "undotree", "Trouble", "lazy", "mason", "notify" },
+        pattern = { "help", "alpha", "dashboard", "neo-tree", "undotree", "Trouble", "lazy", "mason", "notify" },
         callback = function()
           vim.b.miniindentscope_disable = true
         end,
@@ -48,8 +48,13 @@ return {
   {
     "echasnovski/mini.bufremove",
     event = { "BufReadPre", "BufNewFile" },
-    config = function ()
-      require('mini.bufremove').setup()
-    end
+    config = function()
+      require("mini.bufremove").setup()
+    end,
+  },
+  {
+    "echasnovski/mini.ai",
+    event = { "BufReadPre", "BufNewFile" },
+    config = true,
   },
 }
