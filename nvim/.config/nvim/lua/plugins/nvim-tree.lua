@@ -1,6 +1,9 @@
 local M = {
   "kyazdani42/nvim-tree.lua",
-  event = "VimEnter"
+  event = "VimEnter",
+  keys = {
+    { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Toggle NvimTree" }
+  }
 }
 
 function M.config()
@@ -15,7 +18,7 @@ function M.config()
     actions = {
       change_dir = {
         enable = true,
-        global = false,
+        global = true,
         restrict_above_cwd = false,
       }
     },
