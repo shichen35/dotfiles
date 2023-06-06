@@ -12,6 +12,7 @@ M.servers = {
   "rust_analyzer",
   "clangd",
   "gopls",
+  "lemminx",
 }
 
 M.root_patterns = {".git", "lua"}
