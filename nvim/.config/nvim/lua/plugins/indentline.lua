@@ -12,7 +12,7 @@ M.opts = {
     "help",
     "alpha",
     "dashboard",
-    "NvimTree",
+    "neo-tree",
   },
 }
 

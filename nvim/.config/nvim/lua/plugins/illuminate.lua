@@ -5,7 +5,7 @@ local M = {
 
 function M.config()
   local illuminate = require "illuminate"
-  vim.g.Illuminate_ftblacklist = { "alpha", "NvimTree" }
+  vim.g.Illuminate_ftblacklist = { "alpha", "neo-tree" }
   vim.api.nvim_set_keymap(
     "n",
     "<a-n>",
@@ -30,7 +30,7 @@ function M.config()
       "dirvish",
       "fugitive",
       "alpha",
-      "NvimTree",
+      "neo-tree",
       "packer",
       "neogitstatus",
       "Trouble",
