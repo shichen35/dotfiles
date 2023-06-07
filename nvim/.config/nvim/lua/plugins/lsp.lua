@@ -10,12 +10,16 @@ local M = {
 
 local cmp_nvim_lsp = require "cmp_nvim_lsp"
 function M.config()
-      -- Show diagnostic popup on cursor hover
-    -- autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
-    vim.api.nvim_create_autocmd(
-    {"CursorHold"}, --,"CursorHoldI"},
-    {callback = function()vim.diagnostic.open_float(nil, { focusable = false }) end}
-    )
+  -- Show diagnostic popup on cursor hover
+  -- autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+  vim.api.nvim_create_autocmd(
+    { "CursorHold" }, --,"CursorHoldI"},
+    {
+      callback = function()
+        vim.diagnostic.open_float(nil, { focusable = false })
+      end,
+    }
+  )
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true

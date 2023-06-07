@@ -1,10 +1,7 @@
 local M = {
-    'j-hui/fidget.nvim',
-    event = { "DiagnosticChanged", "LspAttach" },
+  "j-hui/fidget.nvim",
+  event = { "DiagnosticChanged", "LspAttach" },
+  config = true,
 }
-
-function M.config()
-    require('fidget').setup()
-end
 
 return M
