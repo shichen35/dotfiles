@@ -27,30 +27,22 @@ return {
         start_with_preview = "<leader>ga",
       },
     },
-    config = function(_, opts)
-      require("mini.align").setup(opts)
-    end,
   },
   {
     "echasnovski/mini.splitjoin",
     keys = {
-      { "<leader>gs", desc = "Toggle split and join arguments" },
+      { "<leader>j", desc = "Toggle split and join arguments" },
     },
     opts = {
       mappings = {
-        toggle = "<leader>gs",
+        toggle = "<leader>j",
       },
     },
-    config = function(_, opts)
-      require("mini.splitjoin").setup(opts)
-    end,
   },
   {
     "echasnovski/mini.bufremove",
     event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("mini.bufremove").setup()
-    end,
+    config = true,
   },
   {
     "echasnovski/mini.ai",

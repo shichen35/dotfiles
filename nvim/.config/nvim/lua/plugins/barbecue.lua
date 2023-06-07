@@ -10,7 +10,6 @@ return {
     attach_navic = false,
     -- configurations go here
     exclude_filetypes = {
-      "",
       "neo-tree",
       "undotree",
       "toggleterm",

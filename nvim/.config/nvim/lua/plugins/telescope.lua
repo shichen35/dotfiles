@@ -2,7 +2,6 @@ local Util = require("utils")
 
 local M = {
   "nvim-telescope/telescope.nvim",
-  lazy = true,
   cmd = { "Telescope" },
   dependencies = {
     {
