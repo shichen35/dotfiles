@@ -67,6 +67,8 @@ if [[ $- =~ .*i.* ]]; then bindkey -s "^[r" " nvim \"+normal G\" ~/.zsh_history^
 alias reset='tput reset'
 alias cmds='history | awk '\''{print $2}'\'' | sort | uniq -c | sort -nr | head -n 6'
 alias bat='bat --style=plain --paging=never --color=always'
+alias jo='joshuto'
+alias lg='lazygit'
 #alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 
 function reset-prompt-and-accept-line() {
