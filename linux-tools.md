@@ -10,9 +10,11 @@
 - ogham/exa             - A modern replacement for ‘ls’.
 - dalance/procs         - A modern replacement for ps written in Rust.
 - bootandy/dust         - A more intuitive version of du in rust.
+- Byron/dua-cli         - View disk space usage and delete unwanted data, fast.
 - XAMPPRocky/tokei      - Count your code, quickly.
 - ClementTsang/bottom   - Yet another cross-platform graphical process/system monitor.
 - imsnif/bandwhich      - Terminal bandwidth utilization tool.
+- ellie/atuin           - Magical shell history.
 - kamiyaa/joshuto       - Ranger-like terminal file manager written in Rust
 
 ## golang
