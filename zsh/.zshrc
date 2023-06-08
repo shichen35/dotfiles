@@ -67,9 +67,34 @@ if [[ $- =~ .*i.* ]]; then bindkey -s "^[r" " nvim \"+normal G\" ~/.zsh_history^
 alias reset='tput reset'
 alias cmds='history | awk '\''{print $2}'\'' | sort | uniq -c | sort -nr | head -n 6'
 alias bat='bat --style=plain --paging=never --color=always'
-alias jo='joshuto'
+alias jo='joshuto-func'
 alias lg='lazygit'
 #alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
+
+function joshuto-func() {
+	ID="$$"
+	mkdir -p /tmp/$USER
+	OUTPUT_FILE="/tmp/$USER/joshuto-cwd-$ID"
+	env joshuto --output-file "$OUTPUT_FILE" $@
+	exit_code=$?
+
+	case "$exit_code" in
+		# regular exit
+		0)
+			;;
+		# output contains current directory
+		101)
+			JOSHUTO_CWD=$(cat "$OUTPUT_FILE")
+			cd "$JOSHUTO_CWD"
+			;;
+		# output selected files
+		102)
+			;;
+		*)
+			echo "Exit code: $exit_code"
+			;;
+	esac
+}
 
 function reset-prompt-and-accept-line() {
     reset-prompt
