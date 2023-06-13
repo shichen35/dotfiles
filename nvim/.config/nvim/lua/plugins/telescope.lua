@@ -4,9 +4,8 @@ local M = {
   "nvim-telescope/telescope.nvim",
   cmd = { "Telescope" },
   dependencies = {
-    {
-      "ahmedkhalf/project.nvim",
-    },
+    { "ahmedkhalf/project.nvim" },
+    { "nvim-telescope/telescope-ui-select.nvim" },
     {
       "nvim-telescope/telescope-fzf-native.nvim",
       build = "make",
@@ -102,11 +101,19 @@ M.opts = {
       },
     },
   },
+  extensions = {
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown {
+        -- even more opts
+      },
+    },
+  },
 }
 
 function M.config(_, opts)
   require("telescope").setup(opts)
   require("telescope").load_extension "fzf"
+  require("telescope").load_extension "ui-select"
 end
 
 return M
