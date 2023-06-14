@@ -1,8 +1,8 @@
 local M = {
   "akinsho/toggleterm.nvim",
-  cmd = { "ToggleTerm", "TermExec" },
-  keys = {"<c-\\>"},
-  event = "VeryLazy"
+  cmd = { "TermSelect", "ToggleTerm", "TermExec" },
+  keys = { "<c-\\>"},
+  event = "VeryLazy",
 }
 
 M.opts = {
@@ -27,7 +27,7 @@ function M.config(_, opts)
 
   function _G.set_terminal_keymaps()
     local opts = { noremap = true }
-    vim.api.nvim_buf_set_keymap(0, 't', '<C-esc>', [[<C-\><C-n>]], opts)
+    vim.api.nvim_buf_set_keymap(0, "t", "<C-esc>", [[<C-\><C-n>]], opts)
     -- vim.api.nvim_buf_set_keymap(0, "t", "<C-h>", [[<C-\><C-n><C-W>h]], opts)
     -- vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", [[<C-\><C-n><C-W>j]], opts)
     -- vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", [[<C-\><C-n><C-W>k]], opts)

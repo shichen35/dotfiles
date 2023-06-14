@@ -37,6 +37,9 @@ keymap("n", "<S-h>", ":bprevious<CR>", { silent = true })
 -- Toggle highlights
 keymap("n", "<leader>h", "<cmd>set hlsearch!<CR>", {silent = true, desc = "Toggle highlights"})
 
+-- TermSelect
+keymap("n", "<leader>gt", "<cmd>TermSelect<CR>", {silent = true, desc = "Select Terminal"})
+
 -- Close buffers
 keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", { silent = true })
 
