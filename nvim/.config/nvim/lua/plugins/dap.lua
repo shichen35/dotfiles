@@ -28,8 +28,10 @@ local M = {
       require "plugins.daps.settings.rust"
 
       -- require("dap.ext.vscode").load_launchjs()
-
-      -- require("dap.ext.vscode").load_launchjs(nil, {})
+      require("dap.ext.vscode").load_launchjs(
+        vim.fn.getcwd() .. "/.neovim" .. "/launch.json",
+        { cppdbg = { 'c', 'cpp' } }
+      )
     end,
   },
   {
