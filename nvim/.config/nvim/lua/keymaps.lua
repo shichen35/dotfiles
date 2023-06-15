@@ -110,8 +110,6 @@ nmap <silent><Up> :echoe "Use k"<CR>
 
 nnoremap <leader>r :call CompileRun()<CR>
 
-autocmd TermOpen * startinsert
-
 func! CompileRun()
 	exec "w"
 	if &filetype == 'c'

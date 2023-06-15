@@ -14,4 +14,5 @@ dap.adapters.codelldb = {
 
 dap.adapters.c = dap.adapters.codelldb
 dap.adapters.cpp = dap.adapters.codelldb
+dap.adapters.cppdbg = dap.adapters.codelldb
 dap.adapters.rust = dap.adapters.codelldb

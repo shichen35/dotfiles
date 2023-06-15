@@ -9,13 +9,13 @@ local M = {
       vim.cmd.colorscheme "catppuccin"
     end,
   },
-  -- {
-  --   "folke/tokyonight.nvim",
-  --   lazy = false,
-  -- },
-  -- {
-  --   "RRethy/nvim-base16",
-  --   lazy = false,
-  -- },
+  {
+    "folke/tokyonight.nvim",
+    keys = { "<leader>cs" },
+  },
+  {
+    "RRethy/nvim-base16",
+    keys = { "<leader>cs" },
+  },
 }
 return M
