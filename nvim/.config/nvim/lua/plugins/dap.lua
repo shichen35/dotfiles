@@ -26,6 +26,10 @@ local M = {
       require "plugins.daps.settings.c"
       require "plugins.daps.settings.cpp"
       require "plugins.daps.settings.rust"
+
+      -- require("dap.ext.vscode").load_launchjs()
+
+      -- require("dap.ext.vscode").load_launchjs(nil, {})
     end,
   },
   {
@@ -33,7 +37,7 @@ local M = {
     lazy = true,
     config = function()
       require("dap_install").setup {
-        	installation_path = vim.fn.stdpath("data") .. "/dapinstall/",
+        installation_path = vim.fn.stdpath "data" .. "/dapinstall/",
       }
       require("dap_install").config("rust", {})
     end,
