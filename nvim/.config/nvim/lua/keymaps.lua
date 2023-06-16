@@ -57,7 +57,7 @@ keymap("v", ">", ">gv", { silent = true })
 -- Plugins --
 
 -- Alpha
-keymap("n", "<leader>a", ":Alpha<CR>", { silent = true })
+-- keymap("n", "<leader>a", ":Alpha<CR>", { silent = true })
 
 -- Git
 keymap("n", "<leader>gl", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { desc = 'Toggle Lazygit', silent = true })

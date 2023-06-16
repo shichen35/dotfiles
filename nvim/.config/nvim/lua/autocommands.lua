@@ -15,14 +15,18 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
+local filetypeBlackList = { "alpha", "notify" }
+
 vim.api.nvim_create_autocmd("InsertEnter", {
   desc = "enable cursorline and disable relative line number in insert mode",
   group = init_group,
   pattern = "*",
   -- command = "setlocal cul nornu",
   callback = function()
-    if vim.bo.filetype:match "alpha" then
-      return
+    for _, str in ipairs(filetypeBlackList) do
+      if vim.bo.filetype:match(str) then
+        return
+      end
     end
     vim.cmd [[setlocal cul nornu]]
   end,
@@ -33,16 +37,18 @@ vim.api.nvim_create_autocmd("InsertLeave", {
   group = init_group,
   pattern = "*",
   -- command = "setlocal nocul rnu",
-  callback = function(opts)
-    if vim.bo.filetype:match "alpha" then
-      return
+  callback = function()
+    for _, str in ipairs(filetypeBlackList) do
+      if vim.bo.filetype:match(str) then
+        return
+      end
     end
     vim.cmd [[setlocal nocul rnu]]
   end,
 })
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "qf", "help", "man", "lspinfo", "spectre_panel" },
+  pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "notify" },
   callback = function()
     vim.cmd [[
       nnoremap <silent> <buffer> q :close<CR>
