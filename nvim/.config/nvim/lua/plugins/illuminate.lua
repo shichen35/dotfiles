@@ -5,6 +5,7 @@ local M = {
 
 M.opts = {
   modes_denylist = { "v", "V" },
+  filetypes_denylist = { "alpha" },
 }
 
 function M.config(_, opts)

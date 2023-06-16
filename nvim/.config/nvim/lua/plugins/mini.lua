@@ -14,6 +14,13 @@ return {
           vim.b.miniindentscope_disable = true
         end,
       })
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "AlphaReady",
+        callback = function()
+          -- vim.opt_local.cul = true
+          vim.b.miniindentscope_disable = true
+        end,
+      })
     end,
   },
   {
