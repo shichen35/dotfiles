@@ -70,6 +70,7 @@ alias cmds='history | awk '\''{print $2}'\'' | sort | uniq -c | sort -nr | head 
 # (( $+commands[exa] )) && alias ls='exa'
 alias jo='joshuto-func'
 alias lg='lazygit'
+alias gu='gitui'
 #alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 
 function joshuto-func() {

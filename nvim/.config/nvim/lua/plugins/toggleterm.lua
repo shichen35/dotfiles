@@ -37,9 +37,13 @@ function M.config(_, opts)
   vim.cmd "autocmd! TermOpen term://* lua set_terminal_keymaps()"
   local Terminal = require("toggleterm.terminal").Terminal
   local lazygit = Terminal:new { cmd = "lazygit", hidden = true }
+  local gitui = Terminal:new { cmd = "gitui", hidden = true }
 
   function _LAZYGIT_TOGGLE()
     lazygit:toggle()
+  end
+  function _GITUI_TOGGLE()
+    gitui:toggle()
   end
 end
 
