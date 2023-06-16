@@ -13,6 +13,7 @@ M.servers = {
   "clangd",
   "gopls",
   "lemminx",
+  "cmake",
 }
 
 M.root_patterns = {".git", "lua"}
