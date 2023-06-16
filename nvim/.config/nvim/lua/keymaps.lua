@@ -60,7 +60,8 @@ keymap("v", ">", ">gv", { silent = true })
 keymap("n", "<leader>a", ":Alpha<CR>", { silent = true })
 
 -- Git
-keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { silent = true })
+keymap("n", "<leader>gl", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { desc = 'Toggle Lazygit', silent = true })
+keymap("n", "<leader>gg", "<cmd>lua _GITUI_TOGGLE()<CR>", { desc = 'Toggle GitUI', silent = true })
 
 -- DAP
 keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", { silent = true })
