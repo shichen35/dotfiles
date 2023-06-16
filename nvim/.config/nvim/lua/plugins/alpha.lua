@@ -1,6 +1,9 @@
 local M = {
   "goolord/alpha-nvim",
   event = "VimEnter",
+  keys = {
+    { "<leader>a", ":Alpha<CR>", silent = true, desc = "Alpha Dashboard" },
+  },
 }
 
 function M.config()

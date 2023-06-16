@@ -17,6 +17,17 @@ vim.api.nvim_create_autocmd("TermOpen", {
 
 local filetypeBlackList = { "alpha", "notify" }
 
+-- vim.api.nvim_create_autocmd('BufEnter', {
+--   pattern = '*',
+--   callback = function(args)
+--     vim.print(vim.bo.filetype)
+--   end,
+-- })
+-- vim.api.nvim_create_autocmd('BufLeave', {
+--   pattern = '*',
+--   callback = function(args) print(args) end,
+-- })
+
 vim.api.nvim_create_autocmd("InsertEnter", {
   desc = "enable cursorline and disable relative line number in insert mode",
   group = init_group,
