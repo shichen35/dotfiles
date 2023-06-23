@@ -75,8 +75,7 @@ alias gu='gitui'
 
 function joshuto-func() {
     ID="$$"
-    mkdir -p /tmp/$USER
-    OUTPUT_FILE="/tmp/$USER/joshuto-cwd-$ID"
+    OUTPUT_FILE="/$TMPDIR/joshuto-cwd-$ID"
     env joshuto --output-file "$OUTPUT_FILE" $@
     exit_code=$?
 
