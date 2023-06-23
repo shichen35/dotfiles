@@ -18,6 +18,7 @@ case ${OSTYPE} in
     ;;
 esac
 export PATH=$PATH:$HOME/.cargo/bin
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 # export PATH=$PATH:/snap/bin:$HOME/.local/bin
 # export PATH=$PATH:$GOPATH/bin:$HOME/.local/bin;
 # export PATH=$PATH:/usr/local/go/bin:/snap/bin:$HOME/.local/bin;
