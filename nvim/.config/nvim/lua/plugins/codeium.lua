@@ -1,4 +1,3 @@
-
 return {
   "Exafunction/codeium.vim",
   enabled = function() return not string.match(vim.env.HOME, "termux") end,
