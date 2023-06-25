@@ -2,7 +2,7 @@ local M = {
   "goolord/alpha-nvim",
   event = "VimEnter",
   keys = {
-    { "<leader>a", ":Alpha<CR>", silent = true, desc = "Alpha Dashboard" },
+    { "<leader>al", ":Alpha<CR>", silent = true, desc = "Alpha Dashboard" },
   },
 }
 
