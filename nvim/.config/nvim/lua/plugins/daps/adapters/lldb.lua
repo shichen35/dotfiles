@@ -4,13 +4,7 @@ dap.adapters.codelldb = {
   type = "server",
   port = "${port}",
   executable = {
-    command = function()
-      if vim.fn.executable "lldb-vscode" then
-        return "lldb-vscode"
-      else
-        return "codelldb"
-      end
-    end,
+    command = (vim.fn.executable "lldb-vscode") and "lldb-vscode" or "codelldb",
     args = { "--port", "${port}" },
     -- On windows you may have to uncomment this:
     -- detached = false,
