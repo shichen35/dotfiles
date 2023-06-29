@@ -3,9 +3,7 @@ local M = {
   dependencies = {
     "nvim-telescope/telescope.nvim",
   },
-  -- event = "VeryLazy",
-  event = "Bufenter",
-  cmd = { "Telescope" },
+  event = "VeryLazy",
   keys = {
     { "<leader>pr", "<cmd>ProjectRoot<cr>", desc = "Change to Project Root" },
     { "<leader>fp", "<cmd>Telescope projects<cr>", desc = "List projects" },

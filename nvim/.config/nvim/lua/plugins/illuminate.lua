@@ -4,7 +4,7 @@ local M = {
 }
 
 M.opts = {
-  modes_denylist = { "v", "V" },
+  modes_denylist = { "v", "vs", "V", "Vs", "", "s" },
   filetypes_denylist = { "alpha" },
 }
 

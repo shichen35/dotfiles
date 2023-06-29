@@ -60,17 +60,6 @@ keymap("v", ">", ">gv", { silent = true })
 keymap("n", "<leader>gl", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { desc = 'Toggle Lazygit', silent = true })
 keymap("n", "<leader>gg", "<cmd>lua _GITUI_TOGGLE()<CR>", { desc = 'Toggle GitUI', silent = true })
 
--- DAP
-keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", { silent = true })
-keymap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", { silent = true })
-keymap("n", "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", { silent = true })
-keymap("n", "<leader>do", "<cmd>lua require'dap'.step_over()<cr>", { silent = true })
-keymap("n", "<leader>dO", "<cmd>lua require'dap'.step_out()<cr>", { silent = true })
-keymap("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", { silent = true })
-keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", { silent = true })
-keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", { silent = true })
-keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", { silent = true })
-
 -- Lsp
 keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", { silent = true })
 
