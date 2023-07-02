@@ -105,7 +105,7 @@ func! CompileRun()
 		:term gcc % -o %:r.out && ./%:r.out
 	elseif &filetype == 'cpp'
 		set splitbelow
-		exec "!g++ -std=c++11 % -Wall -o %<"
+		exec "!g++ -std=c++20 % -Wall -o %<"
 		:sp
 		:term ./%<
 	elseif &filetype == 'python'
