@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
-local filetypeBlackList = { "alpha", "notify" }
+-- local filetypeBlackList = { "alpha", "notify", "neo-tree", "neo-tree-popup" }
 
 -- vim.api.nvim_create_autocmd('BufEnter', {
 --   pattern = '*',
@@ -34,12 +34,14 @@ vim.api.nvim_create_autocmd("InsertEnter", {
   pattern = "*",
   -- command = "setlocal cul nornu",
   callback = function()
-    for _, str in ipairs(filetypeBlackList) do
-      if vim.bo.filetype:match(str) then
-        return
-      end
+    -- for _, str in ipairs(filetypeBlackList) do
+    --   if vim.bo.filetype:match(str) then
+    --     return
+    --   end
+    -- end
+    if vim.wo.number and vim.wo.relativenumber then
+      vim.cmd [[setlocal cul nornu]]
     end
-    vim.cmd [[setlocal cul nornu]]
   end,
 })
 
@@ -49,12 +51,14 @@ vim.api.nvim_create_autocmd("InsertLeave", {
   pattern = "*",
   -- command = "setlocal nocul rnu",
   callback = function()
-    for _, str in ipairs(filetypeBlackList) do
-      if vim.bo.filetype:match(str) then
-        return
-      end
+    -- for _, str in ipairs(filetypeBlackList) do
+    --   if vim.bo.filetype:match(str) then
+    --     return
+    --   end
+    -- end
+    if vim.wo.number and not vim.wo.relativenumber then
+      vim.cmd [[setlocal nocul rnu]]
     end
-    vim.cmd [[setlocal nocul rnu]]
   end,
 })
 
