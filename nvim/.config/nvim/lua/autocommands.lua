@@ -27,12 +27,12 @@ vim.api.nvim_create_autocmd("TermOpen", {
 --   pattern = '*',
 --   callback = function(args) print(args) end,
 -- })
+local insert_toggle_group = vim.api.nvim_create_augroup("inserttoggle", {})
 
 vim.api.nvim_create_autocmd("InsertEnter", {
   desc = "enable cursorline and disable relative line number in insert mode",
-  group = init_group,
+  group = insert_toggle_group,
   pattern = "*",
-  -- command = "setlocal cul nornu",
   callback = function()
     -- for _, str in ipairs(filetypeBlackList) do
     --   if vim.bo.filetype:match(str) then
@@ -47,9 +47,8 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 
 vim.api.nvim_create_autocmd("InsertLeave", {
   desc = "disable cursorline and enable relative line number when leaving insert mode",
-  group = init_group,
+  group = insert_toggle_group,
   pattern = "*",
-  -- command = "setlocal nocul rnu",
   callback = function()
     -- for _, str in ipairs(filetypeBlackList) do
     --   if vim.bo.filetype:match(str) then
