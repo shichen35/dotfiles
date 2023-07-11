@@ -56,6 +56,9 @@ keymap("v", ">", ">gv", { silent = true })
 
 -- Plugins --
 
+-- Lazy
+keymap("n", "<leader>lz", "<cmd>Lazy<CR>", { desc = 'Lazy plugin List', silent = true })
+
 -- Git
 keymap("n", "<leader>gl", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { desc = 'Toggle Lazygit', silent = true })
 keymap("n", "<leader>gg", "<cmd>lua _GITUI_TOGGLE()<CR>", { desc = 'Toggle GitUI', silent = true })
