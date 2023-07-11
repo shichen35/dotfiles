@@ -15,7 +15,7 @@ function M.config()
       -- hl.blend = 100
       -- vim.api.nvim_set_hl(0, 'Cursor', hl)
       -- vim.opt.guicursor:append('a:Cursor/lCursor')
-      vim.opt.cursorline = true
+      vim.opt_local.cursorline = true
     end,
   })
   vim.api.nvim_create_autocmd('BufUnload', {
@@ -26,7 +26,7 @@ function M.config()
       -- hl.blend = 0
       -- vim.api.nvim_set_hl(0, 'Cursor', hl)
       -- vim.opt.guicursor:remove('a:Cursor/lCursor')
-      vim.opt.cursorline = false
+      vim.opt_local.cursorline = false
     end,
   })
 
@@ -81,7 +81,7 @@ function M.config()
     dashboard.button("q", " " .. " Quit", ":qa<CR>"),
   }
   local function footer()
-    return "Chen Shi"
+    return ""
   end
 
   dashboard.section.footer.val = footer()
