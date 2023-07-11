@@ -31,7 +31,7 @@ ZSH_AUTOSUGGEST_USE_ASYNC="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(zsh-completions zsh-syntax-highlighting zsh-autosuggestions) # zsh-autosuggestions docker docker-compose git
-
+DISABLE_AUTO_UPDATE=true
 [ -s $ZSH/oh-my-zsh.sh ] && source $ZSH/oh-my-zsh.sh
 
 # User configuration

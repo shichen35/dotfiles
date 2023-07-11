@@ -35,13 +35,41 @@ function M.config()
   -- local alphaterm = require "alpha.term"
 
   dashboard.section.header.val = {
-    [[                               __                ]],
-    [[  ___     ___    ___   __  __ /\_\    ___ ___    ]],
-    [[ / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  ]],
-    [[/\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
-    [[\ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
-    [[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
+    "           ▄ ▄                   ",
+    "       ▄   ▄▄▄     ▄ ▄▄▄ ▄ ▄     ",
+    "       █ ▄ █▄█ ▄▄▄ █ █▄█ █ █     ",
+    "    ▄▄ █▄█▄▄▄█ █▄█▄█▄▄█▄▄█ █     ",
+    "  ▄ █▄▄█ ▄ ▄▄ ▄█ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ",
+    "  █▄▄▄▄ ▄▄▄ █ ▄ ▄▄▄ ▄ ▄▄▄ ▄ ▄ █ ▄",
+    "▄ █ █▄█ █▄█ █ █ █▄█ █ █▄█ ▄▄▄ █ █",
+    "█▄█ ▄ █▄▄█▄▄█ █ ▄▄█ █ ▄ █ █▄█▄█ █",
+    "    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ █▄█▄▄▄█    ",
+    -- "",
+    -- "",
   }
+    -- dashboard.section.header.val = {
+    --   "",
+    --   "   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣿⣶⣿⣦⣼⣆          ",
+    --   "    ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ",
+    --   "          ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷    ⠻⠿⢿⣿⣧⣄     ",
+    --   "           ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀⠄⠢⣀⡀⠈⠙⠿⠄    ",
+    --   "          ⢠⣿⣿⣿⠈    ⣻⣿⣿⣿⣿⣿⣿⣿⣛⣳⣤⣀⣀   ",
+    --   "   ⢠⣧⣶⣥⡤⢄ ⣸⣿⣿⠘  ⢀⣴⣿⣿⡿⠛⣿⣿⣧⠈⢿⠿⠟⠛⠻⠿⠄  ",
+    --   "  ⣰⣿⣿⠛⠻⣿⣿⡦⢹⣿⣷   ⢊⣿⣿⡏  ⢸⣿⣿⡇ ⢀⣠⣄⣾⠄   ",
+    --   " ⣠⣿⠿⠛ ⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄  ",
+    --   " ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇ ⠛⠻⢷⣄ ",
+    --   "      ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     ",
+    --   "       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ",
+    --   "",
+    -- }
+  -- dashboard.section.header.val = {
+  --   [[                               __                ]],
+  --   [[  ___     ___    ___   __  __ /\_\    ___ ___    ]],
+  --   [[ / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  ]],
+  --   [[/\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
+  --   [[\ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
+  --   [[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
+  -- }
   dashboard.section.buttons.val = {
     dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert<CR>"),
     dashboard.button("p", " " .. " Projects", ":lua require('telescope').extensions.projects.projects()<CR>"),
@@ -49,7 +77,7 @@ function M.config()
     -- dashboard.button("f", " " .. " Find file", ":Telescope find_files<CR>"),
     -- dashboard.button("g", " " .. " Find text", ":Telescope live_grep<CR>"),
     dashboard.button("c", " " .. " Config", ":e $MYVIMRC<CR>"),
-    dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
+    -- dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
     dashboard.button("q", " " .. " Quit", ":qa<CR>"),
   }
   local function footer()
@@ -71,16 +99,16 @@ function M.config()
   -- dashboard.section.terminal.height = height
   -- dashboard.section.terminal.opts.redraw = true
 
-  -- dashboard.config.layout = {
-  --   { type = "padding", val = 1 },
-  --   dashboard.section.terminal,
-  --   { type = "padding", val = 1 },
-  --   dashboard.section.header,
-  --   { type = "padding", val = 2 },
-  --   dashboard.section.buttons,
-  --   { type = "padding", val = 1 },
-  --   dashboard.section.footer,
-  -- }
+  dashboard.config.layout = {
+    -- { type = "padding", val = 1 },
+    -- dashboard.section.terminal,
+    { type = "padding", val = 1 },
+    dashboard.section.header,
+    { type = "padding", val = 2 },
+    dashboard.section.buttons,
+    -- { type = "padding", val = 1 },
+    dashboard.section.footer,
+  }
 
   alpha.setup(dashboard.opts)
 
