@@ -103,19 +103,54 @@ return {
       })
     end
 
+    local hl = vim.api.nvim_get_hl_by_name('Cursor', true)
+    local insert_toggle_group = vim.api.nvim_create_augroup("alpha_inserttoggle", { clear = false })
+
     vim.api.nvim_create_autocmd('User', {
       pattern = 'AlphaReady',
-      desc = 'show cursorline for alpha',
+      desc = 'show cursorline and hide cursor for alpha',
       callback = function()
         vim.opt_local.cursorline = true
+        -- hide cursor
+        hl.blend = 100
+        vim.api.nvim_set_hl(0, 'Cursor', hl)
+        vim.opt.guicursor:append('a:Cursor/lCursor')
+
+        vim.api.nvim_create_autocmd({ "BufEnter" }, {
+          buffer = 0,
+          desc = "hide cursor",
+          group = insert_toggle_group,
+          callback = function()
+            -- print("enter")
+            hl.blend = 100
+            vim.api.nvim_set_hl(0, 'Cursor', hl)
+            vim.opt.guicursor:append('a:Cursor/lCursor')
+          end,
+        })
+
+        vim.api.nvim_create_autocmd({ "BufLeave", "WinEnter" }, {
+          buffer = 0,
+          desc = "show cursor",
+          group = insert_toggle_group,
+          callback = function()
+            -- print("leave")
+            hl.blend = 0
+            vim.api.nvim_set_hl(0, 'Cursor', hl)
+            vim.opt.guicursor:remove('a:Cursor/lCursor')
+          end,
+        })
       end,
     })
 
-    vim.api.nvim_create_autocmd('BufUnload', {
-      buffer = 0,
-      desc = 'hide cursorline after alpha',
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'AlphaClosed',
+      desc = 'hide cursorline and show cursor after alpha',
       callback = function()
         vim.opt_local.cursorline = false
+        -- show cursor
+        hl.blend = 0
+        vim.api.nvim_set_hl(0, 'Cursor', hl)
+        vim.opt_local.guicursor:remove('a:Cursor/lCursor')
       end,
     })
 
