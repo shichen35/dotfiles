@@ -46,6 +46,9 @@ keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", { silent = true })
 -- Better paste
 keymap("v", "p", 'P', { silent = true })
 
+-- Find and replace all selected
+keymap("v", "<leader>s", "y:<C-U>let replacement = input('Enter replacement string: ') <bar> %s/<C-R>\"/\\=replacement/g<CR>", { silent = true, desc = "Find and replace all selected" })
+
 -- Ctrl + C to ESC
 keymap("i", "<C-C>", "<ESC>", { silent = true })
 
