@@ -12,11 +12,11 @@ export EDITOR=$VISUAL
 export ZSH=$HOME/.oh-my-zsh
 
 case ${OSTYPE} in
-  darwin*)
-    source $DOTFILES/zsh-files/mac.zsh
-    ;;
-  linux*)
-    ;;
+    darwin*)
+        source $DOTFILES/zsh-files/mac.zsh
+        ;;
+    linux*)
+        ;;
 esac
 
 # Set name of the theme to load --- if set to "random", it will
