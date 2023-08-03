@@ -1,6 +1,5 @@
 # set -x
 # setopt PRINT_EXIT_VALUE
-
 # zmodload zsh/zprof
 case ${OSTYPE} in
     darwin*)
