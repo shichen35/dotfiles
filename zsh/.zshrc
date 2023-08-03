@@ -1,14 +1,23 @@
 # set -x
 # setopt PRINT_EXIT_VALUE
 # zmodload zsh/zprof
-case ${OSTYPE} in
-    darwin*)
-        source $DOTFILES/zsh-files/mac.zsh
-        ;;
-    linux*)
-        ;;
-esac
 [ -s $HOME/.cargo/env ] && source "$HOME/.cargo/env"
+
+export LANG="en_US.UTF-8"
+export TERM="xterm-256color"
+export VISUAL="nvim"
+export EDITOR=$VISUAL
+
+# Path to your oh-my-zsh installation.
+export ZSH=$HOME/.oh-my-zsh
+
+case ${OSTYPE} in
+  darwin*)
+    source $DOTFILES/zsh-files/mac.zsh
+    ;;
+  linux*)
+    ;;
+esac
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
