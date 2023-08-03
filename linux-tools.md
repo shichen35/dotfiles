@@ -4,6 +4,7 @@
 
 - sharkdp/bat           - A cat(1) clone with wings.
 - sharkdp/fd            - A simple, fast and user-friendly alternative to find.
+- sharkdp/hexyl         - A command-line hex viewer.
 - BurntSushi/ripgrep    - A line-oriented search tool that recursively searches the current directory for a regex pattern.
 - dbrgn/tealdeer        - A very fast implementation of tldr in Rust.
 - lotabout/skim         - Fuzzy Finder in Rust!
@@ -17,7 +18,6 @@
 - ellie/atuin           - Magical shell history.
 - kamiyaa/joshuto       - Ranger-like terminal file manager written in Rust
 - extrawurst/gitui      - Blazing fast terminal-ui for git written in Rust
-
 
 ## golang
 
