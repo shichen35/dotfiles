@@ -22,6 +22,7 @@ function M.config()
   )
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
+  -- capabilities.offsetEncoding = { "utf-16" }
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 
