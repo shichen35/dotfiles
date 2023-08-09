@@ -9,6 +9,10 @@ case ${OSTYPE} in
             BREW_BIN="/opt/homebrew/bin/brew"
         fi
 
+        export PATH="/usr/local/sbin:$PATH"
+        export PATH="$HOME/.local/bin:$PATH"
+        export DYLD_LIBRARY_PATH=/opt/homebrew/lib:$DYLD_LIBRARY_PATH
+
         if type "${BREW_BIN}" &> /dev/null; then
             export BREW_PREFIX="$("${BREW_BIN}" --prefix)"
             for bindir in "${BREW_PREFIX}/opt/"*"/libexec/gnubin"; do export PATH=$bindir:$PATH; done

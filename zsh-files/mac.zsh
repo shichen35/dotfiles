@@ -9,9 +9,6 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 20
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 export ANSIBLE_VAULT_PASSWORD_FILE=/Users/chen.shi/Developer/ansible-vault.pass
-export PATH="/usr/local/sbin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-export DYLD_LIBRARY_PATH=/opt/homebrew/lib:$DYLD_LIBRARY_PATH
 
 alias wpm='wpm --tag chen'
 alias wpms='wpm --stats'
