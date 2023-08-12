@@ -3,6 +3,7 @@ local M = {}
 M.servers = {
   "lua_ls",
   "cssls",
+  "emmet_ls",
   "html",
   "tsserver",
   "pyright",
