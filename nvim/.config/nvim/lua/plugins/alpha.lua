@@ -76,8 +76,6 @@ return {
     local contentHeight = 22
     local winHeight = fn.winheight(0)
     local headerPadding = winHeight >= contentHeight and fn.ceil((winHeight - contentHeight) / 2) or 0
-    print(winHeight .. headerPadding)
-
     dashboard.config.layout = {
       { type = "padding", val = headerPadding },
       -- dashboard.section.terminal,
