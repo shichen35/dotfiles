@@ -19,11 +19,36 @@ return {
   },
   opts = {
     -- add any options here
+    messages = {
+      enabled = true,              -- enables the Noice messages UI
+      view = "notify",             -- default view for messages
+      view_error = "notify",       -- view for errors
+      view_warn = "notify",        -- view for warnings
+      view_history = "messages",   -- view for :messages
+      view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
+    },
     routes = {
       {
         view = "notify",
         filter = { event = "msg_showmode" },
       },
+      {
+        view = "popup",
+        filter = {
+          any = {
+            { event = "msg_show", min_height = 10 },
+            { event = "msg_show", min_width = 200 },
+          },
+        },
+      },
+      -- {
+      --   filter = {
+      --     event = "msg_show",
+      --     kind = "",
+      --     find = "more line",
+      --   },
+      --   opts = { skip = true },
+      -- },
     },
   },
 }
