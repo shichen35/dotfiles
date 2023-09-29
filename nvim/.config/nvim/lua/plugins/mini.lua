@@ -51,9 +51,9 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     config = true,
   },
-  {
-    "echasnovski/mini.ai",
-    event = { "BufReadPre", "BufNewFile" },
-    config = true,
-  },
+  -- {
+  --   "echasnovski/mini.ai",
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   config = true,
+  -- },
 }
