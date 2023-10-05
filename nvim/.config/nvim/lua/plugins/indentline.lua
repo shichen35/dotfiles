@@ -1,18 +1,31 @@
 local M = {
   "lukas-reineke/indent-blankline.nvim",
+  main = "ibl",
   event = "BufReadPre",
 }
 
 M.opts = {
-  char = "▏",
-  show_trailing_blankline_indent = false,
-  show_current_context = false,
-  buftype_exclude = { "terminal", "nofile" },
-  filetype_exclude = {
-    "help",
-    "alpha",
-    "dashboard",
-    "neo-tree",
+  indent = {
+    char = "▏",
+  },
+  scope = { show_start = false, show_end = false },
+  exclude = {
+    buftypes = {
+      "nofile",
+      "terminal",
+    },
+    filetypes = {
+      "help",
+      "startify",
+      "aerial",
+      "alpha",
+      "dashboard",
+      "lazy",
+      "neogitstatus",
+      "NvimTree",
+      "neo-tree",
+      "Trouble",
+    },
   },
 }
 
