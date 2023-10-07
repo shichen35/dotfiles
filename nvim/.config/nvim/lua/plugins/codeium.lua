@@ -16,7 +16,7 @@ return {
       mode = "i",
     },
     {
-      "<M-;>",
+      "<M-]>",
       function()
         return vim.fn["codeium#CycleCompletions"](1)
       end,
@@ -24,7 +24,7 @@ return {
       mode = "i",
     },
     {
-      "<M-,>",
+      "<M-[>",
       function()
         return vim.fn["codeium#CycleCompletions"](-1)
       end,
