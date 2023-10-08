@@ -43,7 +43,7 @@ DISABLE_AUTO_UPDATE=true
 [ -s $ZSH/oh-my-zsh.sh ] && source $ZSH/oh-my-zsh.sh
 
 # User configuration
-# (figlet -f slant 'Rock & Code' && fortune -s)|lolcat;
+(figlet -f slant 'Rock & Code' && fortune -s)|lolcat;
 
 HISTFILE=~/.zsh_history
 SAVEHIST=10000
@@ -74,11 +74,14 @@ if [[ $- =~ .*i.* ]]; then bindkey -s "^[r" " nvim \"+normal G\" ~/.zsh_history^
 # alias vim=nvim
 alias reset='tput reset'
 alias cmds='history | awk '\''{print $2}'\'' | sort | uniq -c | sort -nr | head -n 6'
-(( $+commands[bat] )) && alias bat='bat --style=plain --paging=never --color=always'
+if (( $+commands[bat] )); then
+    alias bcat='bat --style=plain --theme=gruvbox-dark --paging=never --color=always'
+    alias bat='bat --theme=gruvbox-dark --color=always --wrap=never'
+    export MANPAGER="sh -c 'col -bx | bat --theme=gruvbox-dark -l man -p'"
+fi
 # (( $+commands[exa] )) && alias ls='exa'
 alias jo='joshuto-func'
 alias lg='lazygit'
-alias gu='gitui'
 #alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 
 function joshuto-func() {
@@ -299,3 +302,12 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -n 10'"
 # export SDKMAN_DIR="$HOME/.sdkman"
 # [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 (( $+commands[atuin] )) && eval "$(atuin init zsh)"
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+source $HOME/.config/broot/launcher/bash/br
