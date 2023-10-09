@@ -303,11 +303,14 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -n 10'"
 # [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 (( $+commands[atuin] )) && eval "$(atuin init zsh)"
 
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+if [ -f $HOME/.bun/bin/bun ]; then
+  # bun completions
+  [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+  # bun
+  export BUN_INSTALL="$HOME/.bun"
+  export PATH="$BUN_INSTALL/bin:$PATH"
 
-source $HOME/.config/broot/launcher/bash/br
+  # bun completions
+  [ -s "/Users/chen.shi/.bun/_bun" ] && source "/Users/chen.shi/.bun/_bun"
+fi
