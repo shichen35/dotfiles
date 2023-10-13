@@ -85,8 +85,12 @@ alias lg='lazygit'
 #alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 
 function joshuto-func() {
+    TDIR="/tmp/joshuto"
+    if [[ ! -d $TMPDIR ]]; then
+        mkdir $TDIR
+    fi
     ID="$$"
-    OUTPUT_FILE="/$TMPDIR/joshuto-cwd-$ID"
+    OUTPUT_FILE="$TDIR/joshuto-cwd-$ID"
     env joshuto --output-file "$OUTPUT_FILE" $@
     exit_code=$?
 
