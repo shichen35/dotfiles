@@ -6,4 +6,8 @@ ripgrep \
 eza \
 joshuto \
 dua-cli \
-zoxide
+zoxide \
+tokei \
+bottom
+
+

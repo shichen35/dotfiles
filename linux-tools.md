@@ -16,8 +16,8 @@
 - ClementTsang/bottom   - Yet another cross-platform graphical process/system monitor.
 - imsnif/bandwhich      - Terminal bandwidth utilization tool.
 - ellie/atuin           - Magical shell history.
-- kamiyaa/joshuto       - Ranger-like terminal file manager written in Rust
-- extrawurst/gitui      - Blazing fast terminal-ui for git written in Rust
+- kamiyaa/joshuto       - Ranger-like terminal file manager written in Rust.
+- extrawurst/gitui      - Blazing fast terminal-ui for git written in Rust.
 
 ## golang
 

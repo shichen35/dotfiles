@@ -16,6 +16,7 @@ case ${OSTYPE} in
         source $DOTFILES/zsh-files/mac.zsh
         ;;
     linux*)
+        export PATH=$PATH:/usr/local/go/bin
         ;;
 esac
 
@@ -86,7 +87,7 @@ alias lg='lazygit'
 
 function joshuto-func() {
     TDIR="/tmp/joshuto"
-    if [[ ! -d $TMPDIR ]]; then
+    if [[ ! -d $TDIR ]]; then
         mkdir $TDIR
     fi
     ID="$$"
@@ -318,3 +319,4 @@ if [ -f $HOME/.bun/bin/bun ]; then
   # bun completions
   [ -s "/Users/chen.shi/.bun/_bun" ] && source "/Users/chen.shi/.bun/_bun"
 fi
+
