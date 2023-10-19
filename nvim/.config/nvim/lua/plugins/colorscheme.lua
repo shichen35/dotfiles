@@ -4,18 +4,13 @@ local M = {
     name = "catppuccin",
     lazy = false,
     priority = 1000,
+    dependencies = {
+      "folke/tokyonight.nvim",
+    },
     config = function()
       -- load the colorscheme here
-      vim.cmd.colorscheme "catppuccin"
+      vim.cmd.colorscheme "tokyonight"
     end,
-  },
-  {
-    "folke/tokyonight.nvim",
-    keys = { "<leader>cs" },
-  },
-  {
-    "RRethy/nvim-base16",
-    keys = { "<leader>cs" },
-  },
+  }
 }
 return M
