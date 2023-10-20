@@ -22,6 +22,7 @@ return {
         "shfmt",
         "shellcheck",
         "beautysh",
+        "tailwindcss",
       },
       automatic_installation = false,
       handlers = {},
