@@ -67,7 +67,7 @@ keymap("n", "<leader>gl", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { desc = 'Toggle Laz
 keymap("n", "<leader>gg", "<cmd>lua _GITUI_TOGGLE()<CR>", { desc = 'Toggle GitUI', silent = true })
 
 -- Lsp
-keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", { silent = true })
+keymap("n", "<leader>lf", "<cmd>lua require(\"conform\").format({ async = true, lsp_fallback = true })<cr>", { silent = true })
 
 -- Highlight Lines
 keymap("n", "<leader>hl", "<cmd>call matchadd('Cursor', '\\%'.line('.').'l',10,line('.') + 100)<CR>", { silent = true })
