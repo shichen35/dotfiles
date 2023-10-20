@@ -44,7 +44,7 @@ DISABLE_AUTO_UPDATE=true
 [ -s $ZSH/oh-my-zsh.sh ] && source $ZSH/oh-my-zsh.sh
 
 # User configuration
-(figlet -f slant 'Rock & Code' && fortune -s)|lolcat;
+(figlet -f slant 'Rock & Code' && fortune)|lolcat;
 
 HISTFILE=~/.zsh_history
 SAVEHIST=10000
