@@ -50,6 +50,7 @@ window:
     y: 0
 
   # Spread additional padding evenly around the terminal content.
+  # dynamic_padding: true
   dynamic_padding: false
 
   # Window decorations
@@ -61,7 +62,8 @@ window:
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
   #     - buttonless: Title bar, transparent background and no title bar buttons
-  decorations: buttonless
+  decorations: full
+  # decorations: buttonless
 
   # Background opacity
   #
