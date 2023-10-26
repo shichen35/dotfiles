@@ -45,8 +45,8 @@ return {
     -- }
     dashboard.section.buttons.val = {
       dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert<CR>"),
-      dashboard.button("p", " " .. " Projects", ":lua require('telescope').extensions.projects.projects()<CR>"),
       dashboard.button("r", "󰄉 " .. " Recent files", ":Telescope oldfiles<CR>"),
+      dashboard.button("p", " " .. " Projects", ":lua require('telescope').extensions.projects.projects()<CR>"),
       -- dashboard.button("f", " " .. " Find file", ":Telescope find_files<CR>"),
       -- dashboard.button("g", " " .. " Find text", ":Telescope live_grep<CR>"),
       dashboard.button("c", " " .. " Config", ":e $MYVIMRC<CR>"),
