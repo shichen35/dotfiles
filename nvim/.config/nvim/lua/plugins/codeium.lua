@@ -8,7 +8,7 @@ return {
   cmd = { "Codeium" },
   keys = {
     {
-      "<M-g>",
+      "<M-\\>",
       function()
         return vim.fn["codeium#Accept"]()
       end,
