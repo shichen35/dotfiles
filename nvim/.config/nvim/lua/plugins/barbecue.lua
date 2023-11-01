@@ -7,7 +7,7 @@ return {
     "nvim-tree/nvim-web-devicons", -- optional dependency
   },
   opts = {
-    attach_navic = false,
+    attach_navic = true,
     -- configurations go here
     exclude_filetypes = {
       "neo-tree",
