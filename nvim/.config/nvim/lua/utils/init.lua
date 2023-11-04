@@ -16,6 +16,7 @@ M.servers = {
   "lemminx",
   "cmake",
   "tailwindcss",
+  "marksman",
 }
 
 M.root_patterns = {".git", "lua"}
