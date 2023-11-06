@@ -23,11 +23,10 @@ M.keys = {
   -- find
   { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
   { "<leader>ff", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
-  { "<leader>fF", Util.telescope "files", desc = "Find Files (root dir)" },
-  { "<leader>fr", Util.telescope("oldfiles", { cwd = vim.loop.cwd() }), desc = "Recent (cwd)" },
-  { "<leader>fR", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
+  { "<leader>fF", "<cmd>Telescope find_files search_dirs=%:p:h<cr>", desc = "Find Files (file dir)" },
+  { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
   { "<leader>fg", Util.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
-  { "<leader>fG", Util.telescope "live_grep", desc = "Grep (root dir)" },
+  { "<leader>fG", "<cmd>Telescope live_grep search_dirs=%:p:h<cr>", desc = "Grep (file dir)" },
   -- git
   { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
   { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
@@ -47,7 +46,7 @@ M.keys = {
   { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
   { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
   { "<leader>sw", Util.telescope("grep_string", { cwd = false }), desc = "Word (cwd)" },
-  { "<leader>sW", Util.telescope "grep_string", desc = "Word (root dir)" },
+  { "<leader>sW", "<cmd>Telescope grep_string search_dirs=%:p:h<cr>", desc = "Word (file dir)" },
   { "<leader>cs", Util.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
   {
     "<leader>ss",
