@@ -8,7 +8,7 @@ return {
   },
   event = "VeryLazy",
   keys = {
-    { "<leader>e", "<cmd>NeoTreeFocusToggle<CR>", desc = "Toggle NeoTree Explorer" },
+    { "<leader>e", "<cmd>NeoTreeFocusToggle<CR>", desc = "NeoTree Explorer" },
   },
   opts = {
     close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab

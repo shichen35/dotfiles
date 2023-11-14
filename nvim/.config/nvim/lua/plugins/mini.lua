@@ -38,7 +38,7 @@ return {
   {
     "echasnovski/mini.splitjoin",
     keys = {
-      { "<leader>j", desc = "Toggle split and join arguments" },
+      { "<leader>j", desc = "Split and Join" },
     },
     opts = {
       mappings = {
