@@ -1,5 +1,4 @@
-local M =
-{
+local M = {
   "mfussenegger/nvim-dap",
   -- ft = {
   --   "c",
@@ -9,15 +8,15 @@ local M =
   -- },
   -- DAP
   keys = {
-    { "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", { silent = true } },
-    { "<leader>dc", "<cmd>lua require'dap'.continue()<cr>",          { silent = true } },
-    { "<leader>di", "<cmd>lua require'dap'.step_into()<cr>",         { silent = true } },
-    { "<leader>do", "<cmd>lua require'dap'.step_over()<cr>",         { silent = true } },
-    { "<leader>dO", "<cmd>lua require'dap'.step_out()<cr>",          { silent = true } },
-    { "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>",       { silent = true } },
-    { "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>",          { silent = true } },
-    { "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>",          { silent = true } },
-    { "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>",         { silent = true } },
+    { "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", desc = "Toggle Breakpoint", silent = true },
+    { "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", desc = "Continue", silent = true },
+    { "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", desc = "Step Into", silent = true },
+    { "<leader>do", "<cmd>lua require'dap'.step_over()<cr>", desc = "Step Over", silent = true },
+    { "<leader>dO", "<cmd>lua require'dap'.step_out()<cr>", desc = "Step Out", silent = true },
+    { "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", desc = "Toggle Repl", silent = true },
+    { "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", desc = "Run Last", silent = true },
+    { "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", desc = "Toggle UI", silent = true },
+    { "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", desc = "Terminate", silent = true },
   },
   config = function()
     local dap = require "dap"
@@ -47,7 +46,7 @@ local M =
     -- require("dap.ext.vscode").load_launchjs()
     require("dap.ext.vscode").load_launchjs(
       vim.fn.getcwd() .. "/.neovim" .. "/launch.json",
-      { cppdbg = { 'c', 'cpp' } }
+      { cppdbg = { "c", "cpp" } }
     )
   end,
 }
