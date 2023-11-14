@@ -10,7 +10,7 @@ local M = {
       -- ["gs"] = { name = "+surround" },
       -- ["]"] = { name = "+next" },
       -- ["["] = { name = "+prev" },
-      -- ["<leader><tab>"] = { name = "+tabs" },
+      ["<leader><tab>"] = { name = "+tabs" },
       ["<leader>d"] = { name = "+debug" },
       ["<leader>l"] = { name = "+lsp" },
       ["<leader>f"] = { name = "+file/find" },

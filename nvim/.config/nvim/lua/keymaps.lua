@@ -74,6 +74,13 @@ keymap("n", "<leader>hl", "<cmd>call matchadd('Cursor', '\\%'.line('.').'l',10,l
 keymap("n", "<leader>hd", "<cmd>call matchdelete(line('.') + 100)<CR>", { silent = true })
 keymap("n", "<leader>hc", "<cmd>call clearmatches()<CR>", { silent = true })
 
+-- tab
+keymap("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
+keymap("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+keymap("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
+keymap("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+keymap("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+keymap("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 vim.cmd([[
 nmap <leader>il :set invlist<CR>
