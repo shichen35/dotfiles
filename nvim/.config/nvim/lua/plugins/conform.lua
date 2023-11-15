@@ -25,7 +25,7 @@ return {
     },
     formatters = {
       prettier = {
-        prepend_args = { "--no-semi", "--single-quote" }, -- --jsx-single-quote
+        prepend_args = { "--single-quote" }, -- "--jsx-single-quote", "--no-semi"
       },
     },
   },
