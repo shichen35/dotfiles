@@ -47,10 +47,14 @@ function M.config()
     },
     indent = { enable = true, disable = { "python", "css" } },
 
-    context_commentstring = {
-      enable = true,
-      enable_autocmd = false,
-    },
+    -- context_commentstring = {
+    --   enable = true,
+    --   enable_autocmd = false,
+    -- },
+  }
+
+  require("ts_context_commentstring").setup {
+    enable_autocmd = false,
   }
 end
 
