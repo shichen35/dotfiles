@@ -39,6 +39,16 @@ function M.config()
     padding = 0,
   }
 
+  -- local neovim = {
+  --   function()
+  --     return ""
+  --   end,
+  --   color = { fg = 'white', bg = 'black'},
+  --   on_click = function(clicks, button, modifiers)
+  --     print("neovim")
+  --   end,
+  -- }
+
   local spaces = function()
     return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
   end
