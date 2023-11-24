@@ -6,11 +6,19 @@ local M = {
     priority = 1000,
     dependencies = {
       "folke/tokyonight.nvim",
+      {
+        "sainnhe/gruvbox-material",
+        init = function()
+          vim.g.gruvbox_material_better_performance = 1
+          vim.g.gruvbox_material_foreground = "material"
+          vim.g.gruvbox_material_background = "hard"
+        end,
+      },
     },
     config = function()
       -- load the colorscheme here
-      vim.cmd.colorscheme "tokyonight"
+      vim.cmd.colorscheme "gruvbox-material"
     end,
-  }
+  },
 }
 return M
