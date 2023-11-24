@@ -6,7 +6,7 @@ return {
   keys = {
     { 'zR', function() require('ufo').openAllFolds() end },
     { 'zM', function() require('ufo').closeAllFolds() end },
-    { 'zP', function() require('ufo').peekFoldedLinesUnderCursor() end, 'preview fold' },
+    { 'zP', function() require('ufo').peekFoldedLinesUnderCursor() end, desc = 'Preview fold' },
   },
     dependencies = {
       "kevinhwang91/promise-async",
