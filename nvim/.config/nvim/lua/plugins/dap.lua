@@ -15,7 +15,7 @@ local M = {
     { "<leader>do", "<cmd>lua require'dap'.step_over()<cr>", desc = "Step Over", silent = true },
     { "<F11>", "<cmd>lua require'dap'.step_into()<cr>", desc = "Step Into", silent = true },
     { "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", desc = "Step Into", silent = true },
-    { "<s-F11>", "<cmd>lua require'dap'.step_out()<cr>", desc = "Step Out", silent = true },
+    { "<F23>", "<cmd>lua require'dap'.step_out()<cr>", desc = "Step Out", silent = true },
     { "<leader>dO", "<cmd>lua require'dap'.step_out()<cr>", desc = "Step Out", silent = true },
     { "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", desc = "Toggle Repl", silent = true },
     { "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", desc = "Run Last", silent = true },
