@@ -1,10 +1,13 @@
 local dap = require "dap"
+local mason_registry = require("mason-registry")
+local codelldb_root = mason_registry.get_package("codelldb"):get_install_path() .. "/"
+local codelldb_path = codelldb_root .. "codelldb"
 
 dap.adapters.codelldb = {
   type = "server",
   port = "${port}",
   executable = {
-    command = (vim.fn.executable "lldb-vscode") and vim.fn.exepath("lldb-vscode") or vim.fn.exepath("codelldb"),
+    command = codelldb_path,
     args = { "--port", "${port}" },
     -- On windows you may have to uncomment this:
     -- detached = false,
