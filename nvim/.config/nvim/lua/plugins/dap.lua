@@ -9,9 +9,13 @@ local M = {
   -- DAP
   keys = {
     { "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", desc = "Toggle Breakpoint", silent = true },
+    { "<F5>", "<cmd>lua require'dap'.continue()<cr>", desc = "Continue", silent = true },
     { "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", desc = "Continue", silent = true },
-    { "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", desc = "Step Into", silent = true },
+    { "<F10>", "<cmd>lua require'dap'.step_over()<cr>", desc = "Step Over", silent = true },
     { "<leader>do", "<cmd>lua require'dap'.step_over()<cr>", desc = "Step Over", silent = true },
+    { "<F11>", "<cmd>lua require'dap'.step_into()<cr>", desc = "Step Into", silent = true },
+    { "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", desc = "Step Into", silent = true },
+    { "<s-F11>", "<cmd>lua require'dap'.step_out()<cr>", desc = "Step Out", silent = true },
     { "<leader>dO", "<cmd>lua require'dap'.step_out()<cr>", desc = "Step Out", silent = true },
     { "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", desc = "Toggle Repl", silent = true },
     { "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", desc = "Run Last", silent = true },
