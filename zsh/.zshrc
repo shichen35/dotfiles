@@ -3,7 +3,6 @@
 # zmodload zsh/zprof
 [ -s $HOME/.cargo/env ] && source "$HOME/.cargo/env"
 
-export LANG="en_US.UTF-8"
 export TERM="xterm-256color"
 export VISUAL="nvim"
 export EDITOR=$VISUAL
@@ -46,7 +45,7 @@ DISABLE_AUTO_UPDATE=true
 [ -s $ZSH/oh-my-zsh.sh ] && source $ZSH/oh-my-zsh.sh
 
 # User configuration
-(figlet -f slant 'Rock & Code' && fortune)|lolcat;
+(( $+commands[figlet] )) && (( $+commands[lolcat] )) && (( $+commands[fortune] )) && (figlet -f slant 'Rock & Code' && fortune)|lolcat;
 
 HISTFILE=~/.zsh_history
 SAVEHIST=10000
