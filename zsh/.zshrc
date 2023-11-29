@@ -40,9 +40,13 @@ ZSH_AUTOSUGGEST_USE_ASYNC="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-completions zsh-syntax-highlighting zsh-autosuggestions) # zsh-autosuggestions docker docker-compose git
+plugins=(zsh-completions zsh-autocomplete zsh-syntax-highlighting zsh-autosuggestions) # zsh-autosuggestions docker docker-compose git
 DISABLE_AUTO_UPDATE=true
+# fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 [ -s $ZSH/oh-my-zsh.sh ] && source $ZSH/oh-my-zsh.sh
+
+# autoload -Uz compinit
+# compinit
 
 # User configuration
 (( $+commands[figlet] )) && (( $+commands[lolcat] )) && (( $+commands[fortune] )) && (figlet -f slant 'Rock & Code' && fortune)|lolcat;
