@@ -7,8 +7,6 @@ export TERM="xterm-256color"
 export VISUAL="nvim"
 export EDITOR=$VISUAL
 
-alias lvim="NVIM_APPNAME=lazyvim nvim"
-
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -40,7 +38,7 @@ ZSH_AUTOSUGGEST_USE_ASYNC="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-completions zsh-autocomplete zsh-syntax-highlighting zsh-autosuggestions git command-not-found adb podman rust fd ripgrep) # docker docker-compose
+plugins=(zsh-syntax-highlighting zsh-autosuggestions) # git command-not-found adb podman rust fd ripgrep docker docker-compose zsh-completions zsh-autocomplete
 DISABLE_AUTO_UPDATE=true
 # fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 [ -s $ZSH/oh-my-zsh.sh ] && source $ZSH/oh-my-zsh.sh
@@ -89,6 +87,8 @@ fi
 alias jo='joshuto-func'
 alias lg='lazygit'
 #alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
+alias lvim="NVIM_APPNAME=lazyvim nvim"
+(( $+commands[macchina] )) && alias neofetch="macchina"
 
 function joshuto-func() {
     TDIR="/tmp/joshuto"
