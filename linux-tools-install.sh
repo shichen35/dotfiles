@@ -6,6 +6,8 @@ ripgrep \
 eza \
 joshuto \
 dua-cli \
+onefetch \
+macchina \
 zoxide \
 tokei \
 bottom

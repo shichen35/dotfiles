@@ -18,6 +18,8 @@
 - ellie/atuin           - Magical shell history.
 - kamiyaa/joshuto       - Ranger-like terminal file manager written in Rust.
 - extrawurst/gitui      - Blazing fast terminal-ui for git written in Rust.
+- o2sh/onefetch         - Command-line Git information tool.
+- Macchina-CLI/macchina - A system information frontend with an emphasis on performance.
 
 ## golang
 
