@@ -6,7 +6,6 @@
 export TERM="xterm-256color"
 export VISUAL="nvim"
 export EDITOR=$VISUAL
-
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -15,7 +14,7 @@ case ${OSTYPE} in
         source $DOTFILES/zsh-files/mac.zsh
         ;;
     linux*)
-        export PATH=$PATH:/usr/local/go/bin
+        # export PATH=$PATH:/usr/local/go/bin
         ;;
 esac
 
