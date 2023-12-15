@@ -4,6 +4,7 @@
 Opening links from inside container on host:
 ```bash
 sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/xdg-open
+sudo ln -s /usr/bin/distrobox-host-exec /usr/bin/dolphin
 ```
 
 ```bash
