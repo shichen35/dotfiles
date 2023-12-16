@@ -31,8 +31,8 @@ keymap('n', '<C-Left>', ':vertical resize -2<CR>', { silent = true })
 keymap('n', '<C-Right>', ':vertical resize +2<CR>', { silent = true })
 
 -- Navigate buffers
-keymap('n', '<S-l>', ':bnext<CR>', { silent = true })
-keymap('n', '<S-h>', ':bprevious<CR>', { silent = true })
+keymap('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev buffer' })
+keymap('n', ']b', '<cmd>bnext<cr>', { desc = 'Next buffer' })
 
 -- Toggle highlights
 keymap(

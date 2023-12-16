@@ -1,14 +1,6 @@
 return {
   'mg979/vim-visual-multi',
-      event = "VeryLazy",
-  -- keys = {
-  --   { 'C-n', nil, mode = 'n' },
-  --   { 'C-Down', mode = 'n' },
-  --   { 'C-Up', mode = 'n' },
-  --   { '<leader>mp', mode = 'n' },
-  --   { '<leader>ma', mode = 'n' },
-  --   { '<leader>ma', mode = 'v' },
-  -- },
+  event = 'VeryLazy',
   init = function()
     vim.g.VM_default_mappings = 0
     vim.g.VM_maps = {
