@@ -46,24 +46,8 @@ return {
     },
   },
   {
-    'echasnovski/mini.splitjoin',
-    keys = {
-      { '<leader>j', desc = 'Split and Join' },
-    },
-    opts = {
-      mappings = {
-        toggle = '<leader>j',
-      },
-    },
-  },
-  {
     'echasnovski/mini.bufremove',
     event = { 'BufReadPre', 'BufNewFile' },
     config = true,
   },
-  -- {
-  --   "echasnovski/mini.ai",
-  --   event = { "BufReadPre", "BufNewFile" },
-  --   config = true,
-  -- },
 }
