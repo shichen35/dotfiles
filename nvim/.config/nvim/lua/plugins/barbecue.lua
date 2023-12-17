@@ -11,6 +11,7 @@ return {
     -- configurations go here
     exclude_filetypes = {
       'neo-tree',
+      'NvimTree',
       'undotree',
       'toggleterm',
       'Trouble',

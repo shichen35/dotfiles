@@ -14,6 +14,7 @@ return {
           'alpha',
           'dashboard',
           'neo-tree',
+          'NvimTree',
           'undotree',
           'Trouble',
           'lazy',

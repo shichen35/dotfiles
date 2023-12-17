@@ -44,6 +44,7 @@ return {
         qf = '',
         fugitive = '',
         fugitiveblame = '',
+        NvimTree = '',
         ['neo-tree'] = '',
       }
 
