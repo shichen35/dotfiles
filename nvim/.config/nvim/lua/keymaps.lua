@@ -37,7 +37,7 @@ keymap('n', ']b', '<cmd>bnext<cr>', { desc = 'Next buffer' })
 -- Toggle highlights
 keymap(
   'n',
-  '<leader>h',
+  '<leader>ht',
   '<cmd>set hlsearch!<CR>',
   { silent = true, desc = 'Toggle highlights' }
 )
