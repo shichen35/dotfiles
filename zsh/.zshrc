@@ -311,6 +311,7 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -n 10'"
 # export SDKMAN_DIR="$HOME/.sdkman"
 # [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 (( $+commands[atuin] )) && eval "$(atuin init zsh)"
+# (( $+commands[mcfly] )) && eval "$(mcfly init zsh)"
 
 if [ -f $HOME/.bun/bin/bun ]; then
   # bun completions
