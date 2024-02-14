@@ -21,7 +21,7 @@ M.keys = {
     '<cmd>Telescope buffers show_all_buffers=true<cr>',
     desc = 'Switch Buffer',
   },
-  { '<leader>/', Util.telescope 'live_grep', desc = 'Grep (root dir)' },
+  { '<leader>/',  Util.telescope 'live_grep',   desc = 'Grep (root dir)' },
   {
     '<leader>:',
     '<cmd>Telescope command_history<cr>',
@@ -40,7 +40,7 @@ M.keys = {
     '<cmd>Telescope find_files search_dirs=%:p:h<cr>',
     desc = 'Find Files (file dir)',
   },
-  { '<leader>fr', '<cmd>Telescope oldfiles<cr>', desc = 'Recent' },
+  { '<leader>fr', '<cmd>Telescope oldfiles<cr>',     desc = 'Recent' },
   {
     '<leader>fg',
     Util.telescope('live_grep', { cwd = false }),
@@ -52,8 +52,8 @@ M.keys = {
     desc = 'Grep (file dir)',
   },
   -- git
-  { '<leader>gc', '<cmd>Telescope git_commits<CR>', desc = 'commits' },
-  { '<leader>gs', '<cmd>Telescope git_status<CR>', desc = 'status' },
+  { '<leader>gc', '<cmd>Telescope git_commits<CR>',  desc = 'commits' },
+  { '<leader>gs', '<cmd>Telescope git_status<CR>',   desc = 'status' },
   -- search
   { '<leader>sa', '<cmd>Telescope autocommands<cr>', desc = 'Auto Commands' },
   {
@@ -66,7 +66,7 @@ M.keys = {
     '<cmd>Telescope command_history<cr>',
     desc = 'Command History',
   },
-  { '<leader>sC', '<cmd>Telescope commands<cr>', desc = 'Commands' },
+  { '<leader>sC', '<cmd>Telescope commands<cr>',  desc = 'Commands' },
   {
     '<leader>sd',
     '<cmd>Telescope diagnostics bufnr=0<cr>',
@@ -83,12 +83,12 @@ M.keys = {
     '<cmd>Telescope highlights<cr>',
     desc = 'Search Highlight Groups',
   },
-  { '<leader>sk', '<cmd>Telescope keymaps<cr>', desc = 'Key Maps' },
-  { '<leader>sM', '<cmd>Telescope man_pages<cr>', desc = 'Man Pages' },
-  { '<leader>sm', '<cmd>Telescope marks<cr>', desc = 'Jump to Mark' },
-  { '<leader>sn', '<cmd>Telescope notify<cr>', desc = 'Notifications' },
+  { '<leader>sk', '<cmd>Telescope keymaps<cr>',     desc = 'Key Maps' },
+  { '<leader>sM', '<cmd>Telescope man_pages<cr>',   desc = 'Man Pages' },
+  { '<leader>sm', '<cmd>Telescope marks<cr>',       desc = 'Jump to Mark' },
+  { '<leader>sn', '<cmd>Telescope notify<cr>',      desc = 'Notifications' },
   { '<leader>so', '<cmd>Telescope vim_options<cr>', desc = 'Options' },
-  { '<leader>sR', '<cmd>Telescope resume<cr>', desc = 'Resume' },
+  { '<leader>sR', '<cmd>Telescope resume<cr>',      desc = 'Resume' },
   {
     '<leader>sw',
     Util.telescope('grep_string', { cwd = false }),
