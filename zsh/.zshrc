@@ -266,7 +266,6 @@ function omzu() {
     done
     omz update
 }
-# zprof|head
 
 # fzf/rg
 if (( $+commands[rg] )) then
@@ -325,3 +324,14 @@ if [ -f $HOME/.bun/bin/bun ]; then
   [ -s "/Users/chen.shi/.bun/_bun" ] && source "/Users/chen.shi/.bun/_bun"
 fi
 
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+
+# zprof|head
+
+# pnpm
+export PNPM_HOME="/home/deck/distro-arch/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
