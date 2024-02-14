@@ -1,12 +1,12 @@
 local M = {
   'numToStr/Comment.nvim',
-  event = 'BufRead',
   dependencies = {
     {
       'JoosepAlviste/nvim-ts-context-commentstring',
       event = 'VeryLazy',
     },
   },
+  lazy = false,
 }
 
 function M.config()
