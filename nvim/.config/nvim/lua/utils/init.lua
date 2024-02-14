@@ -12,6 +12,7 @@ M.servers = {
   'yamlls',
   'rust_analyzer',
   'clangd',
+  'clang-format',
   'gopls',
   'lemminx',
   'cmake',

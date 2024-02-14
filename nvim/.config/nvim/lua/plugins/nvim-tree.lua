@@ -4,6 +4,17 @@ return {
   lazy = false,
   keys = {
     { '<leader>e', '<cmd>NvimTreeToggle<CR>', desc = 'NvimTree Explorer' },
+    {
+      '<leader>fe',
+      function()
+        require('nvim-tree.api').tree.find_file {
+          update_root = true,
+          open = true,
+          focus = true,
+        }
+      end,
+      desc = 'Nvim Tree Find File',
+    },
   },
   dependencies = {
     'nvim-tree/nvim-web-devicons',
@@ -55,8 +66,8 @@ return {
         icons = {
           git_placement = 'before',
           glyphs = {
---     ignored = "◌",
---   },
+            --     ignored = "◌",
+            --   },
             git = {
               unstaged = '',
               staged = '',
