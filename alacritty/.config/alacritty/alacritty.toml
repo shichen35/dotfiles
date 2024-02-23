@@ -444,3 +444,6 @@ lines = 25
 [window.padding]
 x = 0
 y = 0
+
+[selection]
+save_to_clipboard = true
