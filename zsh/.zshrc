@@ -267,11 +267,6 @@ function omzu() {
     omz update
 }
 
-# fzf/rg
-if (( $+commands[rg] )) then
-  export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
-  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-fi
 
 FZF_COLORS="bg+:-1,\
 fg:gray,\
@@ -292,10 +287,6 @@ export FZF_DEFAULT_OPTS="--color='$FZF_COLORS' \
 --marker ⇒"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -n 10'"
 
-
-# FZF keybindings
-(($+commands[fzf] && $+commands[rg])) && source $DOTFILES/zsh-files/key-bindings-fzf.zsh
-
 # Skim keybindings
 # (($+commands[sk] && $+commands[rg])) && source $DOTFILES/zsh-files/key-bindings-skim.zsh
 # if (($+commands[rg] && $+commands[fd])) then
@@ -304,13 +295,19 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -n 10'"
 #   export SKIM_CTRL_T_OPTS="--color=fg:243,fg+:255,current_match_bg:239,hl:3,hl+:2,matched_bg:-1"
 # fi
 
+# Zoxide
 (( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 # export SDKMAN_DIR="$HOME/.sdkman"
 # [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
-(( $+commands[atuin] )) && eval "$(atuin init zsh)"
-# (( $+commands[mcfly] )) && eval "$(mcfly init zsh)"
+if (( $+commands[atuin] )) then
+  eval "$(atuin init zsh)"
+else if (($+commands[fzf] && $+commands[rg]))
+  export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  source $DOTFILES/zsh-files/key-bindings-fzf.zsh
+fi
 
 if [ -f $HOME/.bun/bin/bun ]; then
   # bun completions
