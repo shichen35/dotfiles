@@ -87,7 +87,7 @@ alias jo='joshuto-func'
 alias lg='lazygit'
 #alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias lvim="NVIM_APPNAME=lazyvim nvim"
-(( $+commands[macchina] )) && alias neofetch="macchina"
+# (( $+commands[macchina] )) && alias neofetch="macchina"
 
 function joshuto-func() {
     TDIR="/tmp/joshuto"
