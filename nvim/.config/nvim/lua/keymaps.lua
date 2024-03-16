@@ -160,12 +160,11 @@ func! CompileRun()
 	if &filetype == 'c'
 		set splitbelow
 		:sp
-		:term mkdir -p bin & gcc % -g -o bin/%:t:r && ./bin/%:t:r
+		:term mkdir -p bin && gcc % -g -o bin/%:t:r && ./bin/%:t:r
 	elseif &filetype == 'cpp'
 		set splitbelow
-		exec "!g++ -std=c++20 % -Wall -o %<"
 		:sp
-		:term ./%<
+    :term mkdir -p bin && g++ -std=c++20 % -Wall -o bin/%:t:r && ./bin/%:t:r
 	elseif &filetype == 'python'
 		set splitbelow
 		:sp
