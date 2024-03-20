@@ -101,7 +101,7 @@ M.keys = {
   },
   {
     '<leader>cs',
-    Util.telescope('colorscheme', { enable_preview = true }),
+    Util.telescope('colorscheme'),
     desc = 'Colorscheme with preview',
   },
   {
@@ -155,11 +155,6 @@ M.opts = {
         ['<C-j>'] = actions.cycle_history_next,
         ['<C-k>'] = actions.cycle_history_prev,
       },
-    },
-  },
-  pickers = {
-    colorscheme = {
-      enable_preview = true,
     },
   },
   extensions = {
