@@ -7,7 +7,7 @@ M.servers = {
   'html',
   'tsserver',
   -- 'pyright',
-  'bashls',
+  -- 'bashls',
   'jsonls',
   'yamlls',
   'rust_analyzer',
