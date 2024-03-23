@@ -21,7 +21,7 @@ return {
           'lua',
           'markdown',
           'markdown_inline',
-          'bash',
+          -- 'bash',
           'html',
           'javascript',
           'typescript',
