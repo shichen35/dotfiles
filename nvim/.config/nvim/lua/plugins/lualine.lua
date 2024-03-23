@@ -72,14 +72,14 @@ function M.config()
     sections = {
       lualine_a = { 'mode' },
       lualine_b = { 'branch' },
-      lualine_c = {
-        diagnostics,
-        {
-          require('noice').api.statusline.mode.get,
-          cond = require('noice').api.statusline.mode.has,
-          color = { fg = '#ff9e64' },
-        },
-      },
+      -- lualine_c = {
+      --   diagnostics,
+      --   {
+      --     require('noice').api.statusline.mode.get,
+      --     cond = require('noice').api.statusline.mode.has,
+      --     color = { fg = '#ff9e64' },
+      --   },
+      -- },
       lualine_x = { diff, spaces, 'encoding', filetype },
       lualine_y = { location },
       lualine_z = { 'progress' },
