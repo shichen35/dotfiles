@@ -5,7 +5,6 @@
 
 export TERM="xterm-256color"
 export VISUAL="nvim"
-export EDITOR=$VISUAL
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -16,6 +15,7 @@ case ${OSTYPE} in
     linux*)
         # export PATH=$PATH:/usr/local/go/bin
         ;;
+    *) ;;
 esac
 
 # Set name of the theme to load --- if set to "random", it will
@@ -158,102 +158,87 @@ ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=reset-prompt-and-accept-line
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=reset-prompt-and-accept-and-hold
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=reset-prompt-and-accept-and-down-history
 
-bindkey '^[l' down-case-word
-    #bindkey '^W' vi-backward-kill-word
-    #bindkey '^[^?' vi-backward-kill-word
+# This function is executed before the command line is written to history. If it does return 1, the current command line is neither appended to the history file nor to the local history stack.
+function zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
 
-    # This function is executed before the command line is written to history. If it does return 1, the current command line is neither appended to the history file nor to the local history stack.
-    function zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
+function displaytime {
+    local T=$1
+    if (( T > 1000 )) then
+        (( T = T/1000.0 ))
+        local Y=$((T/365/60/60/24))
+        local D=$((T/60/60/24%365))
+        local H=$((T/60/60%24))
+        local M=$((T/60%60))
+        local S=$((T%60))
+        [[ $Y -ge 1 ]] && printf '%dy ' $Y
+        [[ $D -ge 1 ]] && printf '%dd ' $D
+        [[ $H -ge 1 ]] && printf '%dh ' $H
+        [[ $M -ge 1 ]] && printf '%dm ' $M
+        printf "%.3fs${NC}\n" $S
+    else
+        printf "%dms${NC}\n" $T
+    fi
+}
 
-    function displaytime {
-        local T=$1
-        if (( T > 1000 )) then
-            (( T = T/1000.0 ))
-            local Y=$((T/365/60/60/24))
-            local D=$((T/60/60/24%365))
-            local H=$((T/60/60%24))
-            local M=$((T/60%60))
-            local S=$((T%60))
-            [[ $Y -ge 1 ]] && printf '%dy ' $Y
-            [[ $D -ge 1 ]] && printf '%dd ' $D
-            [[ $H -ge 1 ]] && printf '%dh ' $H
-            [[ $M -ge 1 ]] && printf '%dm ' $M
-            printf "%.3fs${NC}\n" $S
-        else
-            printf "%dms${NC}\n" $T
-        fi
-    }
+function preexec() {
+    if [[ $time == "on" ]] then
+        timer=$(($(print -P %D{%s%6.})/1000))
+    fi
+}
 
-    function preexec() {
-        if [[ $time == "on" ]] then
-            timer=$(($(print -P %D{%s%6.})/1000))
-        fi
-    }
+function precmd() {
+    # local exit_code=$?
+    GRAY='\033[0;90m'
+    CYAN='\033[1;37m'
+    NC='\033[0m' # No Color
 
-    function precmd() {
-        # local exit_code=$?
-        GRAY='\033[0;90m'
-        CYAN='\033[1;37m'
-        NC='\033[0m' # No Color
+    if [[ $timer && $time == "on" ]]; then
+        now=$(($(print -P %D{%s%6.})/1000))
+        elapsed=$(($now-$timer))
 
-        if [[ $timer && $time == "on" ]]; then
-            now=$(($(print -P %D{%s%6.})/1000))
-            elapsed=$(($now-$timer))
+        # export RPROMPT="%F{cyan}${elapsed}ms %{$reset_color%}"
+        printf "${GRAY}elapsed "
+        displaytime $elapsed
+        unset timer
+    fi
+}
 
-            # export RPROMPT="%F{cyan}${elapsed}ms %{$reset_color%}"
-            printf "${GRAY}elapsed "
-            displaytime $elapsed
-            unset timer
-        fi
+function vdiff () {
+    if [ "${#}" -ne 2 ] ; then
+        echo "vdiff requires two arguments"
+        echo "  comparing dirs:  vdiff dir_a dir_b"
+        echo "  comparing files: vdiff file_a file_b"
+        return 1
+    fi
 
-        # if (( exit_code != 0)) then
-        #   printf "${GRAY}error code: $return_code${NC}\n"
-        # fi
-    }
+    local left="${1}"
+    local right="${2}"
 
-    # TRAPERR() print -u2 exit code $?
+    if [ -d "${left}" ] && [ -d "${right}" ]; then
+        vim +"DirDiff ${left} ${right}"
+    else
+        vim -d "${left}" "${right}"
+    fi
+}
 
-    function vdiff () {
-        if [ "${#}" -ne 2 ] ; then
-            echo "vdiff requires two arguments"
-            echo "  comparing dirs:  vdiff dir_a dir_b"
-            echo "  comparing files: vdiff file_a file_b"
-            return 1
-        fi
+function colors() {
+    for i in {0..255};
+    do
+        printf "\x1b[38;5;${i}m${i} ";
+    done
+    printf "\n";
+}
 
-        local left="${1}"
-        local right="${2}"
+function timezsh() {
+    shell=${1-$SHELL}
+    for i in $(seq 1 5); do time $shell -i -c exit; done
+}
 
-        if [ -d "${left}" ] && [ -d "${right}" ]; then
-            vim +"DirDiff ${left} ${right}"
-        else
-            vim -d "${left}" "${right}"
-        fi
-    }
-
-    function colors() {
-        for i in {0..255};
-        do
-            printf "\x1b[38;5;${i}m${i} ";
-        done
-        printf "\n";
-    }
-
-    function timezsh() {
-        shell=${1-$SHELL}
-        for i in $(seq 1 5); do time $shell -i -c exit; done
-    }
-
-    # fglog - git log browser with FZF
-    function fglog() {
-        git log --graph --color=always \
-            --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
-        fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
-            --bind "ctrl-m:execute:
-                (grep -o '[a-f0-9]\{7\}' | head -1 |
-                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
-                {}
-FZF-EOF"
+# # fglog - git log browser with FZF
+function fglog() {
+    git log --graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+    fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+        --bind "ctrl-m:execute: (grep -o '[a-f0-9]\{7\}' | head -1 | xargs -I % sh -c 'git show --color=always % | less -R') << {}"
 }
 
 function omzu() {
@@ -262,6 +247,7 @@ function omzu() {
         if [ -d "$plugin/.git" ]; then
             printf "${YELLOW}%s${RESET}\n" "${plugin%/}"
             git -C "$plugin" pull
+            source $ZSH/oh-my-zsh.sh
         fi
     done
     omz update
@@ -302,33 +288,34 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -n 10'"
 # export SDKMAN_DIR="$HOME/.sdkman"
 # [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 if (( $+commands[atuin] )) then
-  eval "$(atuin init zsh)"
-else if (($+commands[fzf] && $+commands[rg]))
-  export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
-  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-  source $DOTFILES/zsh-files/key-bindings-fzf.zsh
+    eval "$(atuin init zsh)"
+    # else if (($+commands[fzf] && $+commands[rg]))
+    #   export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+    #   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    #   source $DOTFILES/zsh-files/key-bindings-fzf.zsh
 fi
 
 if [ -f $HOME/.bun/bin/bun ]; then
-  # bun completions
-  [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+    # bun completions
+    [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-  # bun
-  export BUN_INSTALL="$HOME/.bun"
-  export PATH="$BUN_INSTALL/bin:$PATH"
+    # bun
+    export BUN_INSTALL="$HOME/.bun"
+    export PATH="$BUN_INSTALL/bin:$PATH"
 
-  # bun completions
-  [ -s "/Users/chen.shi/.bun/_bun" ] && source "/Users/chen.shi/.bun/_bun"
+    # bun completions
+    [ -s "/Users/chen.shi/.bun/_bun" ] && source "/Users/chen.shi/.bun/_bun"
 fi
 
-export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+# export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
 # zprof|head
 
 # pnpm
 export PNPM_HOME="/home/deck/distro-arch/.local/share/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+    *":$PNPM_HOME:"*) ;;
+    *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
