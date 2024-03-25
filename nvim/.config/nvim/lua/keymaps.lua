@@ -1,8 +1,8 @@
 -- Shorten function name
-local keymap = vim.keymap.set
+local map = vim.keymap.set
 
---Remap space as leader key
-keymap('', '<Space>', '<Nop>', { silent = true })
+-- Remap space as leader key
+map('', '<Space>', '<Nop>', { silent = true })
 vim.g.mapleader = ' '
 
 -- Modes
@@ -14,50 +14,40 @@ vim.g.mapleader = ' '
 --   command_mode = "c",
 
 -- https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
-keymap('n', 'j', [[v:count ? 'j' : 'gj']], { noremap = true, expr = true })
-keymap('n', 'k', [[v:count ? 'k' : 'gk']], { noremap = true, expr = true })
+map('n', 'j', [[v:count ? 'j' : 'gj']], { noremap = true, expr = true })
+map('n', 'k', [[v:count ? 'k' : 'gk']], { noremap = true, expr = true })
 
 -- Normal --
 -- Better window navigation
-keymap('n', '<C-h>', '<C-w>h', { silent = true })
-keymap('n', '<C-j>', '<C-w>j', { silent = true })
-keymap('n', '<C-k>', '<C-w>k', { silent = true })
-keymap('n', '<C-l>', '<C-w>l', { silent = true })
+map('n', '<C-h>', '<C-w>h', { silent = true })
+map('n', '<C-j>', '<C-w>j', { silent = true })
+map('n', '<C-k>', '<C-w>k', { silent = true })
+map('n', '<C-l>', '<C-w>l', { silent = true })
 
 -- Resize with arrows
-keymap('n', '<C-Up>', ':resize -2<CR>', { silent = true })
-keymap('n', '<C-Down>', ':resize +2<CR>', { silent = true })
-keymap('n', '<C-Left>', ':vertical resize -2<CR>', { silent = true })
-keymap('n', '<C-Right>', ':vertical resize +2<CR>', { silent = true })
+map('n', '<C-Up>', ':resize -2<CR>', { silent = true })
+map('n', '<C-Down>', ':resize +2<CR>', { silent = true })
+map('n', '<C-Left>', ':vertical resize -2<CR>', { silent = true })
+map('n', '<C-Right>', ':vertical resize +2<CR>', { silent = true })
 
 -- Navigate buffers
-keymap('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev buffer' })
-keymap('n', ']b', '<cmd>bnext<cr>', { desc = 'Next buffer' })
+map('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev buffer' })
+map('n', ']b', '<cmd>bnext<cr>', { desc = 'Next buffer' })
 
 -- Toggle highlights
-keymap(
-  'n',
-  '<leader>ht',
-  '<cmd>set hlsearch!<CR>',
-  { silent = true, desc = 'Toggle highlights' }
-)
+map('n', '<leader>ht', '<cmd>set hlsearch!<CR>', { silent = true, desc = 'Toggle highlights' })
 
 -- TermSelect
-keymap(
-  'n',
-  '<leader>st',
-  '<cmd>TermSelect<CR>',
-  { silent = true, desc = 'Select Terminal' }
-)
+map('n', '<leader>st', '<cmd>TermSelect<CR>', { silent = true, desc = 'Select Terminal' })
 
 -- Close buffers
-keymap('n', '<S-q>', '<cmd>Bdelete!<CR>', { silent = true })
+map('n', '<S-q>', '<cmd>Bdelete!<CR>', { silent = true })
 
 -- Better paste
-keymap('v', 'p', 'P', { silent = true })
+map('v', 'p', 'P', { silent = true })
 
 -- Find and replace all selected
-keymap(
+map(
   'v',
   '<leader>s',
   "y:<C-U>let replacement = input('Enter replacement string: ') <bar> %s/<C-R>\"/\\=replacement/g<CR>",
@@ -65,17 +55,17 @@ keymap(
 )
 
 -- Ctrl + C to ESC
-keymap('i', '<C-C>', '<ESC>', { silent = true })
+map('i', '<C-C>', '<ESC>', { silent = true })
 
 -- Visual --
 -- Stay in indent mode
-keymap('v', '<', '<gv', { silent = true })
-keymap('v', '>', '>gv', { silent = true })
+map('v', '<', '<gv', { silent = true })
+map('v', '>', '>gv', { silent = true })
 
 -- Plugins --
 
 -- Lazy
-keymap(
+map(
   'n',
   '<leader>lz',
   '<cmd>Lazy<CR>',
@@ -83,13 +73,13 @@ keymap(
 )
 
 -- Git
-keymap(
+map(
   'n',
   '<leader>gl',
   '<cmd>lua _LAZYGIT_TOGGLE()<CR>',
   { desc = 'Toggle Lazygit', silent = true }
 )
-keymap(
+map(
   'n',
   '<leader>gg',
   '<cmd>lua _GITUI_TOGGLE()<CR>',
@@ -97,7 +87,7 @@ keymap(
 )
 
 -- Lsp
-keymap(
+map(
   'n',
   '<leader>lf',
   '<cmd>lua require("conform").format({ async = true, lsp_fallback = true })<cr>',
@@ -105,27 +95,27 @@ keymap(
 )
 
 -- Highlight Lines
-keymap(
+map(
   'n',
   '<leader>hl',
   "<cmd>call matchadd('Cursor', '\\%'.line('.').'l',10,line('.') + 100)<CR>",
   { silent = true }
 )
-keymap(
+map(
   'n',
   '<leader>hd',
   "<cmd>call matchdelete(line('.') + 100)<CR>",
   { silent = true }
 )
-keymap('n', '<leader>hc', '<cmd>call clearmatches()<CR>', { silent = true })
+map('n', '<leader>hc', '<cmd>call clearmatches()<CR>', { silent = true })
 
 -- tab
-keymap('n', '<leader><tab>l', '<cmd>tablast<cr>', { desc = 'Last Tab' })
-keymap('n', '<leader><tab>f', '<cmd>tabfirst<cr>', { desc = 'First Tab' })
-keymap('n', '<leader><tab><tab>', '<cmd>tabnew<cr>', { desc = 'New Tab' })
-keymap('n', '<leader><tab>]', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
-keymap('n', '<leader><tab>c', '<cmd>tabclose<cr>', { desc = 'Close Tab' })
-keymap('n', '<leader><tab>[', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
+map('n', '<leader><tab>l', '<cmd>tablast<cr>', { desc = 'Last Tab' })
+map('n', '<leader><tab>f', '<cmd>tabfirst<cr>', { desc = 'First Tab' })
+map('n', '<leader><tab><tab>', '<cmd>tabnew<cr>', { desc = 'New Tab' })
+map('n', '<leader><tab>]', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
+map('n', '<leader><tab>c', '<cmd>tabclose<cr>', { desc = 'Close Tab' })
+map('n', '<leader><tab>[', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
 
 vim.cmd [[
 nmap <leader>il :set invlist<CR>

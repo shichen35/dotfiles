@@ -1,15 +1,19 @@
 local M = {
   'neovim/nvim-lspconfig',
-  lazy = true,
+  event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
-    {
-      'hrsh7th/cmp-nvim-lsp',
-    },
+    'hrsh7th/cmp-nvim-lsp',
   },
 }
 
-local cmp_nvim_lsp = require 'cmp_nvim_lsp'
 function M.config()
+  local cmp_nvim_lsp = require('cmp_nvim_lsp')
+
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  -- capabilities.offsetEncoding = { "utf-16" }
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
+
   -- Show diagnostic popup on cursor hover
   -- autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
   vim.api.nvim_create_autocmd(
@@ -21,10 +25,6 @@ function M.config()
     }
   )
 
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  -- capabilities.offsetEncoding = { "utf-16" }
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 
   local function lsp_keymaps(bufnr)
     local opts = { noremap = true, silent = true }

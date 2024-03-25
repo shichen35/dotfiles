@@ -1,12 +1,10 @@
 local M = {
   'williamboman/mason.nvim',
-  cmd = 'Mason',
-  event = 'BufReadPre',
+  build = ':MasonUpdate',
+  cmd = { 'Mason', 'MasonInstall' },
+  event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
-    {
-      'williamboman/mason-lspconfig.nvim',
-      lazy = true,
-    },
+    'williamboman/mason-lspconfig.nvim',
   },
 }
 
@@ -25,10 +23,7 @@ local settings = {
 
 function M.config()
   require('mason').setup(settings)
-  require('mason-lspconfig').setup {
-    ensure_installed = require('utils').servers,
-    automatic_installation = false,
-  }
+  require('mason-lspconfig').setup()
 end
 
 return M
