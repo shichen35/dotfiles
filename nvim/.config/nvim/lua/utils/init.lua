@@ -1,23 +1,35 @@
 local M = {}
 
-M.servers = {
-  -- 'lua_ls',
-  -- 'cssls',
-  -- 'emmet_language_server',
-  -- 'html',
-  -- 'tsserver',
-  -- 'pyright',
-  -- 'bashls',
-  -- 'jsonls',
-  -- 'yamlls',
-  -- 'rust_analyzer',
-  -- 'clangd',
-  -- 'clang-format',
-  -- 'gopls',
-  -- 'lemminx',
-  -- 'cmake',
-  -- 'tailwindcss',
-  -- 'marksman',
+M.lsps = {
+  'bashls',
+  'clangd',
+  'cmake',
+  'cssls',
+  'emmet_language_server',
+  'gopls',
+  'html',
+  'jsonls',
+  'lemminx',
+  'lua_ls',
+  'marksman',
+  'pyright',
+  'rust_analyzer',
+  'tailwindcss',
+  'tsserver',
+  'yamlls',
+}
+
+M.linters = {
+}
+
+M.formatters = {
+  'beautysh',
+  'clang-format',
+  'stylua',
+}
+
+M.daps = {
+  'codelldb',
 }
 
 M.root_patterns = { '.git', 'lua' }

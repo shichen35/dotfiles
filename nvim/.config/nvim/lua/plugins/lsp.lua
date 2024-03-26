@@ -7,7 +7,7 @@ local M = {
 }
 
 function M.config()
-  local cmp_nvim_lsp = require('cmp_nvim_lsp')
+  local cmp_nvim_lsp = require 'cmp_nvim_lsp'
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   -- capabilities.offsetEncoding = { "utf-16" }
@@ -24,7 +24,6 @@ function M.config()
       end,
     }
   )
-
 
   local function lsp_keymaps(bufnr)
     local opts = { noremap = true, silent = true }
@@ -88,7 +87,7 @@ function M.config()
     lsp_keymaps(bufnr)
   end
 
-  for _, server in pairs(require('utils').servers) do
+  for _, server in pairs(require('utils').lsps) do
     Opts = {
       on_attach = on_attach,
       capabilities = capabilities,
