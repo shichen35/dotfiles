@@ -1,9 +1,9 @@
 return {
-  name = 'cmake rm build',
+  name = "cmake rm build",
   builder = function()
     return {
-      cmd = { 'rm' },
-      args = { '-rf', 'build' },
+      cmd = { "rm" },
+      args = { "-rf", "build" },
     }
   end,
 }

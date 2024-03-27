@@ -1,20 +1,20 @@
 local M = {
-  'williamboman/mason.nvim',
-  build = ':MasonUpdate',
-  cmd = { 'Mason', 'MasonInstall' },
-  event = { 'BufReadPre', 'BufNewFile' },
+  "williamboman/mason.nvim",
+  build = ":MasonUpdate",
+  cmd = { "Mason", "MasonInstall" },
+  event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    'williamboman/mason-lspconfig.nvim',
+    "williamboman/mason-lspconfig.nvim",
   },
 }
 
 local settings = {
   ui = {
-    border = 'none',
+    border = "none",
     icons = {
-      package_installed = '◍',
-      package_pending = '◍',
-      package_uninstalled = '◍',
+      package_installed = "◍",
+      package_pending = "◍",
+      package_uninstalled = "◍",
     },
   },
   log_level = vim.log.levels.INFO,
@@ -22,14 +22,14 @@ local settings = {
 }
 
 function M.config()
-  require('mason').setup(settings)
+  require("mason").setup(settings)
 
   -- require 'utils'
 
-  require('mason-lspconfig').setup {
+  require("mason-lspconfig").setup({
     ensure_installed = {},
     automatic_installation = true,
-  }
+  })
 end
 
 return M
