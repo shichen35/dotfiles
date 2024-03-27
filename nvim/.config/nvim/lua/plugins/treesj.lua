@@ -1,12 +1,12 @@
 return {
-  'Wansmer/treesj',
+  "Wansmer/treesj",
   keys = {
-    { '<space>j', nil, desc = 'Toggle Split/join' },
-    { '<space>J', nil, desc = 'Toggle Split/join with recursive' },
+    { "<space>j", nil, desc = "Toggle Split/join" },
+    { "<space>J", nil, desc = "Toggle Split/join with recursive" },
   },
-  dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  dependencies = { "nvim-treesitter/nvim-treesitter" },
   config = function()
-    require('treesj').setup {
+    require("treesj").setup({
       ---@type boolean Use default keymaps (<space>m - toggle, <space>j - join, <space>s - split)
       use_default_keymaps = false,
       ---@type boolean Node with syntax error will not be formatted
@@ -19,7 +19,7 @@ return {
       ---start - cursor jumps to the first symbol of the node being formatted
       ---end - cursor jumps to the last symbol of the node being formatted
       ---@type 'hold'|'start'|'end'
-      cursor_behavior = 'hold',
+      cursor_behavior = "hold",
       ---@type boolean Notify about possible problems or not
       notify = true,
       ---@type boolean Use `dot` for repeat action
@@ -28,12 +28,12 @@ return {
       on_error = nil,
       ---@type table Presets for languages
       -- langs = {}, -- See the default presets in lua/treesj/langs
-    }
+    })
     -- For use default preset and it work with dot
-    vim.keymap.set('n', '<leader>j', require('treesj').toggle)
+    vim.keymap.set("n", "<leader>j", require("treesj").toggle)
     -- For extending default preset with `recursive = true`, but this doesn't work with dot
-    vim.keymap.set('n', '<leader>J', function()
-      require('treesj').toggle { split = { recursive = true } }
+    vim.keymap.set("n", "<leader>J", function()
+      require("treesj").toggle({ split = { recursive = true } })
     end)
   end,
 }

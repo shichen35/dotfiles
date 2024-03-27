@@ -1,45 +1,45 @@
 return {
-  'Exafunction/codeium.vim',
+  "Exafunction/codeium.vim",
   enabled = function()
-    return not string.match(vim.env.HOME, 'termux')
+    return not string.match(vim.env.HOME, "termux")
   end,
   init = function()
     vim.g.codeium_disable_bindings = 1
   end,
-  event = { 'InsertEnter' },
-  cmd = { 'Codeium' },
+  event = { "InsertEnter" },
+  cmd = { "Codeium" },
   keys = {
     {
-      '<M-\\>',
+      "<M-\\>",
       function()
-        return vim.fn['codeium#Accept']()
+        return vim.fn["codeium#Accept"]()
       end,
       expr = true,
-      mode = 'i',
+      mode = "i",
     },
     {
-      '<M-k>',
+      "<M-k>",
       function()
-        return vim.fn['codeium#CycleCompletions'](1)
+        return vim.fn["codeium#CycleCompletions"](1)
       end,
       expr = true,
-      mode = 'i',
+      mode = "i",
     },
     {
-      '<M-j>',
+      "<M-j>",
       function()
-        return vim.fn['codeium#CycleCompletions'](-1)
+        return vim.fn["codeium#CycleCompletions"](-1)
       end,
       expr = true,
-      mode = 'i',
+      mode = "i",
     },
     {
-      '<M-x>',
+      "<M-x>",
       function()
-        return vim.fn['codeium#Clear']()
+        return vim.fn["codeium#Clear"]()
       end,
       expr = true,
-      mode = 'i',
+      mode = "i",
     },
   },
 }

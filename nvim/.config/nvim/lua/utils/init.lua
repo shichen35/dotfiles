@@ -1,42 +1,41 @@
 local M = {}
 
 M.lsps = {
-  'bashls',
-  'clangd',
-  'cmake',
-  'cssls',
-  'emmet_language_server',
-  'gopls',
-  'html',
-  'jsonls',
-  'lemminx',
-  'lua_ls',
-  'marksman',
-  'pyright',
-  'rust_analyzer',
-  'tailwindcss',
-  'tsserver',
-  'yamlls',
+  "bashls",
+  "clangd",
+  "cmake",
+  "cssls",
+  "emmet_language_server",
+  "gopls",
+  "html",
+  "jsonls",
+  "lemminx",
+  "lua_ls",
+  "marksman",
+  "pyright",
+  "rust_analyzer",
+  "tailwindcss",
+  "tsserver",
+  "yamlls",
 }
 
-M.linters = {
-}
+M.linters = {}
 
 M.formatters = {
-  'beautysh',
-  'clang-format',
-  'stylua',
+  "beautysh",
+  "clang-format",
+  "stylua",
 }
 
 M.daps = {
-  'codelldb',
+  "codelldb",
 }
 
-M.root_patterns = { '.git', 'lua' }
+M.root_patterns = { ".git", "lua" }
 
 function M.truncate(text, max_width)
   if #text > max_width then
-    return string.sub(text, 1, max_width) .. '…'
+    return string.sub(text, 1, max_width) .. "…"
   else
     return text
   end
@@ -44,7 +43,7 @@ end
 
 ---@param on_attach fun(client, buffer)
 function M.on_attach(on_attach)
-  vim.api.nvim_create_autocmd('LspAttach', {
+  vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
       local buffer = args.buf
       local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -62,14 +61,14 @@ end
 function M.get_root()
   ---@type string?
   local path = vim.api.nvim_buf_get_name(0)
-  path = path ~= '' and vim.loop.fs_realpath(path) or nil
+  path = path ~= "" and vim.loop.fs_realpath(path) or nil
   ---@type string[]
   local roots = {}
   if path then
     for _, client in
-      pairs(vim.lsp.get_active_clients {
+      pairs(vim.lsp.get_active_clients({
         bufnr = 0,
-      })
+      }))
     do
       local workspace = client.config.workspace_folders
       local paths = workspace
@@ -115,25 +114,25 @@ function M.telescope(builtin, opts)
   return function()
     builtin = params.builtin
     opts = params.opts
-    opts = vim.tbl_deep_extend('force', {
+    opts = vim.tbl_deep_extend("force", {
       cwd = M.get_root(),
     }, opts or {})
-    if builtin == 'files' then
-      if vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. '/.git') then
+    if builtin == "files" then
+      if vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. "/.git") then
         opts.show_untracked = true
-        builtin = 'git_files'
+        builtin = "git_files"
       else
-        builtin = 'find_files'
+        builtin = "find_files"
       end
     end
     if opts.cwd and opts.cwd ~= vim.loop.cwd() then
       opts.attach_mappings = function(_, map)
-        map('i', '<a-c>', function()
-          local action_state = require 'telescope.actions.state'
+        map("i", "<a-c>", function()
+          local action_state = require("telescope.actions.state")
           local line = action_state.get_current_line()
           M.telescope(
             params.builtin,
-            vim.tbl_deep_extend('force', {}, params.opts or {}, {
+            vim.tbl_deep_extend("force", {}, params.opts or {}, {
               cwd = false,
               default_text = line,
             })
@@ -143,7 +142,7 @@ function M.telescope(builtin, opts)
       end
     end
 
-    require('telescope.builtin')[builtin](opts)
+    require("telescope.builtin")[builtin](opts)
   end
 end
 

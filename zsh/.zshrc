@@ -46,7 +46,8 @@ DISABLE_AUTO_UPDATE=true
 # compinit
 
 # User configuration
-(( $+commands[figlet] )) && (( $+commands[lolcat] )) && (( $+commands[fortune] )) && (figlet -f slant 'Rock & Code' && fortune)|lolcat;
+# (( $+commands[figlet] )) && (( $+commands[lolcat] )) && (( $+commands[fortune] )) && (figlet -f slant 'Rock & Code' && fortune)|lolcat;
+(( $+commands[lolcat] )) && (( $+commands[fortune] )) && fortune|lolcat;
 
 HISTFILE=~/.zsh_history
 SAVEHIST=10000
