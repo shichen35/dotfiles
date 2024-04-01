@@ -37,7 +37,7 @@ ZSH_AUTOSUGGEST_USE_ASYNC="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-autocomplete zsh-syntax-highlighting zsh-autosuggestions) # git command-not-found adb podman rust fd ripgrep docker docker-compose zsh-completions zsh-autocomplete
+plugins=(zsh-syntax-highlighting zsh-autosuggestions) # zsh-autocomplete git command-not-found adb podman rust fd ripgrep docker docker-compose zsh-completions zsh-autocomplete
 DISABLE_AUTO_UPDATE=true
 # fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 [ -s $ZSH/oh-my-zsh.sh ] && source $ZSH/oh-my-zsh.sh
@@ -290,10 +290,12 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -n 10'"
 # [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 if (( $+commands[atuin] )) then
     eval "$(atuin init zsh)"
-    # else if (($+commands[fzf] && $+commands[rg]))
-    #   export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
-    #   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-    #   source $DOTFILES/zsh-files/key-bindings-fzf.zsh
+fi
+
+if (($+commands[fzf] && $+commands[rg])) then
+    export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    source $DOTFILES/zsh-files/key-bindings-fzf.zsh
 fi
 
 if [ -f $HOME/.bun/bin/bun ]; then
