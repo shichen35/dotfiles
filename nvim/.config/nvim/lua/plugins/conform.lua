@@ -3,6 +3,9 @@ return {
   event = { "BufReadPost", "BufNewFile" },
   opts = {
     formatters_by_ft = {
+      c = { "clang_format" },
+      cpp = { "clang_format" },
+      cmake = { "cmake_format" },
       lua = { "stylua" },
       -- Conform will run multiple formatters sequentially
       python = { "isort", "black" },
