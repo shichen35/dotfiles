@@ -1,6 +1,4 @@
 vim.loader.enable()
 
-require("options")
-require("keymaps")
-require("autocommands")
+require("core")
 require("lazy-init")

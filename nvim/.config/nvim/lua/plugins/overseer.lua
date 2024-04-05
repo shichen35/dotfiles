@@ -46,7 +46,9 @@ return {
     require("overseer").setup({
       templates = {
         "builtin",
-        -- "user.cmake-rm-build",
+        "user.cmake-build",
+        "user.cmake-configure",
+        "user.cmake-rm-build",
       },
     })
   end,
