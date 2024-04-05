@@ -12,7 +12,7 @@ dap.configurations.c = {
       if file.exists(cwd, "CMakeLists.txt") then
         -- Todo. Then invoke cmake commands
         -- Then ask user to provide execute file
-        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/build/", "file")
       else
         local fileName = vim.fn.expand("%:t:r")
         if not file.exists(cwd, "bin") then
