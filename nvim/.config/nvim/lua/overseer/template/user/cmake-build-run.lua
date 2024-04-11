@@ -1,7 +1,7 @@
 return {
   name = "cmake build & run",
   params = {
-    target_binary = {
+    target = {
       type = "string",
       name = "Target",
       order = 1,
@@ -9,23 +9,21 @@ return {
       default = "app",
     },
     args = {
-      type = "string",
+      type = "list",
+      delimiter = " ",
       name = "Arguments",
       order = 2,
-      optional = false,
-      default = "",
+      optional = true,
     },
   },
   builder = function(params)
     return {
-      cmd = { "./build/" .. params.target_binary },
-      args = {
-        params.args,
-      },
+      cmd = { "./build/" .. params.target },
+      args = params.args,
       components = {
         {
           "dependencies",
-          task_names = { { cmd = "cmake", args = { "--build", "build", "--target", params.target_binary } } },
+          task_names = { { cmd = "cmake", args = { "--build", "build", "--target", params.target } } },
         },
         { "on_output_quickfix", set_diagnostics = true },
         "on_result_diagnostics",
