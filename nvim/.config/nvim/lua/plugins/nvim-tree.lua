@@ -23,8 +23,20 @@ return {
     require("nvim-tree").setup({
       sync_root_with_cwd = true,
       view = {
-        width = 35,
-        relativenumber = true,
+        -- width = 35,
+        -- relativenumber = true,
+        -- side = "right",
+        float = {
+          enable = true,
+          open_win_config = {
+            relative = "editor",
+            border = "single",
+            width = 40,
+            height = 21,
+            row = 0,
+            col = 0,
+          },
+        },
       },
       filters = {
         custom = { "^.git$" },
