@@ -24,9 +24,16 @@
 -- return M
 
 return {
-  "sainnhe/gruvbox-material",
+  "ellisonleao/gruvbox.nvim",
   lazy = false,
   priority = 1000,
+  dependencies = {
+    {
+      "catppuccin/nvim",
+      name = "catppuccin",
+    },
+    "folke/tokyonight.nvim",
+  },
   init = function()
     vim.g.gruvbox_material_better_performance = 1
     vim.g.gruvbox_material_foreground = "mix"
@@ -34,6 +41,8 @@ return {
   end,
   config = function()
     -- load the colorscheme here
-    vim.cmd.colorscheme("gruvbox-material")
+    vim.cmd.colorscheme("catppuccin-macchiato")
+    -- vim.cmd.colorscheme("catppuccin-mocha")
+    -- vim.cmd.colorscheme("gruvbox")
   end,
 }
