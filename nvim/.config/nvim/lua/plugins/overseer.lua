@@ -49,6 +49,8 @@ return {
         "user.cmake-build",
         "user.cmake-configure",
         "user.cmake-rm-build",
+        "user.cmake-run",
+        "user.cmake-build-run",
       },
     })
   end,
