@@ -24,7 +24,7 @@ return {
         "-B=build",
         -- "-B=" .. tostring(params.build_dir),
         -- '-G=Unix Makefiles',
-        "-DCMAKE_BUILD_TYPE=" .. tostring(params.build_type),
+        "-DCMAKE_BUILD_TYPE=" .. params.build_type,
         "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
       },
       components = {
