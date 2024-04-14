@@ -1,7 +1,6 @@
 # set -x
 # setopt PRINT_EXIT_VALUE
 # zmodload zsh/zprof
-[ -s $HOME/.cargo/env ] && source "$HOME/.cargo/env"
 
 export TERM="xterm-256color"
 export VISUAL="nvim"

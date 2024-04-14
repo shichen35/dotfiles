@@ -34,3 +34,4 @@ export PATH=$PATH:$HOME/.cargo/bin
 # export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export TIMEFMT=$'=============\nCPU\t%P\nuser\t%*U\nsystem\t%*S\ntotal\t%*E'
+[ -s $HOME/.cargo/env ] && source "$HOME/.cargo/env"
