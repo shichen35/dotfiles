@@ -2,34 +2,35 @@
 return {
   {
     "folke/trouble.nvim",
+    branch = "dev",
     cmd = { "TroubleToggle", "Trouble" },
     opts = { use_diagnostic_signs = true },
     keys = {
       {
-        "<leader>xd",
-        "<cmd>TroubleToggle document_diagnostics<cr>",
-        desc = "Document Diagnostics (Trouble)",
+        "<leader>xx",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Diagnostics (Trouble)",
       },
       {
-        "<leader>xw",
-        "<cmd>TroubleToggle workspace_diagnostics<cr>",
-        desc = "Workspace Diagnostics (Trouble)",
+        "<leader>xX",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Buffer Diagnostics (Trouble)",
       },
       {
         "<leader>xl",
-        "<cmd>TroubleToggle loclist<cr>",
+        "<cmd>Trouble loclist toggle<cr>",
         desc = "Location List (Trouble)",
       },
       {
         "<leader>xq",
-        "<cmd>TroubleToggle quickfix<cr>",
+        "<cmd>Trouble qflist toggle<cr>",
         desc = "Quickfix List (Trouble)",
       },
       {
         "[q",
         function()
           if require("trouble").is_open() then
-            require("trouble").previous({ skip_groups = true, jump = true })
+            require("trouble").prev({ skip_groups = true, jump = true })
           else
             pcall(vim.cmd, "cprev")
           end
