@@ -1,6 +1,6 @@
 export DOTFILES=$HOME/.dotfiles
 export TERMINFO=$HOME/../usr/share/terminfo
-# export GOPATH=$HOME/go
+export PATH=$HOME/go/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 case ${OSTYPE} in
     darwin*)

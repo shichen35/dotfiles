@@ -109,10 +109,15 @@ fzf-history-widget() {
   zle reset-prompt
   return $ret
 }
+
 zle     -N            fzf-history-widget
 bindkey -M emacs '^P' fzf-history-widget
 bindkey -M vicmd '^P' fzf-history-widget
 bindkey -M viins '^P' fzf-history-widget
+
+zmodload zsh/complist
+bindkey -M menuselect '^P' up-line-or-history
+
 
 } always {
   eval $__fzf_key_bindings_options
