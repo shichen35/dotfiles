@@ -221,18 +221,18 @@ function vdiff () {
     fi
 }
 
-function colors() {
-    for i in {0..255};
-    do
-        printf "\x1b[38;5;${i}m${i} ";
-    done
-    printf "\n";
-}
+# function colors() {
+#     for i in {0..255};
+#     do
+#         printf "\x1b[38;5;${i}m${i} ";
+#     done
+#     printf "\n";
+# }
 
-function timezsh() {
-    shell=${1-$SHELL}
-    for i in $(seq 1 5); do time $shell -i -c exit; done
-}
+# function timezsh() {
+#     shell=${1-$SHELL}
+#     for i in $(seq 1 5); do time $shell -i -c exit; done
+# }
 
 # # fglog - git log browser with FZF
 function fglog() {
