@@ -154,6 +154,10 @@ func! CompileRun()
 		set splitbelow
 		:sp
 		:term node %:r.js
+	elseif &filetype == 'java'
+		set splitbelow
+		:sp
+		:term java %:r.java
 	endif
 endfunc
 ]])

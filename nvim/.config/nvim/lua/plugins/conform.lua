@@ -10,6 +10,7 @@ return {
       -- Conform will run multiple formatters sequentially
       python = { "isort", "black" },
       -- Use a sub-list to run only the first available formatter
+      java = { "google-java-format" },
       javascript = { "eslint_d", "prettier" },
       javascriptreact = { "eslint_d", "prettier" },
       typescript = { "eslint_d", "prettier" },
