@@ -10,6 +10,7 @@ export ZSH=$HOME/.oh-my-zsh
 case ${OSTYPE} in
     darwin*)
         source $DOTFILES/zsh-files/mac.zsh
+	eval $(/opt/homebrew/bin/brew shellenv)
         ;;
     linux*)
         # export PATH=$PATH:/usr/local/go/bin
