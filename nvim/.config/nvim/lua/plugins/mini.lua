@@ -51,4 +51,5 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     config = true,
   },
+  { "echasnovski/mini.icons", version = false },
 }
