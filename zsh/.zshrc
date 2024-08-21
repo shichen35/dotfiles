@@ -11,8 +11,9 @@ export ZSH=$HOME/.oh-my-zsh
 case ${OSTYPE} in
     darwin*)
         source $DOTFILES/zsh-files/mac.zsh
-	eval $(/opt/homebrew/bin/brew shellenv)
+        eval $(/opt/homebrew/bin/brew shellenv)
         ;;
+
     linux*)
         # export PATH=$PATH:/usr/local/go/bin
         ;;
@@ -69,9 +70,6 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording en
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 
-# if this is interactive shell, then bind hstr to Ctrl-r (for Vi mode check doc)
-if [[ $- =~ .*i.* ]]; then bindkey -s "^[r" " nvim \"+normal G\" ~/.zsh_history^M"; fi
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -90,6 +88,16 @@ alias lg='lazygit'
 #alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias lvim="NVIM_APPNAME=lazyvim nvim"
 # (( $+commands[macchina] )) && alias neofetch="macchina"
+
+function rgfzf {
+  rg --color=always --line-number --no-heading --smart-case "${*:-}" \
+| fzf -d':' --ansi \
+  --preview "command bat -p --color=always {1} --highlight-line {2}" \
+  --preview-window ~8,+{2}-5 \
+  --bind "enter:execute($EDITOR +{2} {1})" \
+  --delimiter ":" \
+  --nth 1
+}
 
 function joshuto-func() {
     TDIR="/tmp/joshuto"
@@ -150,6 +158,10 @@ function reset-prompt-and-accept-and-down-history() {
 #   print -u2 Exit status: $?
 # }
 
+# bind hstr to Ctrl-r (for Vi mode check doc)
+bindkey -s "^[r" " $EDITOR \"+normal G\" ~/.zsh_history^M";
+
+# accept tweak
 zle -N reset-prompt-and-accept-line
 zle -N reset-prompt-and-accept-and-hold
 zle -N reset-prompt-and-accept-and-down-history
@@ -159,6 +171,18 @@ bindkey '^o' reset-prompt-and-accept-and-down-history
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=reset-prompt-and-accept-line
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=reset-prompt-and-accept-and-hold
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=reset-prompt-and-accept-and-down-history
+
+# Bind the Esc + h key combination to my custom command
+bindkey -r "^[h"
+# Define a function to run run-help on the prompt text
+my_run_help() {
+    [[ -z "$BUFFER" ]] && return
+    $EDITOR ~/.dotfiles/knowledge/cmds/"$BUFFER".md
+}
+
+# Bind the function to Alt+h (ESC followed by h)
+zle -N my_run_help
+bindkey '^[h' my_run_help
 
 # This function is executed before the command line is written to history. If it does return 1, the current command line is neither appended to the history file nor to the local history stack.
 function zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
