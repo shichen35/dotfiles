@@ -61,7 +61,7 @@ end
 function M.get_root()
   ---@type string?
   local path = vim.api.nvim_buf_get_name(0)
-  path = path ~= "" and vim.loop.fs_realpath(path) or nil
+  path = path ~= "" and vim.uv.fs_realpath(path) or nil
   ---@type string[]
   local roots = {}
   if path then
@@ -78,7 +78,7 @@ function M.get_root()
         or client.config.root_dir and { client.config.root_dir }
         or {}
       for _, p in ipairs(paths) do
-        local r = vim.loop.fs_realpath(p)
+        local r = vim.uv.fs_realpath(p)
         if path:find(r, 1, true) then
           roots[#roots + 1] = r
         end
@@ -91,13 +91,13 @@ function M.get_root()
   ---@type string?
   local root = roots[1]
   if not root then
-    path = path and vim.fs.dirname(path) or vim.loop.cwd()
+    path = path and vim.fs.dirname(path) or vim.uv.cwd()
     ---@type string?
     root = vim.fs.find(M.root_patterns, {
       path = path,
       upward = true,
     })[1]
-    root = root and vim.fs.dirname(root) or vim.loop.cwd()
+    root = root and vim.fs.dirname(root) or vim.uv.cwd()
   end
   ---@cast root string
   return root
@@ -118,14 +118,14 @@ function M.telescope(builtin, opts)
       cwd = M.get_root(),
     }, opts or {})
     if builtin == "files" then
-      if vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. "/.git") then
+      if vim.uv.fs_stat((opts.cwd or vim.uv.cwd()) .. "/.git") then
         opts.show_untracked = true
         builtin = "git_files"
       else
         builtin = "find_files"
       end
     end
-    if opts.cwd and opts.cwd ~= vim.loop.cwd() then
+    if opts.cwd and opts.cwd ~= vim.uv.cwd() then
       opts.attach_mappings = function(_, map)
         map("i", "<a-c>", function()
           local action_state = require("telescope.actions.state")
