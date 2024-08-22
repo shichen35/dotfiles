@@ -21,6 +21,8 @@ return {
   },
   config = function()
     require("nvim-tree").setup({
+      -- temporary fix for the floating window: https://github.com/nvim-tree/nvim-tree.lua/issues/2749
+      hijack_netrw = false,
       sync_root_with_cwd = true,
       view = {
         -- width = 35,
@@ -73,6 +75,7 @@ return {
           },
         },
       },
+
       renderer = {
         highlight_opened_files = "name",
         icons = {
