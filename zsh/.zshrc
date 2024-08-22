@@ -177,12 +177,19 @@ bindkey -r "^[h"
 # Define a function to run run-help on the prompt text
 my_run_help() {
     [[ -z "$BUFFER" ]] && return
-    $EDITOR ~/.dotfiles/knowledge/cmds/"$BUFFER".md
+    $EDITOR ~/.dotfiles/knowledge/cmd/"$BUFFER".md
 }
 
 # Bind the function to Alt+h (ESC followed by h)
 zle -N my_run_help
 bindkey '^[h' my_run_help
+
+function open_knowledge() {
+  $EDITOR '+cd $DOTFILES/knowledge/' '+Telescope live_grep'
+}
+
+zle -N open_knowledge
+bindkey '^[k' open_knowledge
 
 # This function is executed before the command line is written to history. If it does return 1, the current command line is neither appended to the history file nor to the local history stack.
 function zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
