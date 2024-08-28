@@ -172,23 +172,56 @@ ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=reset-prompt-and-accept-line
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=reset-prompt-and-accept-and-hold
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=reset-prompt-and-accept-and-down-history
 
-# Bind the Esc + h key combination to my custom command
-bindkey -r "^[h"
-# Define a function to run run-help on the prompt text
-my_run_help() {
+# Define a function to print my help on the prompt text
+function print_my_help() {
+    zle -M ""
+    zle -R
     [[ -z "$BUFFER" ]] && return
-    $EDITOR ~/.dotfiles/knowledge/cmd/"$BUFFER".md
+
+    # Check if the glow command exists
+    if ! command -v glow &> /dev/null; then
+        zle -M "Error: 'glow' command not found. Please install it to view the help documentation."
+        return
+    fi
+
+    # Check if the help file exists, print error message if not
+    if [[ ! -f ~/.dotfiles/knowledge/cmd/"$BUFFER".md ]]; then
+        zle -M "Error: Help file for '$BUFFER' not found."
+        return
+    fi
+
+    # Display the help file using glow
+    command glow ~/.dotfiles/knowledge/cmd/"$BUFFER".md
+    zle reset-prompt
 }
 
-# Bind the function to Alt+h (ESC followed by h)
-zle -N my_run_help
-bindkey '^[h' my_run_help
+# Bind the Esc + h key combination to my custom command
+zle -N print_my_help
+bindkey -r "^[h"
+bindkey '^[h' print_my_help
+
+# Define a function to edit my help on the prompt text
+function edit_my_help() {
+    zle -M ""
+    zle -R
+    [[ -z "$BUFFER" ]] && return
+    command $EDITOR ~/.dotfiles/knowledge/cmd/"$BUFFER".md
+    zle reset-prompt
+}
+
+# Bind the Esc + h key combination to my custom command
+zle -N edit_my_help
+bindkey -r "^[o"
+bindkey '^[o' edit_my_help
 
 function open_knowledge() {
-  $EDITOR '+cd $DOTFILES/knowledge/' '+Telescope live_grep'
+    zle -M ""
+    zle -R
+    $EDITOR '+cd $DOTFILES/knowledge/' '+Telescope live_grep'
 }
 
 zle -N open_knowledge
+bindkey -r "^[k"
 bindkey '^[k' open_knowledge
 
 # This function is executed before the command line is written to history. If it does return 1, the current command line is neither appended to the history file nor to the local history stack.
