@@ -8,16 +8,11 @@ return {
     build = ":TSUpdate",
     dependencies = {
       {
-        "JoosepAlviste/nvim-ts-context-commentstring",
-        event = "VeryLazy",
-      },
-      {
         "nvim-tree/nvim-web-devicons",
         event = "VeryLazy",
       },
     },
     config = function()
-      local treesitter = require("nvim-treesitter")
       local configs = require("nvim-treesitter.configs")
 
       configs.setup({
@@ -53,15 +48,6 @@ return {
           enable = true,
         },
         indent = { enable = true, disable = { "python", "css" } },
-
-        -- context_commentstring = {
-        --   enable = true,
-        --   enable_autocmd = false,
-        -- },
-      })
-
-      require("ts_context_commentstring").setup({
-        enable_autocmd = false,
       })
     end,
   },
