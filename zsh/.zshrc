@@ -12,6 +12,7 @@ case ${OSTYPE} in
     darwin*)
         source $DOTFILES/zsh-files/mac.zsh
         eval $(/opt/homebrew/bin/brew shellenv)
+        export PATH=$PATH:$HOME/go/bin
         ;;
 
     linux*)
