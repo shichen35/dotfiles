@@ -3,6 +3,7 @@ return {
   event = { "BufReadPost", "BufNewFile" },
   opts = {
     formatters_by_ft = {
+      go = { "goimports", "gofmt" },
       c = { "clang_format" },
       cpp = { "clang_format" },
       cmake = { "cmake_format" },
