@@ -58,7 +58,7 @@ return {
     },
     {
       "gR",
-      "<cmd>TroubleToggle lsp_references<cr>",
+      "<cmd>Trouble lsp_references<cr>",
       desc = "References List (Trouble)",
     },
   },
