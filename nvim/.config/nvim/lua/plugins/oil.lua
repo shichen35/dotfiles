@@ -2,7 +2,7 @@ return {
   "stevearc/oil.nvim",
   keys = {
     {
-      "<leader>e",
+      "<leader>E",
       function()
         require("oil").toggle_float()
       end,
