@@ -21,15 +21,21 @@ M.keys = {
     "<cmd>Telescope buffers show_all_buffers=true<cr>",
     desc = "Switch Buffer",
   },
-  { "<leader>/", Util.telescope("live_grep"), desc = "Grep (root dir)" },
+  {
+    "<leader>/",
+    Util.telescope("live_grep"),
+    desc = "Grep (root dir)",
+  },
   {
     "<leader>:",
     "<cmd>Telescope command_history<cr>",
     desc = "Command History",
   },
-  -- { "<leader><space>", Util.telescope("files"), desc = "Find Files (root dir)" },
-  -- find
-  { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+  {
+    "<leader><space>",
+    Util.telescope("files"),
+    desc = "Find Files (root dir)",
+  },
   {
     "<leader>ff",
     Util.telescope("files", { cwd = false }),
@@ -52,10 +58,22 @@ M.keys = {
     desc = "Grep (file dir)",
   },
   -- git
-  { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
-  { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
+  {
+    "<leader>gc",
+    "<cmd>Telescope git_commits<CR>",
+    desc = "commits",
+  },
+  {
+    "<leader>gs",
+    "<cmd>Telescope git_status<CR>",
+    desc = "status",
+  },
   -- search
-  { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
+  {
+    "<leader>sa",
+    "<cmd>Telescope autocommands<cr>",
+    desc = "Auto Commands",
+  },
   {
     "<leader>sb",
     "<cmd>Telescope current_buffer_fuzzy_find<cr>",
@@ -66,7 +84,11 @@ M.keys = {
     "<cmd>Telescope command_history<cr>",
     desc = "Command History",
   },
-  { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
+  {
+    "<leader>sC",
+    "<cmd>Telescope commands<cr>",
+    desc = "Commands",
+  },
   {
     "<leader>sd",
     "<cmd>Telescope diagnostics bufnr=0<cr>",
@@ -77,7 +99,11 @@ M.keys = {
     "<cmd>Telescope diagnostics<cr>",
     desc = "Workspace diagnostics",
   },
-  { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
+  {
+    "<leader>sh",
+    "<cmd>Telescope help_tags<cr>",
+    desc = "Help Pages",
+  },
   {
     "<leader>sH",
     "<cmd>Telescope highlights<cr>",
