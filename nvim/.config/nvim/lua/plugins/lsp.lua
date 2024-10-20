@@ -13,6 +13,10 @@ function M.config()
   -- capabilities.offsetEncoding = { "utf-16" }
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+  }
 
   -- Show diagnostic popup on cursor hover
   -- autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
