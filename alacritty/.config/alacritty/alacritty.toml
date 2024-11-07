@@ -3,8 +3,8 @@
 size = 14.0
 
 [font.normal]
-# family = "Hack Nerd Font Mono"
-family = "MesloLGS Nerd Font Mono"
+family = "Hack Nerd Font Mono"
+# family = "MesloLGS Nerd Font Mono"
 style = "Regular"
 
 [[keyboard.bindings]]

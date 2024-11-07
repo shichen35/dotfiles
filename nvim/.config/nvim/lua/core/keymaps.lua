@@ -118,6 +118,12 @@ nmap <silent><Left> :echoe "Use h"<CR>
 nmap <silent><Right> :echoe "Use l"<CR>
 nmap <silent><Up> :echoe "Use k"<CR>
 
+" Remove arrow keys in Insert Mode
+imap <silent><Down> <nop>
+imap <silent><Left> <nop>
+imap <silent><Right> <nop>
+imap <silent><Up> <nop>
+
 nnoremap <leader>r :call CompileRun()<CR>
 
 func! CompileRun()
