@@ -40,7 +40,7 @@ ZSH_AUTOSUGGEST_USE_ASYNC="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-syntax-highlighting zsh-autosuggestions) # zsh-autocomplete git command-not-found adb podman rust fd ripgrep docker docker-compose zsh-completions zsh-autocomplete
+plugins=(zsh-syntax-highlighting zsh-autosuggestions zsh-vi-mode) # zsh-autocomplete git command-not-found adb podman rust fd ripgrep docker docker-compose zsh-completions zsh-autocomplete
 DISABLE_AUTO_UPDATE=true
 # fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 [ -s $ZSH/oh-my-zsh.sh ] && source $ZSH/oh-my-zsh.sh
@@ -352,8 +352,8 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -n 10'"
 (( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-# export SDKMAN_DIR="$HOME/.sdkman"
-# [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 if (( $+commands[atuin] )) then
     eval "$(atuin init zsh)"
 fi
