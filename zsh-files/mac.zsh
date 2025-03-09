@@ -1,5 +1,4 @@
-ZSH_THEME="gentoo"
-# ZSH_THEME="gnzh"
+# ZSH_THEME="apple"
 # source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 
 # macOS specific configuration

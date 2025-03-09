@@ -14,7 +14,6 @@ case ${OSTYPE} in
         eval $(/opt/homebrew/bin/brew shellenv)
         export PATH=$PATH:$HOME/go/bin
         ;;
-
     linux*)
         # export PATH=$PATH:/usr/local/go/bin
         ;;
@@ -25,7 +24,7 @@ esac
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-[ ! -v ZSH_THEME ] && ZSH_THEME="gentoo"
+[ ! -v ZSH_THEME ] && ZSH_THEME="agnoster"
 
 DISABLE_MAGIC_FUNCTIONS="true"
 DISABLE_AUTO_TITLE="true"
@@ -134,8 +133,6 @@ function reset-prompt-and-accept-line() {
     RPROMPT='%(?..%B(%?%)%b)'
 }
 
-# setopt PRINT_EXIT_VALUE
-
 function reset-prompt() {
     if [ -n "${BUFFER##*( )}" ]; then
         OLD_PROMPT="$PROMPT"
@@ -162,16 +159,34 @@ function reset-prompt-and-accept-and-down-history() {
 # bind hstr to Ctrl-r (for Vi mode check doc)
 bindkey -s "^[r" " $EDITOR \"+normal G\" ~/.zsh_history^M";
 
-# accept tweak
+# Register the widgets for transient prompt
 zle -N reset-prompt-and-accept-line
 zle -N reset-prompt-and-accept-and-hold
 zle -N reset-prompt-and-accept-and-down-history
-bindkey '^M' reset-prompt-and-accept-line
-bindkey '^[a' reset-prompt-and-accept-and-hold
-bindkey '^o' reset-prompt-and-accept-and-down-history
+
+# Add to autosuggest clear widgets
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=reset-prompt-and-accept-line
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=reset-prompt-and-accept-and-hold
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=reset-prompt-and-accept-and-down-history
+
+# Define a function to be called after zsh-vi-mode initializes
+function zvm_after_init() {
+  # Bind keys in both vi insert and normal modes for transient prompt
+  bindkey -M viins '^M' reset-prompt-and-accept-line
+  bindkey -M vicmd '^M' reset-prompt-and-accept-line
+  bindkey -M viins '^[a' reset-prompt-and-accept-and-hold
+  bindkey -M vicmd '^[a' reset-prompt-and-accept-and-hold
+  bindkey -M viins '^o' reset-prompt-and-accept-and-down-history
+  bindkey -M vicmd '^o' reset-prompt-and-accept-and-down-history
+  
+  # Fix Ctrl+R for atuin when zsh-vi-mode is enabled
+  bindkey '^r' atuin-search
+}
+
+# Set up initial bindings (these will work before zsh-vi-mode loads)
+bindkey '^M' reset-prompt-and-accept-line
+bindkey '^[a' reset-prompt-and-accept-and-hold
+bindkey '^o' reset-prompt-and-accept-and-down-history
 
 # Define a function to print my help on the prompt text
 function print_my_help() {
@@ -338,7 +353,19 @@ export FZF_DEFAULT_OPTS="--color='$FZF_COLORS' \
 --prompt '∷ ' \
 --pointer ▶ \
 --marker ⇒"
-export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -n 10'"
+
+export FZF_CTRL_T_OPTS="--preview \"if [[ \$(file --mime {}) =~ text ]]; then bat --style=plain --paging=never --color=always {}; elif [[ -d {} ]]; then echo Directory contents:; find {} -mindepth 1 -maxdepth 1 -not -name \\\".*\\\" -type d | xargs -I+ bash -c 'echo \\\"$(basename +)/\\\"' | sort && find {} -mindepth 1 -maxdepth 1 -not -name \\\".*\\\" -type f | xargs -I+ bash -c 'echo \\\"$(basename +)\\\"' | sort; else echo Not a text file; fi\""
+export FZF_ALT_C_OPTS="--preview \"find {} -mindepth 1 -maxdepth 1 -not -name \\\".*\\\" -type d | xargs -I+ bash -c 'echo \\\"$(basename +)/\\\"' | sort && find {} -mindepth 1 -maxdepth 1 -not -name \\\".*\\\" -type f | xargs -I+ bash -c 'echo \\\"$(basename +)\\\"' | sort\""
+
+if (( $+commands[fzf] )); then
+    source $DOTFILES/zsh-files/key-bindings-fzf.zsh
+fi
+
+# if (($+commands[fzf] && $+commands[rg])) then
+#     export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+#     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+#     source $DOTFILES/zsh-files/key-bindings-fzf.zsh
+# fi
 
 # Skim keybindings
 # (($+commands[sk] && $+commands[rg])) && source $DOTFILES/zsh-files/key-bindings-skim.zsh
@@ -358,11 +385,6 @@ if (( $+commands[atuin] )) then
     eval "$(atuin init zsh)"
 fi
 
-if (($+commands[fzf] && $+commands[rg])) then
-    export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
-    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-    source $DOTFILES/zsh-files/key-bindings-fzf.zsh
-fi
 
 if [ -f $HOME/.bun/bin/bun ]; then
     # bun completions
