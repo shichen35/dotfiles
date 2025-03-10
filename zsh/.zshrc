@@ -15,7 +15,7 @@ case ${OSTYPE} in
         export PATH=$PATH:$HOME/go/bin
         ;;
     linux*)
-        # export PATH=$PATH:/usr/local/go/bin
+        export PATH=$PATH:/usr/local/go/bin
         ;;
     *) ;;
 esac
