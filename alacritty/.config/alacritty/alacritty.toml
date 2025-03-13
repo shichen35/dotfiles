@@ -3,7 +3,8 @@
 size = 14.0
 
 [font.normal]
-family = "Hack Nerd Font Mono"
+family = "UbuntuMono Nerd Font Mono"
+# family = "Hack Nerd Font Mono"
 # family = "MesloLGS Nerd Font Mono"
 style = "Regular"
 
@@ -206,6 +207,11 @@ mods = "Alt|Shift"
 chars = "\u001BN"
 key = "N"
 mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+action = "CreateNewWindow"
+key = "N"
+mods = "Control|Shift"
 
 [[keyboard.bindings]]
 chars = "\u001BO"
