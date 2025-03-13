@@ -5,11 +5,12 @@ cargo install cargo-update \
     fd-find \
     ripgrep \
     eza \
-    joshuto \
     dua-cli \
+    yazi-fm \
+    yazi-cli \
     onefetch \
     macchina \
     zoxide \
     tokei
 
-# brew install tealdeer fd ripgrep joshuto macchina zoxide tokei dua-cli atuin
+# brew install tealdeer fd ripgrep yazi macchina zoxide tokei dua-cli atuin

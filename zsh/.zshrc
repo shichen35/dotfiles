@@ -49,7 +49,7 @@ DISABLE_AUTO_UPDATE=true
 
 # User configuration
 # (( $+commands[figlet] )) && (( $+commands[lolcat] )) && (( $+commands[fortune] )) && (figlet -f slant 'Rock & Code' && fortune)|lolcat;
-(( $+commands[lolcat] )) && (( $+commands[fortune] )) && fortune|lolcat;
+(( $+commands[lolcat] )) && (( $+commands[fortune] )) && fortune tang300|awk '{gsub(/\x1B\[[0-9;]*[mGK]/, ""); print}'|lolcat;
 
 HISTFILE=~/.zsh_history
 SAVEHIST=10000
@@ -83,7 +83,6 @@ if (( $+commands[bat] )); then
     export MANPAGER="sh -c 'col -bx | bat --theme=gruvbox-dark -l man -p'"
 fi
 # (( $+commands[exa] )) && alias ls='exa'
-alias jo='joshuto-func'
 alias lg='lazygit'
 #alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias lvim="NVIM_APPNAME=lazyvim nvim"
@@ -99,32 +98,13 @@ function rgfzf {
   --nth 1
 }
 
-function joshuto-func() {
-    TDIR="/tmp/joshuto"
-    if [[ ! -d $TDIR ]]; then
-        mkdir $TDIR
-    fi
-    ID="$$"
-    OUTPUT_FILE="$TDIR/joshuto-cwd-$ID"
-    env joshuto --output-file "$OUTPUT_FILE" $@
-    exit_code=$?
-
-    case "$exit_code" in
-            # regular exit
-        0)
-            ;;
-            # output contains current directory
-        101)
-            JOSHUTO_CWD=$(cat "$OUTPUT_FILE")
-            cd "$JOSHUTO_CWD"
-            ;;
-            # output selected files
-        102)
-            ;;
-        *)
-            echo "Exit code: $exit_code"
-            ;;
-    esac
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
 }
 
 function reset-prompt-and-accept-line() {
@@ -178,7 +158,7 @@ function zvm_after_init() {
   bindkey -M vicmd '^[a' reset-prompt-and-accept-and-hold
   bindkey -M viins '^o' reset-prompt-and-accept-and-down-history
   bindkey -M vicmd '^o' reset-prompt-and-accept-and-down-history
-  
+
   # Fix Ctrl+R for atuin when zsh-vi-mode is enabled
   bindkey '^r' atuin-search
 }
@@ -381,6 +361,7 @@ fi
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+
 if (( $+commands[atuin] )) then
     eval "$(atuin init zsh)"
 fi

@@ -16,7 +16,7 @@
 - ClementTsang/bottom   - Yet another cross-platform graphical process/system monitor.
 - imsnif/bandwhich      - Terminal bandwidth utilization tool.
 - ellie/atuin           - Magical shell history.
-- kamiyaa/joshuto       - Ranger-like terminal file manager written in Rust.
+- sxyazi/yazi           - Blazing fast terminal file manager written in Rust, based on async I/O.
 - extrawurst/gitui      - Blazing fast terminal-ui for git written in Rust.
 - o2sh/onefetch         - Command-line Git information tool.
 - Macchina-CLI/macchina - A system information frontend with an emphasis on performance.
