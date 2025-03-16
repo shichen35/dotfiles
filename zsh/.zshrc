@@ -49,7 +49,7 @@ DISABLE_AUTO_UPDATE=true
 
 # User configuration
 # (( $+commands[figlet] )) && (( $+commands[lolcat] )) && (( $+commands[fortune] )) && (figlet -f slant 'Rock & Code' && fortune)|lolcat;
-(( $+commands[lolcat] )) && (( $+commands[fortune] )) && fortune tang300|awk '{gsub(/\x1B\[[0-9;]*[mGK]/, ""); print}'|lolcat;
+(( $+commands[lolcat] )) && (( $+commands[fortune] )) && fortune tang300 song100;
 
 HISTFILE=~/.zsh_history
 SAVEHIST=10000
@@ -87,6 +87,10 @@ alias lg='lazygit'
 #alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias lvim="NVIM_APPNAME=lazyvim nvim"
 # (( $+commands[macchina] )) && alias neofetch="macchina"
+alias la='ls -lah'
+
+# finds all files recursively and sorts by last modification, ignore hidden files
+alias lastmod='fd --no-ignore -t f -0|xargs -0 ls -lrt --color=auto|tail -n 10'
 
 function rgfzf {
   rg --color=always --line-number --no-heading --smart-case "${*:-}" \
