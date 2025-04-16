@@ -9,8 +9,7 @@ cargo install cargo-update \
     yazi-fm \
     yazi-cli \
     onefetch \
-    macchina \
     zoxide \
     tokei
 
-# brew install tealdeer fd ripgrep yazi macchina zoxide tokei dua-cli atuin
+# brew install tealdeer fd ripgrep yazi zoxide tokei dua-cli atuin fastfetch

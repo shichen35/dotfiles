@@ -16,6 +16,7 @@ case ${OSTYPE} in
         ;;
     linux*)
         export PATH=$PATH:/usr/local/go/bin
+        eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
         ;;
     *) ;;
 esac
@@ -86,7 +87,6 @@ fi
 alias lg='lazygit'
 #alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias lvim="NVIM_APPNAME=lazyvim nvim"
-# (( $+commands[macchina] )) && alias neofetch="macchina"
 alias la='ls -lah'
 
 # finds all files recursively and sorts by last modification, ignore hidden files
