@@ -11,12 +11,12 @@ export ZSH=$HOME/.oh-my-zsh
 case ${OSTYPE} in
     darwin*)
         source $DOTFILES/zsh-files/mac.zsh
-        eval $(/opt/homebrew/bin/brew shellenv)
+        [[ -d "/opt/homebrew" ]] && eval $(/opt/homebrew/bin/brew shellenv)
         export PATH=$PATH:$HOME/go/bin
         ;;
     linux*)
         export PATH=$PATH:/usr/local/go/bin
-        eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+        [[ -d "/home/linuxbrew" ]] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
         ;;
     *) ;;
 esac
@@ -35,12 +35,14 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
 ZSH_AUTOSUGGEST_USE_ASYNC="true"
 
+zstyle ':omz:plugins:nvm' lazy yes
+
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-syntax-highlighting zsh-autosuggestions) # zsh-vi-mode zsh-autocomplete git command-not-found adb podman rust fd ripgrep docker docker-compose zsh-completions zsh-autocomplete
+plugins=(nvm zsh-syntax-highlighting zsh-autosuggestions) # zsh-vi-mode zsh-autocomplete git command-not-found adb podman rust fd ripgrep docker docker-compose zsh-completions zsh-autocomplete
 DISABLE_AUTO_UPDATE=true
 # fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 [ -s $ZSH/oh-my-zsh.sh ] && source $ZSH/oh-my-zsh.sh
@@ -50,7 +52,7 @@ DISABLE_AUTO_UPDATE=true
 
 # User configuration
 # (( $+commands[figlet] )) && (( $+commands[lolcat] )) && (( $+commands[fortune] )) && (figlet -f slant 'Rock & Code' && fortune)|lolcat;
-(( $+commands[lolcat] )) && (( $+commands[fortune] )) && fortune tang300 song100;
+# (( $+commands[lolcat] )) && (( $+commands[fortune] )) && fortune tang300 song100;
 
 HISTFILE=~/.zsh_history
 SAVEHIST=10000
