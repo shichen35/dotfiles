@@ -6,6 +6,7 @@ return {
       go = { "goimports", "gofmt" },
       c = { "clang_format" },
       cpp = { "clang_format" },
+      rust = { "rustfmt" },
       cmake = { "cmake_format" },
       lua = { "stylua" },
       -- Conform will run multiple formatters sequentially
