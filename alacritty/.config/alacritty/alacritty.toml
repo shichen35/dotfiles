@@ -3,9 +3,8 @@
 size = 14.0
 
 [font.normal]
-family = "UbuntuMono Nerd Font Mono"
 # family = "Hack Nerd Font Mono"
-# family = "MesloLGS Nerd Font Mono"
+family = "Jetbrains Mono Nerd Font Mono"
 style = "Regular"
 
 [[keyboard.bindings]]
@@ -412,6 +411,7 @@ mods = "Alt|Shift"
 decorations = "full"
 dynamic_padding = false
 startup_mode = "Windowed"
+decorations_theme_variant = "Dark"
 
 [window.dimensions]
 columns = 80

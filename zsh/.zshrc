@@ -25,7 +25,7 @@ esac
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-[ ! -v ZSH_THEME ] && ZSH_THEME="agnoster"
+[ ! -v ZSH_THEME ] && ZSH_THEME="gentoo"
 
 DISABLE_MAGIC_FUNCTIONS="true"
 DISABLE_AUTO_TITLE="true"
