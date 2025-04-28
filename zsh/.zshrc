@@ -94,6 +94,21 @@ alias la='ls -lah'
 # finds all files recursively and sorts by last modification, ignore hidden files
 alias lastmod='fd --no-ignore -t f -0|xargs -0 ls -lrt --color=auto|tail -n 10'
 
+# git
+# Git
+alias ga="git add"
+alias gb="git branch"
+alias gc="git commit"
+alias gca="git commit --amend"
+alias gd="git diff"
+alias gds="git diff --staged"
+alias glg="git log --all --oneline --graph --decorate"
+alias gpl="git pull --prune"
+alias gps="git push --no-verify"
+alias gm="git merge"
+alias gs="git status -sb"
+alias gsw="git switch"
+
 function rgfzf {
   rg --color=always --line-number --no-heading --smart-case "${*:-}" \
 | fzf -d':' --ansi \
