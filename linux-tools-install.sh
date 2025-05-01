@@ -8,6 +8,7 @@ cargo install cargo-update \
     dua-cli \
     yazi-fm \
     yazi-cli \
+    zellij \
     onefetch \
     zoxide \
     tokei
