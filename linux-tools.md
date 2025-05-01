@@ -19,6 +19,7 @@
 - sxyazi/yazi             - Blazing fast terminal file manager written in Rust, based on async I/O.
 - extrawurst/gitui        - Blazing fast terminal-ui for git written in Rust.
 - o2sh/onefetch           - Command-line Git information tool.
+- zellij-org/zellij       - A terminal workspace with batteries included.
 
 ## golang
 

@@ -1,3 +1,6 @@
 [submodule "knowledge"]
 	path = knowledge
 	url = git@github.com:shichen35/knowledge.git
+[submodule "kitty/.config/kitty/kitty-themes"]
+	path = kitty/.config/kitty/kitty-themes
+	url = git@github.com:kovidgoyal/kitty-themes.git

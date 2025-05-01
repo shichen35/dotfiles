@@ -94,10 +94,10 @@ alias la='ls -lah'
 # finds all files recursively and sorts by last modification, ignore hidden files
 alias lastmod='fd --no-ignore -t f -0|xargs -0 ls -lrt --color=auto|tail -n 10'
 
-# git
 # Git
 alias ga="git add"
 alias gb="git branch"
+alias gch="git checkout"
 alias gc="git commit"
 alias gca="git commit --amend"
 alias gd="git diff"
