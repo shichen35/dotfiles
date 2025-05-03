@@ -425,6 +425,4 @@ y = 0
 save_to_clipboard = true
 
 [general]
-import = [
-    "~/.config/alacritty/themes/themes/gruvbox_material_medium_dark.toml"
-]
+import = ["~/.config/alacritty/themes/themes/gruvbox_material_medium_dark.toml"]

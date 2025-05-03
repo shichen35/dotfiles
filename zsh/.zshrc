@@ -52,7 +52,7 @@ DISABLE_AUTO_UPDATE=true
 
 # User configuration
 # (( $+commands[figlet] )) && (( $+commands[lolcat] )) && (( $+commands[fortune] )) && (figlet -f slant 'Rock & Code' && fortune)|lolcat;
-# (( $+commands[lolcat] )) && (( $+commands[fortune] )) && fortune tang300 song100;
+(( $+commands[lolcat] )) && (( $+commands[fortune] )) && fortune tang300 song100;
 
 HISTFILE=~/.zsh_history
 SAVEHIST=10000
@@ -106,8 +106,9 @@ alias glg="git log --all --oneline --graph --decorate"
 alias gpl="git pull --prune"
 alias gps="git push --no-verify"
 alias gm="git merge"
-alias gs="git status -sb"
+alias gs="git status"
 alias gsw="git switch"
+alias grs="git restore --staged"
 
 function rgfzf {
   rg --color=always --line-number --no-heading --smart-case "${*:-}" \
