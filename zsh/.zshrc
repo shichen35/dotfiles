@@ -87,8 +87,8 @@ if (( $+commands[bat] )); then
 fi
 # (( $+commands[exa] )) && alias ls='exa'
 alias lg='lazygit'
-#alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias lvim="NVIM_APPNAME=lazyvim nvim"
+#alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias la='ls -lah'
 
 # finds all files recursively and sorts by last modification, ignore hidden files
