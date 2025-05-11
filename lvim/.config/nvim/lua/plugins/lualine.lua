@@ -23,6 +23,7 @@ return {
             hint = icons.diagnostics.Hint,
           },
         },
+        { LazyVim.lualine.pretty_path() },
       },
       lualine_x = {
         -- stylua: ignore
