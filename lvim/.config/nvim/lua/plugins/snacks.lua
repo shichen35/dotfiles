@@ -23,6 +23,7 @@ vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
 
 -- stylua: ignore
 local local_header = [[
+
            ▄ ▄                   
        ▄   ▄▄▄     ▄ ▄▄▄ ▄ ▄     
        █ ▄ █▄█ ▄▄▄ █ █▄█ █ █     
@@ -67,7 +68,7 @@ return {
         },
       },
       sections = {
-        { section = "header" },
+        { section = "header", padding = 1 },
         { section = "keys", gap = 1, padding = 1 },
         { section = "startup" },
       },
