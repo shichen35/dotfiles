@@ -3,6 +3,9 @@
 -- Add any additional keymaps here
 local setkey = vim.keymap.set
 
+-- yank into clipboard
+setkey("x", "<leader>y", '"+y', { noremap = true, desc = "Copy to system clipboard" })
+
 -- Moving lines up and down in visual mode
 setkey("x", "J", ":m '>+1<CR>gv=gv")
 setkey("x", "K", ":m '<-2<CR>gv=gv")
