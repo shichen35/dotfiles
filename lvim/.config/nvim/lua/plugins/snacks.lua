@@ -38,6 +38,7 @@ local local_header = [[
 return {
   "snacks.nvim",
   opts = {
+    scroll = { enabled = false },
     dashboard = {
       preset = {
         pick = function(cmd, opts)
