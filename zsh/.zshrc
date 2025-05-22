@@ -87,9 +87,10 @@ if (( $+commands[bat] )); then
 fi
 # (( $+commands[exa] )) && alias ls='exa'
 alias lg='lazygit'
-alias lvim="NVIM_APPNAME=lazyvim nvim"
+# alias lvim="NVIM_APPNAME=lazyvim nvim"
 #alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias la='ls -lah'
+((!$+commands[wezterm])) && alias wezterm='flatpak run org.wezfurlong.wezterm'
 
 # finds all files recursively and sorts by last modification, ignore hidden files
 alias lastmod='fd --no-ignore -t f -0|xargs -0 ls -lrt --color=auto|tail -n 10'
@@ -412,4 +413,4 @@ case ":$PATH:" in
     *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-
+#
