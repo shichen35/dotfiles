@@ -108,6 +108,7 @@ alias gpl="git pull --prune"
 alias gps="git push --no-verify"
 alias gm="git merge"
 alias gs="git status"
+alias gss="git status -sb"
 alias gsw="git switch"
 alias grs="git restore --staged"
 
