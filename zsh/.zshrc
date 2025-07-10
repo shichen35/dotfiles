@@ -83,7 +83,8 @@ alias cmds='history | awk '\''{print $2}'\'' | sort | uniq -c | sort -nr | head 
 if (( $+commands[bat] )); then
     alias bcat='bat --style=plain --theme=gruvbox-dark --paging=never --color=always'
     alias bat='bat --theme=gruvbox-dark --color=always --wrap=never'
-    export MANPAGER="sh -c 'col -bx | bat --theme=gruvbox-dark -l man -p'"
+    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+    export MANROFFOPT="-c"
 fi
 # (( $+commands[exa] )) && alias ls='exa'
 alias lg='lazygit'
@@ -387,7 +388,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 
 if (( $+commands[atuin] )) then
-    eval "$(atuin init zsh)"
+    eval "$(atuin init zsh --disable-up-arrow)"
 fi
 
 
