@@ -2,6 +2,11 @@
 # setopt PRINT_EXIT_VALUE
 # zmodload zsh/zprof
 
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+export DefaultIMModule=fcitx
+
 export TERM="xterm-256color"
 export VISUAL="nvim"
 export EDITOR="nvim"
@@ -15,7 +20,7 @@ case ${OSTYPE} in
         export PATH=$PATH:$HOME/go/bin
         ;;
     linux*)
-        export PATH=$PATH:/usr/local/go/bin
+        export PATH=$PATH:/usr/local/go/bin:/home/chenshi/.nvm/versions/node/v22.14.0/bin
         [[ -d "/home/linuxbrew" ]] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
         ;;
     *) ;;
@@ -25,6 +30,7 @@ esac
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# [ ! -v ZSH_THEME ] && ZSH_THEME="gentoo"
 [ ! -v ZSH_THEME ] && ZSH_THEME="gentoo"
 
 DISABLE_MAGIC_FUNCTIONS="true"
@@ -42,7 +48,7 @@ zstyle ':omz:plugins:nvm' lazy yes
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(nvm zsh-syntax-highlighting zsh-autosuggestions) # zsh-vi-mode zsh-autocomplete git command-not-found adb podman rust fd ripgrep docker docker-compose zsh-completions zsh-autocomplete
+plugins=(zsh-syntax-highlighting zsh-autosuggestions) # nvm zsh-vi-mode zsh-autocomplete git command-not-found adb podman rust fd ripgrep docker docker-compose zsh-completions zsh-autocomplete
 DISABLE_AUTO_UPDATE=true
 # fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 [ -s $ZSH/oh-my-zsh.sh ] && source $ZSH/oh-my-zsh.sh
@@ -52,11 +58,11 @@ DISABLE_AUTO_UPDATE=true
 
 # User configuration
 # (( $+commands[figlet] )) && (( $+commands[lolcat] )) && (( $+commands[fortune] )) && (figlet -f slant 'Rock & Code' && fortune)|lolcat;
-(( $+commands[lolcat] )) && (( $+commands[fortune] )) && fortune tang300 song100;
+# (( $+commands[lolcat] )) && (( $+commands[fortune] )) && fortune tang300 song100;
 
 HISTFILE=~/.zsh_history
-SAVEHIST=10000
-HISTSIZE=10000
+SAVEHIST=1000
+HISTSIZE=1000
 # HISTORY_IGNORE="(cd|cd ..*|ps|ls|la|l|ll|pwd|clear|reset|man *|history*|vim|vi|nvim)"
 
 setopt BANG_HIST                 # Treat the '!' character specially during expansion.
@@ -113,6 +119,9 @@ alias gss="git status -sb"
 alias gsw="git switch"
 alias grs="git restore --staged"
 
+function cursor {
+  (nohup ~/AppImages/cursor.appimage "$@" > /dev/null 2>&1 &)
+}
 function rgfzf {
   rg --color=always --line-number --no-heading --smart-case "${*:-}" \
 | fzf -d':' --ansi \
@@ -407,12 +416,38 @@ fi
 # export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
 # zprof|head
-
-# pnpm
-export PNPM_HOME="/home/deck/distro-arch/.local/share/pnpm"
-case ":$PATH:" in
-    *":$PNPM_HOME:"*) ;;
-    *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
 #
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin:$HOME/.local/platform-tools"
+export PATH=$HOME/homebrew/bin:$PATH
+# . "/home/chenshi/.deno/env"
+
+function condainit {
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/chenshi/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/chenshi/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/home/chenshi/miniforge3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/chenshi/miniforge3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'mamba shell init' !!
+export MAMBA_EXE='/home/chenshi/miniforge3/bin/mamba';
+export MAMBA_ROOT_PREFIX='/home/chenshi/miniforge3';
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<
+}
