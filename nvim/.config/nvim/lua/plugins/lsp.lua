@@ -12,7 +12,7 @@ function M.config()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   -- capabilities.offsetEncoding = { "utf-16" }
   capabilities.textDocument.completion.completionItem.snippetSupport = true
-  capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
+  capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
   capabilities.textDocument.foldingRange = {
     dynamicRegistration = false,
     lineFoldingOnly = true
@@ -49,13 +49,12 @@ function M.config()
     -- keymap(bufnr, "n", "[d", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", opts)
   end
 
-  local lspconfig = require("lspconfig")
   local on_attach = function(client, bufnr)
     if client.name == "ts_ls" then
       client.server_capabilities.documentFormattingProvider = false
     end
 
-    if client.name == "sumneko_lua" then
+    if client.name == "lua_ls" then
       client.server_capabilities.documentFormattingProvider = false
     end
 
@@ -63,19 +62,23 @@ function M.config()
   end
 
   for _, server in pairs(require("utils").lsps) do
-    Opts = {
+    local opts = {
       on_attach = on_attach,
       capabilities = capabilities,
     }
 
     server = vim.split(server, "@")[1]
+    if server == "sumneko_lua" then server = "lua_ls" end
+    if server == "tsserver" then server = "ts_ls" end
 
     local require_ok, conf_opts = pcall(require, "settings." .. server)
     if require_ok then
-      Opts = vim.tbl_deep_extend("force", conf_opts, Opts)
+      opts = vim.tbl_deep_extend("force", conf_opts, opts)
     end
 
-    lspconfig[server].setup(Opts)
+    -- Nvim 0.11+ API: define and enable config instead of lspconfig.setup
+    vim.lsp.config(server, opts)
+    vim.lsp.enable(server)
   end
 
   local signs = {

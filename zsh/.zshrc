@@ -119,9 +119,10 @@ alias gss="git status -sb"
 alias gsw="git switch"
 alias grs="git restore --staged"
 
-function cursor {
-  (nohup ~/AppImages/cursor.appimage "$@" > /dev/null 2>&1 &)
-}
+# function cursor {
+#   (nohup ~/AppImages/cursor.appimage "$@" > /dev/null 2>&1 &)
+# }
+
 function rgfzf {
   rg --color=always --line-number --no-heading --smart-case "${*:-}" \
 | fzf -d':' --ansi \
@@ -419,7 +420,7 @@ fi
 #
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin:$HOME/.local/platform-tools"
 export PATH=$HOME/homebrew/bin:$PATH
-# . "/home/chenshi/.deno/env"
+. "/home/chenshi/.deno/env"
 
 function condainit {
 # >>> conda initialize >>>
