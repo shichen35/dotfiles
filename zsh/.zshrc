@@ -390,16 +390,17 @@ fi
 #   export SKIM_CTRL_T_OPTS="--color=fg:243,fg+:255,current_match_bg:239,hl:3,hl+:2,matched_bg:-1"
 # fi
 
-# Zoxide
 (( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
+
+(( $+commands[atuin] )) && eval "$(atuin init zsh --disable-up-arrow)"
+
+# distrobox utils
+(( $+commands[distrobox-host-exec] )) && alias nautilus="distrobox-host-exec nautilus"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 
-if (( $+commands[atuin] )) then
-    eval "$(atuin init zsh --disable-up-arrow)"
-fi
 
 
 if [ -f $HOME/.bun/bin/bun ]; then
@@ -420,19 +421,19 @@ fi
 #
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin:$HOME/.local/platform-tools"
 export PATH=$HOME/homebrew/bin:$PATH
-. "/home/chenshi/.deno/env"
+. "$HOME/.deno/env"
 
 function condainit {
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/chenshi/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('$HOME/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/chenshi/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "/home/chenshi/miniforge3/etc/profile.d/conda.sh"
+    if [ -f "$HOME/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "$HOME/miniforge3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/chenshi/miniforge3/bin:$PATH"
+        export PATH="$HOME/miniforge3/bin:$PATH"
     fi
 fi
 unset __conda_setup
@@ -441,8 +442,8 @@ unset __conda_setup
 
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba shell init' !!
-export MAMBA_EXE='/home/chenshi/miniforge3/bin/mamba';
-export MAMBA_ROOT_PREFIX='/home/chenshi/miniforge3';
+export MAMBA_EXE='$HOME/miniforge3/bin/mamba';
+export MAMBA_ROOT_PREFIX='$HOME/miniforge3';
 __mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__mamba_setup"

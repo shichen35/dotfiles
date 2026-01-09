@@ -10,7 +10,6 @@ case ${OSTYPE} in
         fi
 
         export PATH="/usr/local/sbin:$PATH"
-        export PATH="$HOME/.local/bin:$PATH"
         # export DYLD_LIBRARY_PATH=/opt/homebrew/lib:$DYLD_LIBRARY_PATH
 
         # if type "${BREW_BIN}" &> /dev/null; then
