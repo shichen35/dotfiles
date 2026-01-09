@@ -395,7 +395,7 @@ fi
 (( $+commands[atuin] )) && eval "$(atuin init zsh --disable-up-arrow)"
 
 # distrobox utils
-(( $+commands[distrobox-host-exec] )) && alias nautilus="distrobox-host-exec nautilus"
+(( $+commands[distrobox-host-exec] )) && alias open="distrobox-host-exec xdg-open"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
