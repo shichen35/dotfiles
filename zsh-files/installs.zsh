@@ -16,9 +16,9 @@ fi
 if [ ! -d $HOME/.oh-my-zsh/custom/plugins/zsh-vi-mode ]; then
     git clone --depth=1 https://github.com/jeffreytse/zsh-vi-mode ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-vi-mode
 fi
-# if [ ! -d $HOME/.oh-my-zsh/custom/plugins/zsh-autocomplete ]; then
-#     git clone --depth=1 https://github.com/marlonrichert/zsh-autocomplete ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autocomplete
-# fi
+if [ ! -d $HOME/.oh-my-zsh/custom/plugins/zsh-autocomplete ]; then
+    git clone --depth=1 https://github.com/marlonrichert/zsh-autocomplete ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autocomplete
+fi
 
 # backup and copy .zshrc
 if [ -f $HOME/.zshrc.pre-oh-my-zsh ] && [ -f $HOME/.zshrc ]; then
