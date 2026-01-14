@@ -49,16 +49,17 @@ ZSH_AUTOSUGGEST_USE_ASYNC="true"
 # Lazy load NVM (Performance)
 zstyle ':omz:plugins:nvm' lazy yes
 
+# Add a delay for autocomplete
+zstyle ':autocomplete:*' delay 1
+
 # Plugins
 # Note: zsh-syntax-highlighting must be LAST.
 plugins=(
-  # zsh-vi-mode
-  zsh-autocomplete
-  zsh-completions
+  # zsh-autocomplete
+  # zsh-completions
+  zsh-vi-mode
+  fzf-tab
   zsh-autosuggestions
-  # docker 
-  # docker-compose
-  # podman
   zsh-syntax-highlighting
 )
 
@@ -69,8 +70,8 @@ plugins=(
 # 3. HISTORY CONFIGURATION
 # =============================================================================
 HISTFILE=~/.zsh_history
-SAVEHIST=5000  # Increased for modern usage
-HISTSIZE=5000
+SAVEHIST=1000
+HISTSIZE=1000
 # Don't save these commands to history
 HISTORY_IGNORE="(ls|cd|pwd|exit|clear|reset|bg|fg|history|cd ..*)"
 
@@ -113,6 +114,10 @@ if (( $+commands[bat] )); then
   export MANPAGER="sh -c 'col -bx | bat -l man -p'"
   export MANROFFOPT="-c"
 fi
+if (( $+commands[eza] )); then
+  alias el='eza -l --icons --git -a'
+  alias et='eza --tree --level=2 --icons'
+fi
 
 # FZF Configuration
 FZF_COLORS="bg+:-1,fg:gray,fg+:white,border:black,spinner:0,hl:yellow,header:blue,info:green,pointer:red,marker:red,prompt:gray,hl+:red"
@@ -136,6 +141,7 @@ fi
 (( $+commands[atuin] )) && eval "$(atuin init zsh --disable-up-arrow)"
 
 # Distrobox
+(( $+commands[xdg-open])) && alias open="xdg-open"
 (( $+commands[distrobox-host-exec] )) && alias open="distrobox-host-exec xdg-open"
 
 # =============================================================================
@@ -171,6 +177,13 @@ alias grs="git restore --staged"
 # =============================================================================
 # 6. FUNCTIONS
 # =============================================================================
+
+# Load completion only on the first kubectl
+# function kubectl() {
+#     unfunction "$0"
+#     source <(command kubectl completion zsh)
+#     $0 "$@"
+# }
 
 # Ripgrep + FZF
 function rgfzf {
@@ -330,6 +343,7 @@ function print_my_help() {
 }
 zle -N print_my_help
 bindkey '^[h' print_my_help
+bindkey -M viins '^[h' print_my_help
 
 # Edit Help Widget
 function edit_my_help() {
@@ -340,14 +354,17 @@ function edit_my_help() {
 }
 zle -N edit_my_help
 bindkey '^[o' edit_my_help
+bindkey -M viins '^[o' edit_my_help
 
 # Open Knowledge Widget
 function open_knowledge() {
     zle -M "" && zle -R
-    $EDITOR '+cd $DOTFILES/knowledge/' '+Telescope live_grep'
+    $EDITOR '+cd $DOTFILES/knowledge/' '+FzfLua live_grep'
 }
 zle -N open_knowledge
 bindkey '^[k' open_knowledge
+bindkey -M viins '^[k' open_knowledge
+
 
 # VI Mode Hooks
 function zvm_after_init() {
