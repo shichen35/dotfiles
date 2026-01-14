@@ -3,13 +3,9 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 export DefaultIMModule=fcitx
 
-export PATH=$HOME/x-tools/arm-kindlehf-linux-gnueabihf/bin:$PATH:$HOME/.nvm/versions/node/v22.14.0/bin
-
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
-
-
 
 if [ -f $HOME/.bun/bin/bun ]; then
     # bun completions
@@ -27,7 +23,7 @@ fi
 
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin:$HOME/.local/platform-tools"
 export PATH=$HOME/homebrew/bin:$PATH
-. "$HOME/.deno/env"
+[ -s "$HOME/.deno/env" ] && . "$HOME/.deno/env"
 
 function condainit {
 # >>> conda initialize >>>
@@ -44,7 +40,6 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
 
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba shell init' !!

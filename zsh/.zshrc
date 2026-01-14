@@ -2,7 +2,7 @@
 # 1. ENVIRONMENT & PATHS
 # =============================================================================
 # Note: Let the terminal set TERM. Only uncomment if you have specific issues.
-# export TERM="xterm-256color" 
+export TERM="xterm-256color" 
 
 export VISUAL="nvim"
 export EDITOR="nvim"
@@ -52,13 +52,13 @@ zstyle ':omz:plugins:nvm' lazy yes
 # Plugins
 # Note: zsh-syntax-highlighting must be LAST.
 plugins=(
-  zsh-vi-mode
+  # zsh-vi-mode
   zsh-autocomplete
   zsh-completions
   zsh-autosuggestions
-  docker 
-  docker-compose
-  podman
+  # docker 
+  # docker-compose
+  # podman
   zsh-syntax-highlighting
 )
 
@@ -369,4 +369,4 @@ bindkey '^[a' reset-prompt-and-accept-and-hold
 bindkey '^o' reset-prompt-and-accept-and-down-history
 
 # Work Config
-# source "$HOME/.dotfiles/zsh-files/work.zsh"
+source "$HOME/.dotfiles/zsh-files/work.zsh"
