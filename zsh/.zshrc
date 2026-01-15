@@ -110,7 +110,6 @@ fi
 # Bat / Exa / Manpager config
 if (( $+commands[bat] )); then
   alias bcat='bat --style=plain --theme=gruvbox-dark --paging=never --color=always'
-  alias bat='bat --theme=gruvbox-dark --color=always --wrap=never'
   export MANPAGER="sh -c 'col -bx | bat -l man -p'"
   export MANROFFOPT="-c"
 fi
@@ -324,6 +323,34 @@ ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(
     reset-prompt-and-accept-and-hold
     reset-prompt-and-accept-and-down-history
 )
+
+# Help tldr+fzf
+function tf() {
+  tldr --list | fzf --preview "tldr {} --color=always" --preview-window=right:70% | xargs tldr
+}
+
+# Help tldr with bat preview
+function run_tldr_bat_view() {
+    local cmd="${BUFFER%% *}"
+    [[ -z "$cmd" ]] && return
+    
+    local real_cmd="${aliases[$cmd]:-$cmd}"
+    real_cmd="${real_cmd%% *}"
+
+    if ! tldr "$real_cmd" >/dev/null 2>&1; then
+        zle -M "tldr: No entry found for '$real_cmd'"
+        return
+    fi
+
+    zle -I
+
+    tldr "$real_cmd" --color always --pager
+
+    zle redisplay
+}
+zle -N run_tldr_bat_view
+bindkey '^[t' run_tldr_bat_view
+bindkey -M viins '^[t' run_tldr_bat_view
 
 # Custom Help Widget
 function print_my_help() {
