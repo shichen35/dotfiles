@@ -2,7 +2,7 @@
 # 1. ENVIRONMENT & PATHS
 # =============================================================================
 # Note: Let the terminal set TERM. Only uncomment if you have specific issues.
-export TERM="xterm-256color" 
+export TERM="xterm-256color"
 
 export VISUAL="nvim"
 export EDITOR="nvim"
@@ -104,7 +104,7 @@ zshaddhistory() {
 
 # Fun startup
 if (( $+commands[fortune] )); then
-    fortune tang300 song100
+    fortune $DOTFILES/art/tang300 $DOTFILES/art/song100
 fi
 
 # Bat / Exa / Manpager config
@@ -333,7 +333,7 @@ function tf() {
 function run_tldr_bat_view() {
     local cmd="${BUFFER%% *}"
     [[ -z "$cmd" ]] && return
-    
+
     local real_cmd="${aliases[$cmd]:-$cmd}"
     real_cmd="${real_cmd%% *}"
 
