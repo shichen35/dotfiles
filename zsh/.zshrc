@@ -7,8 +7,9 @@ export TERM="xterm-256color"
 export VISUAL="nvim"
 export EDITOR="nvim"
 export LANG="en_US.UTF-8"
+export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S'
 
-# Path to your oh-my-zsh installation.
+export DOTFILES=$HOME/.dotfiles
 export ZSH="$HOME/.oh-my-zsh"
 
 # OS Specific Configuration (Homebrew & Go)
@@ -44,13 +45,10 @@ DISABLE_AUTO_UPDATE="true"
 # Autosuggest Settings
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
-ZSH_AUTOSUGGEST_USE_ASYNC="true"
-
-# Lazy load NVM (Performance)
-zstyle ':omz:plugins:nvm' lazy yes
+# ZSH_AUTOSUGGEST_USE_ASYNC="true"
 
 # Add a delay for autocomplete
-zstyle ':autocomplete:*' delay 1
+# zstyle ':autocomplete:*' delay 1
 
 # Plugins
 # Note: zsh-syntax-highlighting must be LAST.
@@ -121,7 +119,7 @@ fi
 # FZF Configuration
 FZF_COLORS="bg+:-1,fg:gray,fg+:white,border:black,spinner:0,hl:yellow,header:blue,info:green,pointer:red,marker:red,prompt:gray,hl+:red"
 
-export FZF_DEFAULT_OPTS="--color='$FZF_COLORS' --prompt '∷ ' --pointer ▶ --marker ⇒"
+export FZF_DEFAULT_OPTS="--color=$FZF_COLORS --prompt '∷ ' --pointer ▶ --marker ⇒"
 
 # Helper variable for preview commands to reduce duplication
 _fzf_preview_cmd="if [[ \$(file --mime {}) =~ text ]]; then bat --style=plain --paging=never --color=always {}; elif [[ -d {} ]]; then echo Directory contents:; find {} -mindepth 1 -maxdepth 1 -not -name \".*\" -type d | xargs -I+ bash -c 'echo \"$(basename +)/\"' | sort && find {} -mindepth 1 -maxdepth 1 -not -name \".*\" -type f | xargs -I+ bash -c 'echo \"$(basename +)\"' | sort; else echo Not a text file; fi"
@@ -192,7 +190,7 @@ function rgfzf {
     --preview-window ~8,+{2}-5 \
     --bind "enter:execute($EDITOR +{2} {1})" \
     --delimiter ":" \
-    --nth 1
+    --nth 1,3..
 }
 
 # Yazi Wrapper (File Manager)
@@ -294,7 +292,7 @@ function reset-prompt-and-accept-line() {
 }
 
 function reset-prompt() {
-    if [ -n "${BUFFER##*( )}" ]; then
+    if [[ -n ${BUFFER//[[:space:]]/} ]]; then
         OLD_PROMPT="$PROMPT"
         PROMPT='%{%F{245}%}[%D{%H:%M:%S}]>%f '
         zle reset-prompt
