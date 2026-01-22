@@ -1,3 +1,8 @@
+# Windsurf: If running in Cascade Terminal, use bash
+if [[ "$WINDSURF_CASCADE_TERMINAL" == "1" ]]; then
+  exec bash
+fi
+
 # =============================================================================
 # 1. ENVIRONMENT & PATHS
 # =============================================================================
