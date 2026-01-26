@@ -143,8 +143,11 @@ fi
 (( $+commands[atuin] )) && eval "$(atuin init zsh --disable-up-arrow)"
 
 # Distrobox
-(( $+commands[xdg-open])) && alias open="xdg-open"
-(( $+commands[distrobox-host-exec] )) && alias open="distrobox-host-exec xdg-open"
+if [[ -n ${DISTROBOX_ENTER_PATH-} ]]; then
+    alias open="distrobox-host-exec xdg-open"
+else
+    alias open="xdg-open"
+fi
 
 # =============================================================================
 # 5. ALIASES
