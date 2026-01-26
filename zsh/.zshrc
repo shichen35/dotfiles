@@ -363,7 +363,7 @@ function print_my_help() {
         zle -M "Error: 'glow' not found."
         return
     fi
-    local help_file=~/.dotfiles/knowledge/cmd/"$BUFFER".md
+    local help_file=~/.dotfiles/knowledge/40\ Library/Reference/Linux\ Commands/"$BUFFER".md
     if [[ ! -f "$help_file" ]]; then
         zle -M "Error: Help file for '$BUFFER' not found."
         return
@@ -379,7 +379,8 @@ bindkey -M viins '^[h' print_my_help
 function edit_my_help() {
     zle -M "" && zle -R
     [[ -z "$BUFFER" ]] && return
-    command $EDITOR ~/.dotfiles/knowledge/cmd/"$BUFFER".md
+    command $EDITOR ~/.dotfiles/knowledge/40\ Library/Reference/Linux\ Commands/"$BUFFER".md
+    
     zle reset-prompt
 }
 zle -N edit_my_help
