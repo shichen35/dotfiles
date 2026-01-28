@@ -28,7 +28,7 @@ case ${OSTYPE} in
     export PATH=$PATH:$HOME/go/bin
     ;;
   linux*)
-    export PATH=$PATH:/usr/local/go/bin
+    export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
     if [[ -d "/home/linuxbrew" ]]; then
       eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     fi
@@ -144,9 +144,9 @@ fi
 
 # Distrobox
 if [[ -n ${DISTROBOX_ENTER_PATH-} ]]; then
-    alias open="distrobox-host-exec xdg-open"
+    (( $+commands[xdg-open])) && alias open="distrobox-host-exec xdg-open"
 else
-    alias open="xdg-open"
+    (( $+commands[xdg-open])) && alias open="xdg-open"
 fi
 
 # =============================================================================
