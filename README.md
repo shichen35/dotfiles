@@ -1,4 +1,4 @@
-# dotfiles
+# Linux Notes
 
 ## Distrobox
 
@@ -17,15 +17,3 @@ sudo ln -s /usr/bin/distrobox-host-exec /usr/bin/dolphin
 pacman -Qe | awk '{print $1}' > package_list.txt
 for x in $(cat package_list.txt); do pacman -S $x; done
 ```
-
-### Prerequisites
-
-    - git
-    - curl
-    - wget
-    - zsh
-    - tmux
-    - neovim
-    - n nodejs
-    - python3 python3-pip
-

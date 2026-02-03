@@ -29,3 +29,36 @@
 ## c/c++
 
 - fastfetch-cli/fastfetch - A maintained, feature-rich and performance oriented, neofetch like system information tool.
+
+## Install
+
+cargo
+
+```bash
+cargo install cargo-update \
+    atuin \
+    tealdeer \
+    fd-find \
+    ripgrep \
+    eza \
+    dua-cli \
+    yazi-fm \
+    yazi-cli \
+    zellij \
+    onefetch \
+    zoxide \
+    tokei
+```
+
+homebrew
+
+```bash
+brew install tealdeer fd ripgrep yazi zoxide tokei dua-cli atuin fastfetch
+```
+
+arch
+
+```bash
+sudo pacman -Syy base base-devel fzf git go htop neovim openssh python python-pip stow tmux unzip wget zip zsh xclip
+
+```
