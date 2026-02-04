@@ -372,7 +372,7 @@ function print_my_help() {
         zle -M "Error: Help file for '$BUFFER' not found."
         return
     fi
-    command glow "$help_file"
+    command glow -w 0 "$help_file"
     zle reset-prompt
 }
 zle -N print_my_help
