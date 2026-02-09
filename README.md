@@ -1,19 +1,46 @@
-# Linux Notes
+# .dotfiles
 
-## Distrobox
+My personal configuration files for Linux/macOS, managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
-Opening links from inside container on host:
+## Overview
 
-### Export binaries to host
+This repository contains configurations for:
+- **Shell:** Zsh (with Oh My Zsh, custom plugins)
+- **Editor:** Neovim (LazyVim based custom config)
+- **Terminal:** Alacritty, Kitty, WezTerm
+- **Multiplexer:** Tmux, Zellij
+- **Tools:** Git, Bat, Eza, FZF, and more.
 
-```bash
-sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/xdg-open
-sudo ln -s /usr/bin/distrobox-host-exec /usr/bin/dolphin
-```
+## Installation
 
-### Backup and Restore pacman packages
+### Prerequisites
+- `git`
+- `stow`
+- `zsh`
 
-```bash
-pacman -Qe | awk '{print $1}' > package_list.txt
-for x in $(cat package_list.txt); do pacman -S $x; done
-```
+### Quick Start
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/.dotfiles.git ~/.dotfiles
+   cd ~/.dotfiles
+   ```
+
+2. Bootstrap:
+   ```bash
+   # Make the setup script executable (coming soon)
+   chmod +x setup.sh
+   ./setup.sh
+   ```
+
+3. Manual Stow (if not using setup script):
+   ```bash
+   stow zsh
+   stow nvim
+   stow tmux
+   # ... add other directories as needed
+   ```
+
+## Documentation
+- [Linux Tools & Distrobox](docs/linux-tools.md)
+- [Rust CLI Alternatives](docs/rust-tools.md)
