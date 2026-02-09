@@ -9,6 +9,9 @@ fi
 # Note: Let the terminal set TERM. Only uncomment if you have specific issues.
 export TERM="xterm-256color"
 
+# Ensure PATH arrays contain unique entries
+typeset -U PATH path
+
 export VISUAL="nvim"
 export EDITOR="nvim"
 export LANG="en_US.UTF-8"
@@ -77,7 +80,8 @@ HISTFILE=~/.zsh_history
 SAVEHIST=1000
 HISTSIZE=1000
 # Don't save these commands to history
-HISTORY_IGNORE="(ls|cd|pwd|exit|clear|reset|bg|fg|history|cd ..*)"
+# Regex: Exact match for simple commands, prefix match for cd ..
+HISTORY_IGNORE="^((ls|cd|pwd|exit|clear|reset|bg|fg|history)$|cd \.\.*)"
 
 setopt BANG_HIST                 # Treat the '!' character specially during expansion.
 setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
@@ -97,7 +101,7 @@ setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 zshaddhistory() {
   emulate -L zsh
   ## Uncomment if you want to use the HISTORY_IGNORE regex above:
-  # [[ $1 =~ $HISTORY_IGNORE ]] && return 1
+  [[ $1 =~ $HISTORY_IGNORE ]] && return 1
   # whence ${${(z)1}[1]} >| /dev/null || return 1 # Your original check (command validity)
   return 0
 }
@@ -421,4 +425,4 @@ bindkey '^[a' reset-prompt-and-accept-and-hold
 bindkey '^o' reset-prompt-and-accept-and-down-history
 
 # Work Config
-source "$HOME/.dotfiles/zsh-files/work.zsh"
+[ -f "$HOME/.dotfiles/zsh-files/work.zsh" ] && source "$HOME/.dotfiles/zsh-files/work.zsh"
