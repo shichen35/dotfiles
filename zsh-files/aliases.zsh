@@ -5,6 +5,7 @@ alias reset='tput reset'
 alias cmds='history | awk '''{print $2}''' | sort | uniq -c | sort -nr | head -n 6'
 alias eh="$EDITOR "+normal G" ~/.zsh_history"
 alias lg='lazygit'
+alias lzd='lazydocker'
 alias la='ls -lah'
 alias lastmod='fd --no-ignore -t f -0 | xargs -0 ls -lrt --color=auto | tail -n 10'
 

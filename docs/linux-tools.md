@@ -23,8 +23,9 @@
 
 ## golang
 
-- junegunn/fzf            - A command-line fuzzy finder.
-- jesseduffield/lazygit   - Simple terminal UI for git commands.
+- junegunn/fzf             - A command-line fuzzy finder.
+- jesseduffield/lazygit    - Simple terminal UI for git commands.
+- jesseduffield/lazydocker - The lazier way to manage everything docker.
 
 ## c/c++
 
