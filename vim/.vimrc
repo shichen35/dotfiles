@@ -1,241 +1,116 @@
-" You want Vim, not vi. When Vim finds a vimrc, 'nocompatible' is set anyway.
-" We set it explicitely to make our position clear!
+" =============================================================================
+" GENERAL SETTINGS
+" =============================================================================
 set nocompatible
-set termguicolors
+set encoding=utf-8
+scriptencoding utf-8
+set fileformats=unix,mac
 
+" Performance & UX
+set termguicolors              " Enable true color support
+set ttyfast                    " Faster scrolling
+set lazyredraw                 " Don't redraw while executing macros
+set updatetime=300             " Faster completion/diagnostics update (default 4000)
+set shortmess+=c               " Shut off completion messages
+set signcolumn=yes             " Always show sign column to prevent text shift
+set hidden                     " Allow buffer switching without saving
+set history=1000
+
+" Indentation
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set expandtab
+set autoindent
+set shiftround
+set backspace=indent,eol,start
+
+" Search
+set incsearch
+set ignorecase
+set smartcase
+set hlsearch
+
+" UI Layout
+set number relativenumber
+set laststatus=2               " Always show statusline
+set display+=lastline          " Show as much as possible of the last line
+set splitright                 " Vertical windows split to right
+set splitbelow                 " Horizontal windows split to bottom
+set scrolloff=5                " Keep 5 lines context when scrolling
+set sidescrolloff=5
+set nowrap
+set noshowmode                 " distinct from 'showcmd', lightline handles mode
+set showcmd
+set wildmenu
+set noerrorbells
+set mouse=a
+
+" Persistent Undo
+if has("persistent_undo")
+    let target_path = expand('~/.vim/undodir')
+    if !isdirectory(target_path)
+        call mkdir(target_path, "p", 0700)
+    endif
+    let &undodir=target_path
+    set undofile
+endif
+
+" =============================================================================
+" PLUGINS (Vim-Plug)
+" =============================================================================
 if empty(glob("~/.vim/autoload/plug.vim"))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-filetype plugin indent on
-syntax on
-" set mouse=a
-set backspace=indent,eol,start " Make backspace work as you would expect.
-set shiftwidth=4
-set shiftround
-set tabstop=4 softtabstop=4
-set expandtab
-set autoindent
-set hidden                     " Buffer should still exist if window is closed
-set laststatus=2               " Always show statusline.
-set display+=lastline          " Show as much as possible of the last line.
-set splitright                 " Vertical windows should be split to right
-set splitbelow                 " Horizontal windows should split to bottom
-set noerrorbells
-set nowrap
-set noswapfile
-set nobackup
-set nowritebackup
-if has("persistent_undo")
-   let target_path = expand('~/.vim/undodir')
-    " create the directory and any parent directories
-    " if the location does not exist.
-    if !isdirectory(target_path)
-        call mkdir(target_path, "p", 0700)
-    endif
-
-    let &undodir=target_path
-    set undofile
-endif
-set incsearch
-set hls
-set smartcase
-set ignorecase
-set wildmenu
-" set wildmode=longest:full,full
-" set wildmode=list:longest,full
-set path+=**
-set nu rnu
-set noshowmode
-set showcmd                    " Show me what I'm typing
-set ttyfast
-set scrolloff=2
-set sidescrolloff=4
-set sidescroll=1
-set encoding=utf-8
-set fileformats=unix,mac
-set nrformats+=alpha           " Make CTRL-A and CTRL-X work for alphabet characters
-set omnifunc=ale#completion#OmniFunc
-
-"vim-plug
 call plug#begin('~/.vim/plugged')
-" Plug 'joshdick/onedark.vim'
-" Plug 'sheerun/vim-polyglot'
-" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
-" Plug 'posva/vim-vue'
-" Plug 'honza/vim-snippets'
-" Plug 'SirVer/ultisnips'
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-" Plug 'will133/vim-dirdiff'
-" Plug 'tpope/vim-fugitive'
-Plug 'AndrewRadev/splitjoin.vim'
-" Plug 'Yggdroot/indentLine'
-Plug 'ryanoasis/vim-devicons'
-Plug 'ap/vim-css-color'
-Plug 'dense-analysis/ale'
-Plug 'easymotion/vim-easymotion'
-Plug 'haya14busa/is.vim'
-Plug 'itchyny/lightline.vim'
-Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
-Plug 'lotabout/skim.vim'
-" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" Plug 'junegunn/fzf.vim'
-Plug 'wellle/context.vim'
-Plug 'junegunn/vim-easy-align'
-Plug 'mbbill/undotree'
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
+" UI & Themes
 Plug 'morhetz/gruvbox'
 Plug 'arcticicestudio/nord-vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'itchyny/lightline.vim'
+Plug 'ap/vim-css-color'
+
+" Navigation & Search
+Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
+Plug 'lotabout/skim.vim'
 Plug 'preservim/nerdtree'
-Plug 'rust-lang/rust.vim'
+Plug 'mbbill/undotree'
+Plug 'easymotion/vim-easymotion'
+Plug 'haya14busa/is.vim'
+Plug 'wellle/context.vim'
+
+" Editing & Coding
+Plug 'dense-analysis/ale'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
+" Languages
+Plug 'rust-lang/rust.vim'
+
 call plug#end()
 
-" Autocomplete on tab
-imap <Tab> <c-x><c-o>
-
-" Use space as <leader>
-let mapleader = "\<Space>"
-
-command! Config execute ":tabnew ~/.vimrc"
-command! Reload execute ":source ~/.vimrc"
-
-nmap <leader>l :set invlist<CR>
-nmap <leader>h :set hls!<CR>
-nnoremap / :set hls<CR>/
-
-"Automatically insert a matching brace in Vim
-imap <silent> {<CR> {<CR>}<CR><Up><C-o>O
-
-nmap <leader>ff :Files<CR>
-nmap <leader>fg :Rg<CR>
-nmap <leader>fb :Buffers<CR>
-
-nmap <leader>u :UndotreeToggle<CR>
-
-imap <C-e> <C-o><S-a>
-imap <c-a> <c-o><s-i>
-
-" yank into clipboard
-nmap <leader>y "+y
-xmap <leader>y "+y
-nmap <leader>Y gg"+yG
-
-" delete without yanking
-nmap <leader>d "_d
-xmap <leader>d "_d
-
-" replace currently selected text with default register
-" without yanking it
-xmap <leader>p "_dP
-
-" moving lines up and down in visual mode
-xmap J :m '>+1<CR>gv=gv
-xmap K :m '<-2<CR>gv=gv
-
-" MERDTree shortcuts
-nmap <leader>nn :NERDTreeFocus<CR>
-nmap <leader>nf :NERDTreeFind<CR>
-
-" Ale shortcuts
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-nmap <silent> <leader>gd <Plug>(ale_go_to_definition)
-nmap <silent> <leader>gl <Plug>(ale_detail)
-nmap <silent> <leader>gi <Plug>(ale_go_to_implementation)
-nmap <silent> <leader>gt <Plug>(ale_go_to_type_definition)
-nmap <silent> <leader>gh <Plug>(ale_hover)
-nmap <silent> <leader>gr <Plug>(ale_find_references)
-
-" TermDebug shortcuts
-nmap <leader>db :Break<CR>
-nmap <leader>dr :Run
-nmap <leader>dl :Clear<CR>
-nmap <leader>df :Finish<CR>
-nmap <leader>du :Util<CR>
-nmap <leader>dn :Over<CR>
-nmap <leader>ds :Step<CR>
-nmap <leader>dc :Continue<CR>
-
-" Pressing ,ss will toggle and untoggle spell checking
-nmap <leader>sp :setlocal spell!<CR>
-nmap <leader>r :call CompileRun()<CR>
-func! CompileRun()
-    exec "w"
-    if &filetype == 'c'
-        set splitbelow
-        :term gcc % -o %:r.out && time ./%:r.out
-    elseif &filetype == 'cpp'
-        set splitbelow
-        exec "!g++ -std=c++11 % -Wall -o %<"
-        :term time ./%<
-    elseif &filetype == 'python'
-        set splitbelow
-        :term python3 %
-    elseif &filetype == 'html'
-        silent! exec "!open % &"
-    elseif &filetype == 'markdown'
-        exec "MarkdownPreview"
-    elseif &filetype == 'javascript'
-        set splitbelow
-        :term export DEBUG="INFO,ERROR,WARNING"; node --trace-warnings .
-    elseif &filetype == 'go'
-        set splitbelow
-        :term go run %
-    elseif &filetype == 'rust'
-        :Cargo run
-    endif
-endfunc
-
-autocmd CompleteDone * pclose
-
-autocmd InsertEnter * set cul nornu
-autocmd InsertLeave * set nocul rnu
-
+" =============================================================================
+" THEME & APPEARANCE
+" =============================================================================
 set background=dark
-colorscheme gruvbox
+try
+    colorscheme gruvbox
+catch
+    colorscheme default
+endtry
+
 hi CursorLine term=bold cterm=bold ctermbg=233
-"hi Search ctermfg=NONE ctermbg=237 cterm=bold
-
 highlight ColorColumn ctermbg=234 guibg=#303030
-nmap <leader>cc :call ToggleColorColumn()<CR>
-function! ToggleColorColumn()
-    if &colorcolumn == ""
-        let &colorcolumn="".join(range(81,winwidth(0)),",")
-    else
-        let &colorcolumn=""
-    endif
-endfunction
 
-" Remove newbie crutches in Command Mode
-"cmap <Down> <Nop>
-"cmap <Left> <Nop>
-"cmap <Right> <Nop>
-"cmap <Up> <Nop>
-
-" " Remove newbie crutches in Insert Mode
-" imap <Down> <Nop>
-" imap <Left> <Nop>
-" imap <Right> <Nop>
-" imap <Up> <Nop>
-
-" Remove newbie crutches in Normal Mode
-nmap <silent><Down> :echoe "Use j"<CR>
-nmap <silent><Left> :echoe "Use h"<CR>
-nmap <silent><Right> :echoe "Use l"<CR>
-nmap <silent><Up> :echoe "Use k"<CR>
-
-" " Remove newbie crutches in Visual Mode
-" xmap <Down> <Nop>
-" xmap <Left> <Nop>
-" xmap <Right> <Nop>
-" xmap <Up> <Nop>
-
+" Lightline Configuration
 let g:lightline = {
-            \ 'colorscheme': 'powerline',
+            \ 'colorscheme': 'gruvbox',
             \ 'active': {
                 \   'left': [ [ 'mode', 'paste' ],
                 \             [ 'readonly', 'filename', 'modified' ] ],
@@ -250,104 +125,149 @@ let g:lightline = {
                 \ 'component': {
                     \  'filename': '%n:%t'
                     \ }
-                    \ }
+            \ }
 
 function! LightlineLineinfo()
-    "if winwidth(0) < 80
-    "    return ''
-    "endif
-
     let l:current_line = printf('%3d', line('.'))
     let l:max_line = printf('%d', line('$'))
     let l:current_col = printf('%-2d', col('.'))
-    let l:lineinfo = ' ' . l:current_line . '/' . l:max_line . ':' . l:current_col
-    return l:lineinfo
+    return ' ' . l:current_line . '/' . l:max_line . ':' . l:current_col
 endfunction
 
 function! ScrollIndicator()
-    let l:line_no_indicator_chars = ['⎺', '⎻', '─', '⎼', '⎽']
-    "let l:line_no_indicator_chars = ['⡀','⣀','⣄','⣤','⣦','⣶','⣷','⣿']
-    "let l:line_no_indicator_chars = [
-    "            \ '>      ',
-    "            \ '=>     ',
-    "            \ '==>    ',
-    "            \ '===>   ',
-    "            \ '====>  ',
-    "            \ '=====> ',
-    "            \ '======>',
-    "            \ '=======',
-    "            \ ]
-    let l:current_line = line('.')
-    let l:total_lines = line('$')
-    let l:line_no_fraction = floor(l:current_line) / floor(l:total_lines)
-    if l:current_line == l:total_lines
-        let l:index = len(l:line_no_indicator_chars) - 1
+    let l:chars = ['⎺', '⎻', '─', '⎼', '⎽']
+    let l:ratio = 1.0 * line('.') / line('$')
+    let l:idx = float2nr(l:ratio * (len(l:chars) - 1))
+    return l:chars[l:idx]
+endfunction
+
+" =============================================================================
+" MAPPINGS
+" =============================================================================
+let mapleader = "\<Space>"
+
+" Config Management
+command! Config tabnew ~/.vimrc
+command! Reload source ~/.vimrc
+
+" General
+nnoremap <leader>l :set invlist<CR>
+nnoremap <leader>h :set hls!<CR>
+nnoremap / :set hls<CR>/
+
+" Clipboard
+noremap <leader>y "+y
+noremap <leader>Y "+y$
+noremap <leader>d "_d
+noremap <leader>p "_dP
+
+" Window Navigation (if not using Tmux navigator)
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
+
+" Visual Moving
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" Skim / Files
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fg :Rg<CR>
+nnoremap <leader>fb :Buffers<CR>
+
+" Undotree
+nnoremap <leader>u :UndotreeToggle<CR>
+
+" NERDTree
+nnoremap <leader>nn :NERDTreeFocus<CR>
+nnoremap <leader>nf :NERDTreeFind<CR>
+
+" EasyMotion
+map <Leader>/ <Plug>(easymotion-sn)
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_do_mapping = 0
+
+" Color Column Toggle
+nnoremap <leader>cc :call ToggleColorColumn()<CR>
+function! ToggleColorColumn()
+    if &colorcolumn == ""
+        let &colorcolumn="".join(range(81,winwidth(0)),",")
     else
-        let l:index = float2nr(l:line_no_fraction * len(l:line_no_indicator_chars))
+        let &colorcolumn=""
     endif
-    let l:percentage = printf("%3d%%",float2nr(l:line_no_fraction * 100))
-    "return l:percentage . ' ['.l:line_no_indicator_chars[l:index].']'
-    return l:line_no_indicator_chars[l:index]
 endfunction
 
-function! TrimWhitespace()
-    let l:save = winsaveview()
-    keeppatterns %s/\s\+$//e
-    call winrestview(l:save)
-endfunction
+" Spell Check
+nnoremap <leader>sp :setlocal spell!<CR>
 
+" No Arrow Keys (Training Mode)
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
+
+" =============================================================================
+" AUTOCOMMANDS & LANGUAGE SETTINGS
+" =============================================================================
+
+" ALE (Linting)
+let g:ale_completion_enabled = 1
+let g:ale_linters = {
+            \ 'c': ['gcc'],
+            \ 'rust': ['analyzer'],
+            \ }
+let g:ale_fixers = {
+            \ 'rust': ['rustfmt', 'trim_whitespace', 'remove_trailing_lines'],
+            \ 'javascript': ['prettier'],
+            \ 'typescript': ['prettier'],
+            \ 'json': ['prettier'],
+            \ }
+let g:rustfmt_autosave = 1
+let g:ale_c_cc_options = '-std=gnu17 -Wall'
+set omnifunc=ale#completion#OmniFunc
+
+" ALE Mappings
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+nmap <silent> <leader>gd <Plug>(ale_go_to_definition)
+nmap <silent> <leader>gr <Plug>(ale_find_references)
+nmap <silent> <leader>gh <Plug>(ale_hover)
+
+" Compilation Runner
+nnoremap <leader>r :call CompileRun()<CR>
+
+func! CompileRun()
+    exec "w"
+    if &filetype == 'c'
+        set splitbelow
+        term gcc % -o %:r.out && time ./%:r.out
+    elseif &filetype == 'cpp'
+        set splitbelow
+        term g++ -std=c++11 % -Wall -o %< && time ./%<
+    elseif &filetype == 'python'
+        set splitbelow
+        term python3 %
+    elseif &filetype == 'go'
+        set splitbelow
+        term go run %
+    elseif &filetype == 'rust'
+        term cargo run
+    endif
+endfunc
+
+" Auto-Trim Whitespace
 augroup CHEN_SHI
     autocmd!
-    autocmd BufWritePre * :call TrimWhitespace()
-    " autocmd VimEnter * :VimApm
-    " autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
+    autocmd BufWritePre * keeppatterns %s/\s\+$//e
 augroup END
 
-autocmd FileType c,cpp setlocal equalprg=clang-format
-
-"""""""""""""""""""""
-"      Plugins      "
-"""""""""""""""""""""
-" easy motion
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-
-" Jump to anywhere you want with minimal keystrokes, with just one key binding.
-" `s{char}{label}`
-" nmap s <Plug>(easymotion-sn)
-nmap <Leader>/ <Plug>(easymotion-sn)
-
-" Turn on case-insensitive feature
-let g:EasyMotion_smartcase = 1
-
-" JK motions: Line motions
-" map <Leader>j <Plug>(easymotion-j)
-" map <Leader>k <Plug>(easymotion-k)
-
-" vim-go
-" let g:go_fmt_command = "goimports"
-" let g:go_autodetect_gopath = 1
-" let g:go_list_type = "quickfix"
-"
-" let g:go_highlight_types = 1
-" let g:go_highlight_fields = 1
-" let g:go_highlight_functions = 1
-" let g:go_highlight_function_calls = 1
-" let g:go_highlight_extra_types = 1
-" let g:go_highlight_generate_tags = 1
-
-" Enable completion where available.
-let g:ale_completion_enabled = 1
-let g:ale_linters = {'c': ['gcc'],'rust': ['analyzer']}
-let g:ale_c_cc_options = '-std=gnu17 -Wall'
-
-let g:ale_fixers = { 'rust': ['rustfmt', 'trim_whitespace', 'remove_trailing_lines'] }
-let g:rustfmt_autosave = 1
-
-
-" vim term debugger settings
-autocmd VimEnter *.rs call SetRustDebugger()
-function! SetRustDebugger()
-    :packadd termdebug
-    let g:termdebugger="rust-gdb"
-    " let g:termdebug_wide = 163
-endfunction
+" TermDebug / Rust
+if executable('rust-gdb')
+    autocmd VimEnter *.rs let g:termdebugger="rust-gdb"
+    autocmd VimEnter *.rs packadd termdebug
+endif
