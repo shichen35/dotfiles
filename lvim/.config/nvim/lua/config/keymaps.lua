@@ -11,15 +11,15 @@ setkey("x", "J", ":m '>+1<CR>gv=gv")
 setkey("x", "K", ":m '<-2<CR>gv=gv")
 
 -- Remove newbie crutches in Normal Mode
-setkey("n", "<Up>", ':echoe "Use k"<CR>', { silent = true })
-setkey("n", "<Down>", ':echoe "Use j"<CR>', { silent = true })
-setkey("n", "<Left>", ':echoe "Use h"<CR>', { silent = true })
-setkey("n", "<Right>", ':echoe "Use l"<CR>', { silent = true })
+-- setkey("n", "<Up>", ':echoe "Use k"<CR>', { silent = true })
+-- setkey("n", "<Down>", ':echoe "Use j"<CR>', { silent = true })
+-- setkey("n", "<Left>", ':echoe "Use h"<CR>', { silent = true })
+-- setkey("n", "<Right>", ':echoe "Use l"<CR>', { silent = true })
 
 -- Remove arrow keys in Insert Mode
-setkey("i", "<Up>", "<nop>", { silent = true })
-setkey("i", "<Down>", "<nop>", { silent = true })
-setkey("i", "<Left>", "<nop>", { silent = true })
-setkey("i", "<Right>", "<nop>", { silent = true })
+-- setkey("i", "<Up>", "<nop>", { silent = true })
+-- setkey("i", "<Down>", "<nop>", { silent = true })
+-- setkey("i", "<Left>", "<nop>", { silent = true })
+-- setkey("i", "<Right>", "<nop>", { silent = true })
 
 setkey("n", "<leader>il", ":set invlist<CR>", { silent = true })
