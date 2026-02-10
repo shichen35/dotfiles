@@ -42,5 +42,5 @@ This repository contains configurations for:
    ```
 
 ## Documentation
-- [Linux Tools & Distrobox](docs/linux-tools.md)
+- [Linux Notes & Distrobox](docs/linux-notes.md)
 - [Rust CLI Alternatives](docs/rust-tools.md)
