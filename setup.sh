@@ -55,7 +55,7 @@ backup_if_exists "$HOME/.tmux.conf"
 
 # 3. Run Stow
 echo ">>> Stowing dotfiles..."
-STOW_PACKAGES=(zsh tmux nvim kitty fastfetch) # alacritty wezterm clang-format
+STOW_PACKAGES=(zsh tmux lvim vim kitty fastfetch) # alacritty wezterm clang-format
 
 for pkg in "${STOW_PACKAGES[@]}"; do
   if [ -d "$pkg" ]; then
