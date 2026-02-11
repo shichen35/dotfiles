@@ -32,6 +32,7 @@ case ${OSTYPE} in
     ;;
   linux*)
     export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
+    setopt re_match_pcre
     if [[ -d "/home/linuxbrew" ]]; then
       eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
       export ELECTRON_OZONE_PLATFORM_HINT=wayland
