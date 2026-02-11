@@ -7,7 +7,7 @@ fi
 # 1. ENVIRONMENT & PATHS
 # =============================================================================
 # Note: Let the terminal set TERM. Only uncomment if you have specific issues.
-export TERM="xterm-256color"
+[[ -z "${TERM-}" ]] && export TERM="xterm-256color"
 
 # Ensure PATH arrays contain unique entries
 typeset -U PATH path
@@ -25,15 +25,15 @@ case ${OSTYPE} in
   darwin*)
     [ -f "$DOTFILES/zsh-files/mac.zsh" ] && source "$DOTFILES/zsh-files/mac.zsh"
     # Check for Apple Silicon Homebrew
-    if [[ -d "/opt/homebrew" ]]; then
+    if [[ -x "/opt/homebrew/bin/brew" ]]; then
       eval "$(/opt/homebrew/bin/brew shellenv)"
     fi
-    export PATH=$PATH:$HOME/go/bin
+    path+=("$HOME/go/bin")
     ;;
   linux*)
-    export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
+    path+=("/usr/local/go/bin" "$HOME/go/bin")
     setopt re_match_pcre
-    if [[ -d "/home/linuxbrew" ]]; then
+    if [[ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
       eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
       export ELECTRON_OZONE_PLATFORM_HINT=wayland
     fi
@@ -113,7 +113,7 @@ zshaddhistory() {
 
 # Fun startup
 if (( $+commands[fortune] )); then
-    fortune $DOTFILES/art/tang300 $DOTFILES/art/song100
+    fortune "$DOTFILES/art/tang300" "$DOTFILES/art/song100"
 fi
 
 # Bat / Exa / Manpager config
@@ -162,4 +162,4 @@ fi
 [ -f "$DOTFILES/zsh-files/functions.zsh" ] && source "$DOTFILES/zsh-files/functions.zsh"
 
 # Work Config
-[ -f "$HOME/.dotfiles/zsh-files/work.zsh" ] && source "$HOME/.dotfiles/zsh-files/work.zsh"
+[ -f "$DOTFILES/zsh-files/work.zsh" ] && source "$DOTFILES/zsh-files/work.zsh"
