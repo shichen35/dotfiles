@@ -152,3 +152,4 @@ fi
 
 # Work Config
 [ -f "$DOTFILES/zsh-files/work.zsh" ] && source "$DOTFILES/zsh-files/work.zsh"
+
