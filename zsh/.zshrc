@@ -31,7 +31,7 @@ case ${OSTYPE} in
     path+=("$HOME/go/bin")
     ;;
   linux*)
-    path+=("/usr/local/go/bin" "$HOME/go/bin")
+    path+=("/usr/local/go/bin" "$HOME/go/bin" "$HOME/.local/bin" "$HOME/.cargo/bin")
     setopt re_match_pcre
     if [[ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
       eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -101,9 +101,9 @@ setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 # =============================================================================
 
 # Fun startup
-if (( $+commands[fortune] )); then
-    fortune "$DOTFILES/art/tang300" "$DOTFILES/art/song100"
-fi
+# if (( $+commands[fortune] )); then
+#     fortune "$DOTFILES/art/tang300" "$DOTFILES/art/song100"
+# fi
 
 # Bat / Exa / Manpager config
 if (( $+commands[bat] )); then
