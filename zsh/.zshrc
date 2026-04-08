@@ -28,10 +28,9 @@ case ${OSTYPE} in
     if [[ -x "/opt/homebrew/bin/brew" ]]; then
       eval "$(/opt/homebrew/bin/brew shellenv)"
     fi
-    path+=("$HOME/go/bin")
     ;;
   linux*)
-    path+=("/usr/local/go/bin" "$HOME/go/bin" "$HOME/.local/bin" "$HOME/.cargo/bin")
+    path+=("/usr/local/go/bin")
     setopt re_match_pcre
     if [[ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
       eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -39,6 +38,7 @@ case ${OSTYPE} in
     fi
     ;;
 esac
+path+=("$HOME/go/bin" "$HOME/.local/bin" "$HOME/.cargo/bin")
 
 # =============================================================================
 # 2. OH-MY-ZSH SETTINGS
