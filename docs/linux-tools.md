@@ -54,7 +54,7 @@ cargo install cargo-update \
 homebrew
 
 ```bash
-brew install tealdeer fd ripgrep yazi zoxide tokei dua-cli atuin fastfetch
+brew install tealdeer fd ripgrep yazi zoxide tokei dua-cli atuin fastfetch htop neovim fzf
 ```
 
 arch
