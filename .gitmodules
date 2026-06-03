@@ -4,3 +4,6 @@
 [submodule "kitty/.config/kitty/kitty-themes"]
 	path = kitty/.config/kitty/kitty-themes
 	url = git@github.com:kovidgoyal/kitty-themes.git
+[submodule "my-skills"]
+	path = my-skills
+	url = git@github.com:shichen35/my-skills.git
