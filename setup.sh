@@ -53,6 +53,14 @@ backup_if_exists "$HOME/.tmux.conf"
 # Stow will try to symlink individual files inside ~/.config/nvim if the dir exists.
 # So we are likely fine unless conflicting files exist.
 
+# 2b. Seed machine-local zsh config
+# ~/.zshrc.local holds settings that must not be committed. Create it once from
+# the template; never overwrite an existing one.
+if [ ! -f "$HOME/.zshrc.local" ] && [ -f "zsh-files/zshrc.local.example" ]; then
+  echo ">>> Creating ~/.zshrc.local from template..."
+  cp "zsh-files/zshrc.local.example" "$HOME/.zshrc.local"
+fi
+
 # 3. Run Stow
 echo ">>> Stowing dotfiles..."
 STOW_PACKAGES=(zsh tmux lvim vim kitty fastfetch) # alacritty wezterm clang-format

@@ -30,6 +30,14 @@ clone_if_missing "https://github.com/Aloxaf/fzf-tab" "$OMZ_CUSTOM/plugins/fzf-ta
 #     git clone --depth=1 https://github.com/marlonrichert/zsh-autocomplete ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autocomplete
 # fi
 
+# macOS one-time system preferences
+if [[ "$OSTYPE" == darwin* ]]; then
+    MACOS_DEFAULTS="${0:A:h}/macos-defaults.sh"
+    if [[ -x "$MACOS_DEFAULTS" ]]; then
+        "$MACOS_DEFAULTS"
+    fi
+fi
+
 # backup and copy .zshrc
 if [[ -f "$HOME/.zshrc.pre-oh-my-zsh" && -f "$HOME/.zshrc" ]]; then
     mv "$HOME/.zshrc" "$HOME/.zshrc.backup"

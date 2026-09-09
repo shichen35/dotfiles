@@ -1,21 +1,16 @@
-# ZSH_THEME="apple"
-# source "/usr/local/opt/fzf/shell/key-bindings.zsh"
-
-# macOS specific configuration
-# export MANPATH="/usr/local/man:$MANPATH"
-defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -int 20
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-
-# drag window from anywhere with ctrl + cmd + click
-defaults write -g NSWindowShouldDragOnGesture -bool true
+# =============================================================================
+# macOS specific shell configuration.
+#
+# One-time system preferences (`defaults write`) are NOT here: they live in
+# macos-defaults.sh, which installs.zsh runs once during setup. Running them on
+# every shell start spawned four processes per terminal for no benefit.
+#
+# SDKMAN is initialised in work.zsh, which is sourced on every platform.
+# =============================================================================
 
 export ANSIBLE_VAULT_PASSWORD_FILE=/Users/chen.shi/Developer/ansible-vault.pass
 
 alias wpm='wpm --tag chen'
 alias wpms='wpm --stats'
-export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[ -s $HOME/.sdkman/bin/sdkman-init.sh ] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+path_prepend "/usr/local/opt/openssl@1.1/bin"
