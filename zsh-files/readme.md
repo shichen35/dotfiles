@@ -1,3 +1,7 @@
+> These notes patch the **agnoster** theme by hand. The current default in
+> `.zshrc` is `gentoo`, so none of this is active unless you switch back to
+> agnoster. Kept because the patches are tedious to work out again.
+
 # Modify the zsh agnoster theme to show only the current directory name
 
 File: `~/.oh-my-zsh/themes/agnoster.zsh-theme`

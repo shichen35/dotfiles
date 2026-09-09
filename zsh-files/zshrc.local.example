@@ -1,0 +1,20 @@
+# =============================================================================
+# ~/.zshrc.local — configuration for this machine only. Not tracked by git.
+#
+# Sourced last by .zshrc, so anything here overrides everything above it.
+# path_prepend and path_append are available.
+#
+# Put here: absolute paths that only exist on this box, host-specific aliases,
+# credentials paths, per-machine tool overrides.
+# Do NOT put here: anything you want on every machine — that belongs in the repo.
+# =============================================================================
+
+# Android SDK
+# export ANDROID_HOME="$HOME/Android/Sdk"
+# path_append "$ANDROID_HOME/emulator" "$ANDROID_HOME/platform-tools"
+
+# Locally installed AppImages
+# [[ -x "$HOME/AppImages/cursor.appimage" ]] && alias cursor="$HOME/AppImages/cursor.appimage"
+
+# Override the theme for this machine
+# ZSH_THEME="agnoster"
